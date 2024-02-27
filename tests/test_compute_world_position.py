@@ -10,13 +10,18 @@ def test_parse_samples(samples):
     unpacked_frames = plume.sample_parser.parse_samples(samples, filter_descriptors=[Frame.DESCRIPTOR])
 
     for frame in unpacked_frames:
+        # copy all previous positions and hierarchy to new frame
+        # delete all position marked destroyed
+
         frame_time = frame.timestamp
 
         transform_updates = plume.frame_parser.parse_frame_data(frame, filter_descriptors=[TransformUpdate.DESCRIPTOR])
-
+        
         for transform_update in transform_updates:
+            # update with new position
             pass
 
+    # for each frame, compute the local TRS matrix for each transform, and using their parent, compute the world TRS matrix
 
 if __name__ == '__main__':
     current_dir = os.path.dirname(os.path.abspath(__file__))
