@@ -1,14 +1,15 @@
 from samples.record_header_pb2 import RecordHeader
 from google.protobuf.descriptor import Descriptor
 
-from typing import List, Optional
+from typing import List
 
 class Record:
 
-    def __init__(self, filepath : str, record_header: RecordHeader = None, samples: list = []):
+    def __init__(self, filepath : str):
         self.filepath = filepath
-        self.record_header = record_header
-        self.samples = samples
+        self.record_header = None
+        self.samples = []
+        self.frames = []
 
     def GetSamplesByDescriptor(self, descriptor: Descriptor):
         if descriptor is None:

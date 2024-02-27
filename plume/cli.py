@@ -2,7 +2,7 @@ import argparse
 
 from re import sub
 from os import makedirs, path
-from record_parser import parse_record
+from plume.sample_parser import parse_record
 from dataframe_exporter import to_dataframes
 from xdf_exporter import to_xdf
 from typing import List
