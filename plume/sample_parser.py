@@ -7,7 +7,8 @@ def parse_sample(sample):
     unpacked_payload, success = unpack_any(sample.payload)
     if not success:
         return None, False
-    sample = plume.sample.Sample(sample.timestamp, unpacked_payload)
+    timestamp = sample.timestamp if sample.HasField('timestamp') else None
+    sample = plume.sample.Sample(timestamp, unpacked_payload)
     return sample, True
 
 def parse_samples(samples, filter_descriptors=None):

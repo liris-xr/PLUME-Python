@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13packed_sample.proto\x12\x0cplume.sample\x1a\x19google/protobuf/any.proto\"[\n\x0cPackedSample\x12\x16\n\ttimestamp\x18\x01 \x01(\x03H\x00\x88\x01\x01\x12%\n\x07payload\x18\x02 \x01(\x0b\x32\x14.google.protobuf.AnyB\x0c\n\n_timestampB\x0f\xaa\x02\x0cPLUME.Sampleb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13packed_sample.proto\x12\x0cplume.sample\x1a\x19google/protobuf/any.proto\"[\n\x0cPackedSample\x12\x16\n\ttimestamp\x18\x01 \x01(\x04H\x00\x88\x01\x01\x12%\n\x07payload\x18\x02 \x01(\x0b\x32\x14.google.protobuf.AnyB\x0c\n\n_timestampB\x0f\xaa\x02\x0cPLUME.Sampleb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
