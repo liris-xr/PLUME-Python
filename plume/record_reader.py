@@ -1,6 +1,5 @@
 from plume.samples.packed_sample_pb2 import PackedSample
 from delimited_protobuf import read as __read_delimited
-from tqdm import tqdm
 import lz4.frame
 
 # Required to add all DESCRIPTORS into the default descriptor pool
@@ -12,11 +11,9 @@ def __read_packed_samples(data: BytesIO):
     packed_samples = []
     total_size = len(data.getbuffer())
 
-    with tqdm(total=total_size, desc="Reading packed samples", unit="B", unit_scale=True) as pbar:
-        while data.tell() < total_size:
-            packed_sample = __read_delimited(data, PackedSample)
-            packed_samples.append(packed_sample)
-            pbar.update(data.tell() - pbar.n)
+    while data.tell() < total_size:
+        packed_sample = __read_delimited(data, PackedSample)
+        packed_samples.append(packed_sample)
     return packed_samples
 
 def __is_lz4_compressed(raw_bytes: bytes) -> bool:
