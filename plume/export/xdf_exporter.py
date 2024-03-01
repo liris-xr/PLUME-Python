@@ -3,12 +3,13 @@ from samples.common.marker_pb2 import Marker
 from samples.lsl.stream_sample_pb2 import StreamSample
 from samples.lsl.stream_open_pb2 import StreamOpen
 from samples.lsl.stream_close_pb2 import StreamClose
-
+from google.protobuf.timestamp_pb2 import Timestamp
+from plume.record import Sample
+from plume.filtering import filter_samples
 from xdf_writer import *
-from record import Record
 
-def to_xdf(output_buf, record: Record):
-    datetime_str = record.record_header.payload.created_at.ToDatetime().astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
+def lsl_samples_to_xdf(output_buf, markers: list[Sample[Marker]], lsl_samples: list[Sample[StreamClose | StreamOpen | StreamSample]], record_start_time: Timestamp):
+    datetime_str = record_start_time.ToDatetime().astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
     # Add a colon separator to the offset segment
     datetime_str = "{0}:{1}".format(datetime_str[:-2], datetime_str[-2:])
 
@@ -26,7 +27,11 @@ def to_xdf(output_buf, record: Record):
     stream_max_time[marker_stream_id] = None
     stream_sample_count[marker_stream_id] = 0
 
-    for stream_open_sample in record.GetSamplesByDescriptor(StreamOpen.DESCRIPTOR):
+    stream_open_samples = filter_samples(lsl_samples, StreamOpen)
+    stream_samples = filter_samples(lsl_samples, StreamSample)
+    stream_close_samples = filter_samples(lsl_samples, StreamClose)
+
+    for stream_open_sample in stream_open_samples:
         stream_info = stream_open_sample.payload.stream_info
         xml_header = ET.fromstring(stream_open_sample.payload.xml_header)
         stream_id = np.uint64(stream_info.lsl_stream_id) + 1 # reserve id = 1 for the marker stream
@@ -37,12 +42,12 @@ def to_xdf(output_buf, record: Record):
         stream_sample_count[stream_id] = 0
         write_stream_header(output_buf, stream_open_sample.payload.xml_header, stream_id)
 
-    for stream_sample in record.GetSamplesByDescriptor(StreamSample.DESCRIPTOR):
+    for stream_sample in stream_samples:
         stream_info = stream_sample.payload.stream_info
         stream_id = np.uint64(stream_info.lsl_stream_id) + 1
         channel_format = stream_channel_format[stream_id]
         attr = stream_sample.payload.WhichOneof('values')
-        t = stream_sample.header.time / 1_000_000_000.0 #convert time to seconds
+        t = stream_sample.timestamp / 1_000_000_000.0 #convert time to seconds
 
         if stream_min_time[stream_id] is None or t < stream_min_time[stream_id]:
             stream_min_time[stream_id] = t
@@ -57,9 +62,9 @@ def to_xdf(output_buf, record: Record):
         val = getattr(stream_sample.payload, attr).value
         write_stream_sample(output_buf, val, t, channel_format, stream_id)
 
-    for marker_sample in record.GetSamplesByDescriptor(Marker.DESCRIPTOR):
+    for marker_sample in markers:
         channel_format = stream_channel_format[marker_stream_id]
-        t = marker_sample.header.time / 1_000_000_000.0 #convert time to seconds
+        t = marker_sample.timestamp / 1_000_000_000.0 #convert time to seconds
 
         if stream_min_time[marker_stream_id] is None or t < stream_min_time[marker_stream_id]:
             stream_min_time[marker_stream_id] = t
@@ -74,7 +79,7 @@ def to_xdf(output_buf, record: Record):
         val = marker_sample.payload.label
         write_stream_sample(output_buf, val, t, channel_format, marker_stream_id)
 
-    for stream_close_sample in record.GetSamplesByDescriptor(StreamClose.DESCRIPTOR):
+    for stream_close_sample in stream_close_samples:
         stream_info = stream_close_sample.payload.stream_info
         stream_id = np.uint64(stream_info.lsl_stream_id) + 1
         sample_count = stream_sample_count[stream_id]

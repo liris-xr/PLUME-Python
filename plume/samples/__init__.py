@@ -1,6 +1,4 @@
 import sys
-import pkgutil
-import importlib
 from glob import glob
 from os.path import abspath, basename, dirname, isfile, isdir, join
 
