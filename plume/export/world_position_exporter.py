@@ -8,6 +8,7 @@ from plume.filtering import filter_samples
 from plume.record import Frame
 from plume.samples.unity.transform_pb2 import TransformCreate, TransformUpdate, TransformDestroy
 from tqdm import tqdm
+import time
 
 @dataclass
 class LocalTransform:
@@ -63,6 +64,7 @@ class FrameTransforms:
     frame_number: int
     transforms: list[LocalTransform]
 
+# This is painfully slow, this can be optimized by only recomputing the transforms for which one of its parents changed
 def compute_world_positions(frames: list[Frame]) -> list[dict[str, WorldTransform]]:
 
     world_transforms: list[dict[str, WorldTransform]] = []
@@ -70,6 +72,9 @@ def compute_world_positions(frames: list[Frame]) -> list[dict[str, WorldTransfor
     last_frame_local_transforms = None
 
     for frame in tqdm(frames, desc="Computing world positions"):
+
+        frame_total_start_time = time.time()
+
         if last_frame_local_transforms is None:
             frame_local_transforms: dict[str, LocalTransform] = {}
         else:
@@ -116,6 +121,8 @@ def compute_world_positions(frames: list[Frame]) -> list[dict[str, WorldTransfor
 
         frame_world_transforms: dict[str, WorldTransform] = {}
 
+        world_transform_start_time = time.time()
+
         # When all transforms are updated, compute world transforms
         for transform_guid, local_transform in frame_local_transforms.items():
             world_transform = WorldTransform(world_position=local_transform.get_world_position(),
@@ -125,6 +132,14 @@ def compute_world_positions(frames: list[Frame]) -> list[dict[str, WorldTransfor
         
         world_transforms.append(frame_world_transforms)
         last_frame_local_transforms = frame_local_transforms
+
+        world_transform_end_time = time.time()
+        world_transform_time = world_transform_end_time - world_transform_start_time
+        print(f"Time taken to compute WorldTransform for frame {frame.frame_number}: {world_transform_time} seconds")
+
+        frame_total_end_time = time.time()
+        frame_total_time = frame_total_end_time - frame_total_start_time
+        print(f"Total time taken for the whole frame: {frame_total_time} seconds")
 
     return world_transforms
             
