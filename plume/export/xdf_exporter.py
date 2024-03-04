@@ -1,14 +1,13 @@
 import xml.etree.ElementTree as ET
-from samples.common.marker_pb2 import Marker 
-from samples.lsl.stream_sample_pb2 import StreamSample
-from samples.lsl.stream_open_pb2 import StreamOpen
-from samples.lsl.stream_close_pb2 import StreamClose
+from plume.samples.common.marker_pb2 import Marker 
+from plume.samples.lsl.stream_sample_pb2 import StreamSample
+from plume.samples.lsl.stream_open_pb2 import StreamOpen
+from plume.samples.lsl.stream_close_pb2 import StreamClose
+from plume.record import RawSample
 from google.protobuf.timestamp_pb2 import Timestamp
-from plume.record import Sample
-from plume.filtering import filter_samples
 from xdf_writer import *
 
-def lsl_samples_to_xdf(output_buf, markers: list[Sample[Marker]], lsl_samples: list[Sample[StreamClose | StreamOpen | StreamSample]], record_start_time: Timestamp):
+def lsl_samples_to_xdf(output_buf, markers: list[RawSample[Marker]], lsl_samples: list[RawSample[StreamClose | StreamOpen | StreamSample]], record_start_time: Timestamp):
     datetime_str = record_start_time.ToDatetime().astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
     # Add a colon separator to the offset segment
     datetime_str = "{0}:{1}".format(datetime_str[:-2], datetime_str[-2:])
