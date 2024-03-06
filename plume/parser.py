@@ -9,9 +9,9 @@ from typing import BinaryIO, TypeVar, Any
 
 from plume.samples import packed_sample_pb2, record_pb2
 from plume.samples.common import marker_pb2
-from plume.samples.lsl import stream_sample_pb2, stream_close_pb2, stream_open_pb2, stream_info_pb2
+from plume.samples.lsl import lsl_stream_pb2
 from plume.samples.unity import frame_pb2
-from plume.record import Record, FrameSample, MarkerSample, RawSample, LslSample, RecordMetadata, RecorderVersion
+from plume.record import Record, FrameSample, MarkerSample, RawSample, LslSample, LslOpenStream, LslCloseStream, RecordMetadata, RecorderVersion
 from plume import file_reader
 
 # Required to add all DESCRIPTORS into the default descriptor pool
@@ -27,7 +27,7 @@ def unpack_any(any: Any, descriptor_pool: descriptor_pool.DescriptorPool) -> Mes
     try:
         success = any.Unpack(unpacked)
     except:
-        warn(f"Failed to unpack payload with type name {any.TypeName()} and at timestamp {any.timestamp}")
+        warn(f"Failed to unpack payload with type name {any.TypeName()}")
         success = False
     if not success:
         return None
@@ -35,12 +35,7 @@ def unpack_any(any: Any, descriptor_pool: descriptor_pool.DescriptorPool) -> Mes
 
 def parse_raw_marker_sample(raw_marker_sample: RawSample[marker_pb2.Marker]) -> MarkerSample:
     """Unpacks a sample containing a payload of type Marker into a MarkerSample."""
-    unpacked_marker = marker_pb2.Marker()
-    raw_marker_sample.payload.Unpack(unpacked_marker)
-    if unpacked_marker is None:
-        warn(f"Failed to unpack marker")
-        return None
-    return MarkerSample(timestamp=raw_marker_sample.timestamp, label=unpacked_marker.label)
+    return MarkerSample(timestamp=raw_marker_sample.timestamp, label=raw_marker_sample.payload.label)
 
 def parse_raw_marker_samples(raw_marker_samples: list[RawSample[marker_pb2.Marker]]) -> list[MarkerSample]:
     """Unpacks a list of markers into a list of MarkerSamples."""
@@ -51,31 +46,40 @@ def parse_raw_marker_samples(raw_marker_samples: list[RawSample[marker_pb2.Marke
             marker_samples.append(marker_sample)
     return marker_samples
 
-def parse_raw_lsl_sample(raw_lsl_sample: RawSample[stream_sample_pb2.StreamSample]) -> LslSample:
+def parse_raw_lsl_sample(raw_lsl_sample: RawSample[lsl_stream_pb2.StreamSample]) -> LslSample:
     """Unpacks a sample containing a payload of type StreamSample into an LslSample."""
-    stream_info = raw_lsl_sample.payload.stream_info
+    stream_id = raw_lsl_sample.payload.stream_id
     values: list[float | int | str] = []
     value_case = raw_lsl_sample.payload.WhichOneof("values")
-    if value_case == "string_value":
-        values = raw_lsl_sample.payload.string_value.value
-    elif value_case == "float_value":
-        values = raw_lsl_sample.payload.float_value.value
-    elif value_case == "double_value":
-        values = raw_lsl_sample.payload.double_value.value
-    elif value_case == "int8_value":
-        values = raw_lsl_sample.payload.int8_value.value
-    elif value_case == "int16_value":
-        values = raw_lsl_sample.payload.int16_value.value
-    elif value_case == "int32_value":
-        values = raw_lsl_sample.payload.int32_value.value
-    elif value_case == "int64_value":
-        values = raw_lsl_sample.payload.int64_value.value
+    if value_case == "string_values":
+        values = raw_lsl_sample.payload.string_values.value
+    elif value_case == "float_values":
+        values = raw_lsl_sample.payload.float_values.value
+    elif value_case == "double_values":
+        values = raw_lsl_sample.payload.double_values.value
+    elif value_case == "int8_values":
+        values = raw_lsl_sample.payload.int8_values.value
+    elif value_case == "int16_values":
+        values = raw_lsl_sample.payload.int16_values.value
+    elif value_case == "int32_values":
+        values = raw_lsl_sample.payload.int32_values.value
+    elif value_case == "int64_values":
+        values = raw_lsl_sample.payload.int64_values.value
     else:
         warn(f"Failed to parse raw lsl sample with value type {value_case}")
         return None
-    return LslSample(timestamp=raw_lsl_sample.timestamp, stream_info=stream_info, channel_values=values)
+    return LslSample(timestamp=raw_lsl_sample.timestamp, stream_id=stream_id, channel_values=values)
 
-def parse_raw_lsl_samples(raw_lsl_samples: list[RawSample[stream_sample_pb2.StreamSample]]) -> list[LslSample]:
+def parse_raw_lsl_open_stream(raw_lsl_open_stream: RawSample[lsl_stream_pb2.StreamOpen]) -> LslOpenStream:
+    stream_id = raw_lsl_open_stream.payload.stream_id
+    xml_header = raw_lsl_open_stream.payload.xml_header
+    return LslOpenStream(timestamp=raw_lsl_open_stream.timestamp, stream_id=stream_id, xml_header=xml_header)
+
+def parse_raw_lsl_close_stream(raw_lsl_close_stream: RawSample[lsl_stream_pb2.StreamClose]) -> LslCloseStream:
+    stream_id = raw_lsl_close_stream.payload.stream_id
+    return LslCloseStream(timestamp=raw_lsl_close_stream.timestamp, stream_id=stream_id)
+
+def parse_raw_lsl_samples(raw_lsl_samples: list[RawSample[lsl_stream_pb2.StreamSample]]) -> list[LslSample]:
     """Unpacks a list of lsl samples into a list of LslSamples."""
     lsl_samples: list[LslSample] = []
     for packed_sample in raw_lsl_samples:
@@ -83,7 +87,23 @@ def parse_raw_lsl_samples(raw_lsl_samples: list[RawSample[stream_sample_pb2.Stre
         if lsl_sample is not None:
             lsl_samples.append(lsl_sample)
     return lsl_samples
-    
+
+def parse_raw_lsl_open_streams(raw_lsl_open_streams: list[RawSample[lsl_stream_pb2.StreamOpen]]) -> list[LslOpenStream]:
+    lsl_open_streams: list[LslOpenStream] = []
+    for packed_sample in raw_lsl_open_streams:
+        lsl_open_stream = parse_raw_lsl_open_stream(packed_sample)
+        if lsl_open_stream is not None:
+            lsl_open_streams.append(lsl_open_stream)
+    return lsl_open_streams
+
+def parse_raw_lsl_close_streams(raw_lsl_close_streams: list[RawSample[lsl_stream_pb2.StreamClose]]) -> list[LslCloseStream]:
+    lsl_close_streams: list[LslCloseStream] = []
+    for packed_sample in raw_lsl_close_streams:
+        lsl_close_stream = parse_raw_lsl_open_stream(packed_sample)
+        if lsl_close_stream is not None:
+            lsl_close_streams.append(lsl_close_stream)
+    return lsl_close_streams
+
 def parse_raw_frame_sample(raw_frame_sample: RawSample[frame_pb2.Frame], descriptor_pool: descriptor_pool.DescriptorPool = __default_descriptor_pool) -> FrameSample:
     """Unpacks a sample containing a payload of type Frame into a list of unpacked frame data samples."""
     packed_frame: frame_pb2.Frame = raw_frame_sample.payload
@@ -130,7 +150,9 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
 
     raw_frames: list[RawSample[frame_pb2.Frame]] = []
     raw_markers: list[RawSample[marker_pb2.Marker]] = []
-    raw_lsl: list[RawSample[stream_sample_pb2.StreamOpen | stream_sample_pb2.StreamClose | stream_sample_pb2.StreamSample]] = []
+    raw_lsl_samples: list[RawSample[lsl_stream_pb2.StreamSample]] = []
+    raw_lsl_open_streams: list[RawSample[lsl_stream_pb2.StreamOpen]] = []
+    raw_lsl_close_streams: list[RawSample[lsl_stream_pb2.StreamClose]] = []
     raw_metadata: RawSample[record_pb2.RecordMetadata] = None
 
     for sample in raw_samples:
@@ -138,14 +160,20 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
             raw_frames.append(sample)
         elif isinstance(sample.payload, marker_pb2.Marker):
             raw_markers.append(sample)
-        elif isinstance(sample.payload, stream_sample_pb2.StreamSample):
-            raw_lsl.append(sample)
+        elif isinstance(sample.payload, lsl_stream_pb2.StreamSample):
+            raw_lsl_samples.append(sample)
+        elif isinstance(sample.payload, lsl_stream_pb2.StreamOpen):
+            raw_lsl_open_streams.append(sample)
+        elif isinstance(sample.payload, lsl_stream_pb2.StreamClose):
+            raw_lsl_close_streams.append(sample)
         elif isinstance(sample.payload, record_pb2.RecordMetadata):
             raw_metadata = sample
 
     frames: list[FrameSample] = parse_raw_frame_samples(raw_frames)
     markers: list[MarkerSample] = parse_raw_marker_samples(raw_markers)
-    lsl_stream_samples: list[LslSample] = parse_raw_lsl_samples(raw_lsl)
+    lsl_samples: list[LslSample] = parse_raw_lsl_samples(raw_lsl_samples)
+    lsl_open_streams: list[LslOpenStream] = parse_raw_lsl_open_streams(raw_lsl_open_streams)
+    lsl_close_streams: list[LslCloseStream] = parse_raw_lsl_close_streams(raw_lsl_close_streams)
 
     if raw_metadata is None:
         warn("No metadata found in the record")
@@ -162,7 +190,9 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
 
     return Record(metadata=metadata,
                   frames=frames,
-                  lsl=lsl_stream_samples,
+                  lsl_samples=lsl_samples,
+                  lsl_open_streams=lsl_open_streams,
+                  lsl_close_streams=lsl_close_streams,
                   markers=markers,
                   raw_samples=raw_samples)
 

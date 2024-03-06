@@ -11,9 +11,9 @@ def test_parse_samples():
 
 def test_parse_record():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, "record_2.plm")
+    file_path = os.path.join(current_dir, "record_1.plm")
     record = parser.parse_record_from_file(file_path)
-    print(len(record.lsl))
+    print(len(record.lsl_samples))
     print(len(record.frames))
     print(len(record.markers))
     print(record.metadata)
@@ -30,5 +30,5 @@ def test_simple_filtering():
 
 if __name__ == '__main__':
     # test_parse_samples()
-    # test_parse_record()
-    test_simple_filtering()
+    test_parse_record()
+    # test_simple_filtering()

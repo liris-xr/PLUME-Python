@@ -1,9 +1,6 @@
 from plume.samples import record_pb2
 from plume.samples.unity import frame_pb2
-from plume.samples.lsl import stream_sample_pb2
-from plume.samples.lsl import stream_close_pb2
-from plume.samples.lsl import stream_open_pb2
-from plume.samples.lsl import stream_info_pb2
+from plume.samples.lsl import lsl_stream_pb2
 from plume.samples.common.marker_pb2 import Marker
 from typing import TypeVar, Generic, Optional
 from google.protobuf.message import Message
@@ -50,17 +47,17 @@ class LslStreamInfo():
 
 @dataclass(frozen=True)
 class LslSample(Sample):
-    stream_info: LslStreamInfo
-    # Recorder timestamp in nanoseconds before applying lsl time correction
-    raw_timestamp: int
-    # Correction in nanoseconds to apply to the raw timestamp to get the time corrected timestamp
-    time_correction: int
-    # Timestamp provided by LSL when querying the stream sample
-    lsl_timestamp: int
-    # Time correction provided by LSL when querying the stream sample
-    lsl_time_correction: int
-
+    stream_id: str
     channel_values: list[float | int | str]
+
+@dataclass(frozen=True)
+class LslOpenStream(Sample):
+    stream_id: str
+    xml_header: str
+
+@dataclass(frozen=True)
+class LslCloseStream(Sample):
+    stream_id: str
 
 @dataclass(frozen=True)
 class RecorderVersion:
@@ -80,8 +77,8 @@ class RecordMetadata():
 class Record():
     metadata: RecordMetadata
     frames: list[FrameSample]
-    lsl: list[LslSample]
-    lsl_open_streams: list[stream_open_pb2.StreamOpen]
-    lsl_close_streams: list[stream_close_pb2.StreamClose]
+    lsl_samples: list[LslSample]
+    lsl_open_streams: list[LslOpenStream]
+    lsl_close_streams: list[LslCloseStream]
     markers: list[MarkerSample]
     raw_samples: list[RawSample]
