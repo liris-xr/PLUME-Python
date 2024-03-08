@@ -85,7 +85,7 @@ Contributions are what make the open source community such an amazing place to l
 Don't forget to give the project a star! Thanks again!
 
 ## License
-Distributed under the <a rel="license" href="https://github.com/liris-xr/PLUME/blob/master/LICENSE">GPLv3 License</a>.
+Distributed under the <a rel="license" href="https://github.com/liris-xr/PLUME-Python/blob/master/LICENSE">GPLv3 License</a>.
 
 ## Contact
 Charles JAVERLIAT - charles.javerliat@gmail.com
