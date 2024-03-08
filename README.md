@@ -48,6 +48,9 @@ python cli.py input_file output_dir --csv --xdf --descriptors [DESCRIPTORS ...]
 * **--xdf**: Convert markers and physiological signals to XDF .
 * **-descriptors**: Descriptor name used for filtering which samples to output as CSV files. Short name will automatically be preprended (eg. TransformUpdate -> plume.sample.unity.TransformUpdate).
 
+## Customization
+If you have customized your PLUME Record as instructed <a href="https://github.com/liris-xr/PLUME-Recorder?tab=readme-ov-file#customisation">here</a> you need to import your generated protos for Python in the samples folder: `PLUME-Python/plume/samples`.
+
 
 ## Roadmap
 
