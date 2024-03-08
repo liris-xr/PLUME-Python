@@ -1,7 +1,7 @@
 from google.protobuf.message_factory import GetMessageClass
 from google.protobuf.message import Message
 from google.protobuf.any_pb2 import Any
-from google.protobuf import descriptor_pool
+from google.protobuf import descriptor_pool as _descriptor_pool
 from delimited_protobuf import read as _read_delimited
 
 from warnings import warn
@@ -14,22 +14,41 @@ from plume.samples.unity import frame_pb2
 from plume.record import Record, FrameSample, MarkerSample, RawSample, LslSample, LslOpenStream, LslCloseStream, RecordMetadata, RecorderVersion
 from plume import file_reader
 
-# Required to add all DESCRIPTORS into the default descriptor pool
-from plume.samples import *
-__default_descriptor_pool = descriptor_pool.Default()
+import os
+import importlib.util
+
+# # Required to add all DESCRIPTORS into the default descriptor pool
+# from plume.samples import *
+# __default_descriptor_pool = descriptor_pool.Default()
+
+def build_descriptor_pool(root_folder):
+    """
+    Import all generated *_pb2.py modules dynamically.
+    """
+    for root, dirs, files in os.walk(root_folder):
+        for file in files:
+            if file.endswith("_pb2.py"):
+                # Dynamically import the module
+                module_name = file[:-6]  # Remove "_pb2.py" from the file name
+                spec = importlib.util.spec_from_file_location(module_name, os.path.join(root, file))
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+    return _descriptor_pool.Default()
+
+__default_descriptor_pool = build_descriptor_pool(os.path.dirname(__file__))
 
 T = TypeVar('T', bound=Message)
 
-def unpack_any(any: Any, descriptor_pool: descriptor_pool.DescriptorPool) -> Message:
+def unpack_any(any: Any, descriptor_pool: _descriptor_pool.DescriptorPool) -> Message:
     """Unpacks an Any message into its original type using the provided descriptor pool."""
-    descriptor = descriptor_pool.FindMessageTypeByName(any.TypeName())
-    unpacked = GetMessageClass(descriptor)()
     try:
+        descriptor = descriptor_pool.FindMessageTypeByName(any.TypeName())
+        unpacked = GetMessageClass(descriptor)()
         success = any.Unpack(unpacked)
     except:
-        warn(f"Failed to unpack payload with type name {any.TypeName()}")
         success = False
     if not success:
+        warn(f"Failed to unpack payload with type name {any.TypeName()}")
         return None
     return unpacked
 
@@ -104,7 +123,7 @@ def parse_raw_lsl_close_streams(raw_lsl_close_streams: list[RawSample[lsl_stream
             lsl_close_streams.append(lsl_close_stream)
     return lsl_close_streams
 
-def parse_raw_frame_sample(raw_frame_sample: RawSample[frame_pb2.Frame], descriptor_pool: descriptor_pool.DescriptorPool = __default_descriptor_pool) -> FrameSample:
+def parse_raw_frame_sample(raw_frame_sample: RawSample[frame_pb2.Frame], descriptor_pool: _descriptor_pool.DescriptorPool = __default_descriptor_pool) -> FrameSample:
     """Unpacks a sample containing a payload of type Frame into a list of unpacked frame data samples."""
     packed_frame: frame_pb2.Frame = raw_frame_sample.payload
     frame_data_samples: list[RawSample] = []
@@ -112,12 +131,11 @@ def parse_raw_frame_sample(raw_frame_sample: RawSample[frame_pb2.Frame], descrip
     for data in packed_frame.data:
         unpacked_data: Message = unpack_any(data, descriptor_pool)
         if unpacked_data is None:
-            warn(f"Failed to unpack frame data with type name {data.type_url}")
             continue
         frame_data_samples.append(RawSample(timestamp=raw_frame_sample.timestamp, payload=unpacked_data))
     return FrameSample(timestamp=raw_frame_sample.timestamp, frame_number=packed_frame.frame_number, data=frame_data_samples)
 
-def parse_raw_frame_samples(raw_frame_samples: list[RawSample[frame_pb2.Frame]], descriptor_pool: descriptor_pool.DescriptorPool = __default_descriptor_pool) -> list[FrameSample]:
+def parse_raw_frame_samples(raw_frame_samples: list[RawSample[frame_pb2.Frame]], descriptor_pool: _descriptor_pool.DescriptorPool = __default_descriptor_pool) -> list[FrameSample]:
     """Unpacks a list of frames into a list of unpacked frame data samples."""
     frame_samples: list[FrameSample] = []
     for packed_sample in raw_frame_samples:
@@ -126,15 +144,15 @@ def parse_raw_frame_samples(raw_frame_samples: list[RawSample[frame_pb2.Frame]],
             frame_samples.append(frame_sample)
     return frame_samples
 
-def unpack_sample(packed_sample: packed_sample_pb2.PackedSample, descriptor_pool: descriptor_pool.DescriptorPool = __default_descriptor_pool) -> RawSample:
+def unpack_sample(packed_sample: packed_sample_pb2.PackedSample, descriptor_pool: _descriptor_pool.DescriptorPool = __default_descriptor_pool) -> RawSample:
     """Unpacks the payload of a packed sample using the provided descriptor pool and returns an unpacked sample."""
     unpacked_payload = unpack_any(packed_sample.payload, descriptor_pool)
     if unpacked_payload is None:
-        warn(f"Failed to unpack payload with type name {packed_sample.payload.type_url}")
+        return None
     timestamp = packed_sample.timestamp if packed_sample.HasField("timestamp") else None
     return RawSample(timestamp=timestamp, payload=unpacked_payload)
 
-def unpack_samples(packed_samples: list[packed_sample_pb2.PackedSample], descriptor_pool: descriptor_pool.DescriptorPool = __default_descriptor_pool) -> list[RawSample]:
+def unpack_samples(packed_samples: list[packed_sample_pb2.PackedSample], descriptor_pool: _descriptor_pool.DescriptorPool = __default_descriptor_pool) -> list[RawSample]:
     """Unpacks the payload of each packed samples in the list using the provided descriptor pool and returns a list of unpacked samples."""
     raw_samples: list[RawSample] = []
     for packed_sample in packed_samples:

@@ -1,5 +1,4 @@
 from plume import parser
-from plume.samples.unity.frame_pb2 import Frame
 import os.path
 
 def test_parse_samples():

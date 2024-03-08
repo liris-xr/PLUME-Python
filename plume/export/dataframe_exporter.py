@@ -2,20 +2,20 @@ import pandas as pd
 from google.protobuf.json_format import MessageToDict
 from google.protobuf import descriptor_pool
 
-from plume.record import Sample, Record, Frame
+from plume.record import Sample, Record, FrameSample, RawSample, MarkerSample
 from plume.samples.common.marker_pb2 import Marker
 
 # Required to add all DESCRIPTORS into the default descriptor pool
 from plume.samples import *
 __default_descriptor_pool = descriptor_pool.Default()
 
-def markers_to_dataframe(markers: list[Sample[Marker]]) -> pd.DataFrame:
+def markers_to_dataframe(markers: list[MarkerSample]) -> pd.DataFrame:
     sample_data = []
     for marker in markers:
-        sample_data.append({"timestamp": marker.timestamp} | marker.payload.label)
+        sample_data.append({"timestamp": marker.timestamp, "marker_label": marker.label})
     return pd.json_normalize(sample_data)
 
-def frames_to_dataframe(frames: list[Frame], descriptor_pool: descriptor_pool.DescriptorPool = __default_descriptor_pool) -> dict[type, pd.DataFrame]:
+def frames_to_dataframe(frames: list[FrameSample], descriptor_pool: descriptor_pool.DescriptorPool = __default_descriptor_pool) -> dict[type, pd.DataFrame]:
     """Converts a list of frames into a dictionary of dataframes. The keys are the types of the payloads and the values are the dataframes."""
     # Aggregate data from all frames in a single list
     samples = [data for frame in frames for data in frame.data]

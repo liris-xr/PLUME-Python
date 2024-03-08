@@ -1,14 +1,10 @@
 import xml.etree.ElementTree as ET
-from plume.samples.common.marker_pb2 import Marker 
-from plume.samples.lsl.stream_sample_pb2 import StreamSample
-from plume.samples.lsl.stream_open_pb2 import StreamOpen
-from plume.samples.lsl.stream_close_pb2 import StreamClose
-from plume.record import RawSample
-from google.protobuf.timestamp_pb2 import Timestamp
-from xdf_writer import *
+from plume.record import LslSample, LslOpenStream, LslCloseStream, MarkerSample
+from plume.export.xdf_writer import *
+from datetime import datetime
 
-def lsl_samples_to_xdf(output_buf, markers: list[RawSample[Marker]], lsl_samples: list[RawSample[StreamClose | StreamOpen | StreamSample]], record_start_time: Timestamp):
-    datetime_str = record_start_time.ToDatetime().astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
+def lsl_samples_to_xdf(output_buf, markers: list[MarkerSample], lsl_open_streams: list[LslOpenStream], lsl_close_streams: list[LslCloseStream], lsl_samples: list[LslSample], record_start_time: datetime):
+    datetime_str = record_start_time.astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
     # Add a colon separator to the offset segment
     datetime_str = "{0}:{1}".format(datetime_str[:-2], datetime_str[-2:])
 
@@ -26,27 +22,20 @@ def lsl_samples_to_xdf(output_buf, markers: list[RawSample[Marker]], lsl_samples
     stream_max_time[marker_stream_id] = None
     stream_sample_count[marker_stream_id] = 0
 
-    stream_open_samples = filter_samples(lsl_samples, StreamOpen)
-    stream_samples = filter_samples(lsl_samples, StreamSample)
-    stream_close_samples = filter_samples(lsl_samples, StreamClose)
-
-    for stream_open_sample in stream_open_samples:
-        stream_info = stream_open_sample.payload.stream_info
-        xml_header = ET.fromstring(stream_open_sample.payload.xml_header)
-        stream_id = np.uint64(stream_info.lsl_stream_id) + 1 # reserve id = 1 for the marker stream
+    for lsl_open_stream in lsl_open_streams:
+        xml_header = ET.fromstring(lsl_open_stream.xml_header)
+        stream_id = np.uint64(lsl_open_stream.stream_id) + 1 # reserve id = 1 for the marker stream
         channel_format = xml_header.find("channel_format").text
         stream_channel_format[stream_id] = channel_format
         stream_min_time[stream_id] = None
         stream_max_time[stream_id] = None
         stream_sample_count[stream_id] = 0
-        write_stream_header(output_buf, stream_open_sample.payload.xml_header, stream_id)
+        write_stream_header(output_buf, lsl_open_stream.xml_header, stream_id)
 
-    for stream_sample in stream_samples:
-        stream_info = stream_sample.payload.stream_info
-        stream_id = np.uint64(stream_info.lsl_stream_id) + 1
+    for lsl_sample in lsl_samples:
+        stream_id = np.uint64(lsl_sample.stream_id) + 1
         channel_format = stream_channel_format[stream_id]
-        attr = stream_sample.payload.WhichOneof('values')
-        t = stream_sample.timestamp / 1_000_000_000.0 #convert time to seconds
+        t = lsl_sample.timestamp / 1_000_000_000.0 #convert time to seconds
 
         if stream_min_time[stream_id] is None or t < stream_min_time[stream_id]:
             stream_min_time[stream_id] = t
@@ -58,7 +47,7 @@ def lsl_samples_to_xdf(output_buf, markers: list[RawSample[Marker]], lsl_samples
         else:
             stream_sample_count[stream_id] += 1
 
-        val = getattr(stream_sample.payload, attr).value
+        val = lsl_sample.channel_values
         write_stream_sample(output_buf, val, t, channel_format, stream_id)
 
     for marker_sample in markers:
@@ -75,12 +64,11 @@ def lsl_samples_to_xdf(output_buf, markers: list[RawSample[Marker]], lsl_samples
         else:
             stream_sample_count[marker_stream_id] += 1
 
-        val = marker_sample.payload.label
+        val = marker_sample.label
         write_stream_sample(output_buf, val, t, channel_format, marker_stream_id)
 
-    for stream_close_sample in stream_close_samples:
-        stream_info = stream_close_sample.payload.stream_info
-        stream_id = np.uint64(stream_info.lsl_stream_id) + 1
+    for lsl_close_stream in lsl_close_streams:
+        stream_id = np.uint64(lsl_close_stream.stream_id) + 1
         sample_count = stream_sample_count[stream_id]
         write_stream_footer(output_buf, stream_min_time[stream_id], stream_max_time[stream_id], sample_count, stream_id)
 

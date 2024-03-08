@@ -4,8 +4,7 @@ from dataclasses import dataclass, field
 from copy import deepcopy
 import numpy as np
 import quaternion
-from plume.filtering import filter_samples
-from plume.record import Frame
+from plume.record import FrameSample, RawSample
 from plume.samples.unity.transform_pb2 import TransformCreate, TransformUpdate, TransformDestroy
 from tqdm import tqdm
 import time
@@ -65,25 +64,30 @@ class FrameTransforms:
     transforms: list[LocalTransform]
 
 # This is painfully slow, this can be optimized by only recomputing the transforms for which one of its parents changed
-def compute_world_positions(frames: list[Frame]) -> list[dict[str, WorldTransform]]:
+def compute_world_positions(frames: list[FrameSample]) -> list[dict[str, WorldTransform]]:
 
     world_transforms: list[dict[str, WorldTransform]] = []
 
     last_frame_local_transforms = None
 
     for frame in tqdm(frames, desc="Computing world positions"):
-
-        frame_total_start_time = time.time()
-
         if last_frame_local_transforms is None:
             frame_local_transforms: dict[str, LocalTransform] = {}
         else:
             # Copy all previous transforms for the new frame
             frame_local_transforms = deepcopy(last_frame_local_transforms)
 
-        transform_create_samples = filter_samples(frame.data, TransformCreate)
-        transform_destroy_samples = filter_samples(frame.data, TransformDestroy)
-        transform_update_samples = filter_samples(frame.data, TransformUpdate)
+        transform_create_samples: list[RawSample[TransformCreate]] = []
+        transform_update_samples: list[RawSample[TransformUpdate]] = []
+        transform_destroy_samples: list[RawSample[TransformDestroy]] = []
+
+        for frame_data in frame.data:
+            if isinstance(frame_data.payload, TransformCreate):
+                transform_create_samples.append(frame_data)
+            elif isinstance(frame_data.payload, TransformUpdate):
+                transform_update_samples.append(frame_data)
+            elif isinstance(frame_data.payload, TransformDestroy):
+                transform_destroy_samples.append(frame_data)
 
         # Add newly created transforms
         for transform_create_sample in transform_create_samples:
@@ -121,8 +125,6 @@ def compute_world_positions(frames: list[Frame]) -> list[dict[str, WorldTransfor
 
         frame_world_transforms: dict[str, WorldTransform] = {}
 
-        world_transform_start_time = time.time()
-
         # When all transforms are updated, compute world transforms
         for transform_guid, local_transform in frame_local_transforms.items():
             world_transform = WorldTransform(world_position=local_transform.get_world_position(),
@@ -132,14 +134,6 @@ def compute_world_positions(frames: list[Frame]) -> list[dict[str, WorldTransfor
         
         world_transforms.append(frame_world_transforms)
         last_frame_local_transforms = frame_local_transforms
-
-        world_transform_end_time = time.time()
-        world_transform_time = world_transform_end_time - world_transform_start_time
-        print(f"Time taken to compute WorldTransform for frame {frame.frame_number}: {world_transform_time} seconds")
-
-        frame_total_end_time = time.time()
-        frame_total_time = frame_total_end_time - frame_total_start_time
-        print(f"Total time taken for the whole frame: {frame_total_time} seconds")
 
     return world_transforms
             
