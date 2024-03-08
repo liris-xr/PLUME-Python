@@ -27,6 +27,30 @@
     </p>
 </div>
 
+<details>
+    <summary>Table of Contents</summary>
+    <ol>
+        <li><a href="#about-plume-python">About PLUME Python</a></li>
+        <li>
+            <a href="#getting-started">Getting Started</a>
+            <ul>
+                <li><a href="#prerequisites">Prerequisites</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#usage">Usage</a></li>
+            </ul>
+        </li>
+        <li><a href="#customization">Customization</a></li>
+        <li><a href="#customization">Roadmap</a></li>
+        <li><a href="#contributing">Contributing</a></li>
+        <li><a href="#license">License</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#citation">Citation</a></li>
+    </ol>
+</details>
+
+## About PLUME Python
+The interoperability of PLUME record files allows for other language to load those files for external analysis. PLUME Python is a module that can load record files using the Protobuf package to filter and convert the data into more commonly used formats in data analysis like pandas dataframe or CSV files. Embedded data such as LabStreamingLayer's samples can be exported to XDF files for external use in tools such as SigViewer, EEGLAB or MoBILAB.
+
 ## Getting Started
 ### Prerequisites
 * Python 3.10 or later
@@ -49,24 +73,19 @@ python cli.py input_file output_dir --csv --xdf --descriptors [DESCRIPTORS ...]
 * **-descriptors**: Descriptor name used for filtering which samples to output as CSV files. Short name will automatically be preprended (eg. TransformUpdate -> plume.sample.unity.TransformUpdate).
 
 ## Customization
-If you have customized your PLUME Record as instructed <a href="https://github.com/liris-xr/PLUME-Recorder?tab=readme-ov-file#customisation">here</a> you need to import your generated protos for Python in the samples folder: `PLUME-Python/plume/samples`.
-
+If you have customized your PLUME Record as instructed <a href="https://github.com/liris-xr/PLUME-Recorder?tab=readme-ov-file#customisation">here</a>, import your generated protos for Python in the samples folder: `PLUME-Python/plume/samples`.
 
 ## Roadmap
-
 See the [open issues](https://github.com/liris-xr/PLUME/issues) for a full list of proposed features (and known issues).
 
 ## Contributing
-
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 Don't forget to give the project a star! Thanks again!
 
 ## License
-
 Distributed under the <a rel="license" href="https://github.com/liris-xr/PLUME/blob/master/LICENSE">GPLv3 License</a>.
 
 ## Contact
-
 Charles JAVERLIAT - charles.javerliat@gmail.com
 
 Sophie VILLENAVE - sophie.villenave@ec-lyon.fr
