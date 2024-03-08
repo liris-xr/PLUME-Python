@@ -27,6 +27,8 @@
     </p>
 </div>
 
+<img alt="PLUME Python" src="/Documentation~/Images/plume_python.png">
+
 <details>
     <summary>Table of Contents</summary>
     <ol>
