@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from copy import deepcopy
+import sys
 import numpy as np
 import quaternion
 from plume.record import FrameSample, RawSample
 from plume.samples.unity.transform_pb2 import TransformCreate, TransformUpdate, TransformDestroy
 from tqdm import tqdm
-import time
 
 @dataclass
 class LocalTransform:
@@ -22,7 +22,7 @@ class LocalTransform:
         rotation_matrix = np.eye(4)
         rotation_matrix[0:3, 0:3] = quaternion.as_rotation_matrix(self.local_rotation)
         scale_matrix = np.eye(4)
-        scale_matrix[0:3, 0:3] = np.diag(self.local_scale)
+        scale_matrix[0:3, 0:3] = np.eye(3) * self.local_scale
         return translation_matrix @ rotation_matrix @ scale_matrix
 
     def compute_local_to_world_matrix(self):
@@ -33,23 +33,24 @@ class LocalTransform:
         else:
             return local_matrix
 
-    def get_world_position(self):
+    def compute_world_transform(self):
         local_to_world_matrix = self.compute_local_to_world_matrix()
-        return local_to_world_matrix[0:3, 3].transpose()
-    
-    def get_world_rotation(self):
-        local_to_world_matrix = self.compute_local_to_world_matrix()
-        local_to_world_matrix[0:3, 0] /= np.linalg.norm(local_to_world_matrix[0:3, 0])
-        local_to_world_matrix[0:3, 1] /= np.linalg.norm(local_to_world_matrix[0:3, 1])
-        local_to_world_matrix[0:3, 2] /= np.linalg.norm(local_to_world_matrix[0:3, 2])
-        return quaternion.from_rotation_matrix(local_to_world_matrix[0:3, 0:3])
-
-    def get_world_scale(self):
-        local_to_world_matrix = self.compute_local_to_world_matrix()
+        position = local_to_world_matrix[0:3, 3].transpose()
+        local_to_world_matrix[0:3, 3] = 0
         sx = np.linalg.norm(local_to_world_matrix[0:3, 0])
         sy = np.linalg.norm(local_to_world_matrix[0:3, 1])
         sz = np.linalg.norm(local_to_world_matrix[0:3, 2])
-        return np.array([sx, sy, sz])
+        scale = np.array([sx, sy, sz])
+
+        if sx != 0:
+            local_to_world_matrix[0:3, 0] /= sx
+        if sy != 0:
+            local_to_world_matrix[0:3, 1] /= sy
+        if sz != 0:
+            local_to_world_matrix[0:3, 2] /= sz
+        
+        rotation = quaternion.from_rotation_matrix(local_to_world_matrix[0:3, 0:3])
+        return WorldTransform(position, rotation, scale)
 
 @dataclass(frozen=True)
 class WorldTransform:
@@ -63,7 +64,7 @@ class FrameTransforms:
     frame_number: int
     transforms: list[LocalTransform]
 
-# This is painfully slow, this can be optimized by only recomputing the transforms for which one of its parents changed
+# TODO: This is painfully slow, this can be optimized by only recomputing the transforms for which one of its parents changed
 def compute_world_positions(frames: list[FrameSample]) -> list[dict[str, WorldTransform]]:
 
     world_transforms: list[dict[str, WorldTransform]] = []
@@ -127,9 +128,7 @@ def compute_world_positions(frames: list[FrameSample]) -> list[dict[str, WorldTr
 
         # When all transforms are updated, compute world transforms
         for transform_guid, local_transform in frame_local_transforms.items():
-            world_transform = WorldTransform(world_position=local_transform.get_world_position(),
-                                             world_rotation=local_transform.get_world_rotation(),
-                                             world_scale=local_transform.get_world_scale())
+            world_transform = local_transform.compute_world_transform()
             frame_world_transforms[transform_guid] = world_transform
         
         world_transforms.append(frame_world_transforms)
