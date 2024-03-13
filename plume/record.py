@@ -11,6 +11,7 @@ from abc import ABC
 
 T = TypeVar('T', bound=Message)
 
+
 @dataclass(frozen=True)
 class Sample(ABC):
     # Timestamp in nanoseconds relative to the start of the record
@@ -23,10 +24,12 @@ class Sample(ABC):
 
     def is_timestamped(self):
         return self.timestamp is not None
-    
+
+
 @dataclass(frozen=True)
 class RawSample(Sample, Generic[T]):
     payload: T
+
 
 @dataclass(frozen=True)
 class FrameSample(Sample):
@@ -34,9 +37,11 @@ class FrameSample(Sample):
     frame_number: int
     data: list[RawSample]
 
+
 @dataclass(frozen=True)
 class MarkerSample(Sample):
     label: str
+
 
 @dataclass(frozen=True)
 class LslStreamInfo():
@@ -45,19 +50,23 @@ class LslStreamInfo():
     # XML containing channel format, number of channels, metadata, etc
     xml_header: str
 
+
 @dataclass(frozen=True)
 class LslSample(Sample):
     stream_id: str
     channel_values: list[float | int | str]
+
 
 @dataclass(frozen=True)
 class LslOpenStream(Sample):
     stream_id: str
     xml_header: str
 
+
 @dataclass(frozen=True)
 class LslCloseStream(Sample):
     stream_id: str
+
 
 @dataclass(frozen=True)
 class RecorderVersion:
@@ -66,12 +75,14 @@ class RecorderVersion:
     minor: str
     patch: str
 
+
 @dataclass(frozen=True)
 class RecordMetadata():
     start_time: datetime
     name: str
     extra_metadata: str
     recorder_version: RecorderVersion
+
 
 @dataclass(frozen=True)
 class Record():
