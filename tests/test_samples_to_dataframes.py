@@ -1,14 +1,12 @@
-import os.path
-
-from plume_python import parser
-from plume_python.export.dataframe_exporter import frames_to_dataframe, markers_to_dataframe
-from plume_python.samples.unity.transform_pb2 import TransformUpdate
 import pytest
 
+from plume_python.samples.common import marker_pb2
+from plume_python.utils.dataframe import samples_to_dataframe, record_to_dataframes
 
-def test_export_frames_dataframes():
-    frames_df = frames_to_dataframe(pytest.record.frames)
+
+def test_export_record_dataframes():
+    frames_df = record_to_dataframes(pytest.record)
 
 
 def test_export_markers_dataframes():
-    markers_df = markers_to_dataframe(pytest.record.markers)
+    markers_df = samples_to_dataframe(pytest.record[marker_pb2.Marker])

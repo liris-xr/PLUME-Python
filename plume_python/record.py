@@ -1,91 +1,71 @@
-from abc import ABC
 from dataclasses import dataclass
-from datetime import datetime
-from typing import TypeVar, Generic, Optional
+from typing import TypeVar, Generic, Optional, Type
+from .samples.record_pb2 import RecordMetadata
 
 from google.protobuf.message import Message
 
 T = TypeVar('T', bound=Message)
 
 
-@dataclass(frozen=True)
-class Sample(ABC):
+@dataclass(frozen=True, slots=True, kw_only=True)
+class Sample(Generic[T]):
     # Timestamp in nanoseconds relative to the start of the record
     timestamp: Optional[int]
-
-    def __new__(cls, *args, **kwargs):
-        if cls == Sample:
-            raise TypeError("Cannot instantiate abstract sample.")
-        return super().__new__(cls)
+    payload: T
 
     def is_timestamped(self):
         return self.timestamp is not None
 
 
-@dataclass(frozen=True)
-class RawSample(Sample, Generic[T]):
-    payload: T
-
-
-@dataclass(frozen=True)
-class FrameSample(Sample):
-    # This corresponds to the in-game frame number and *NOT* the index of the frame in the record
+@dataclass(frozen=True, slots=True)
+class FrameDataSample(Sample[T]):
     frame_number: int
-    data: list[RawSample]
+
+
+@dataclass(frozen=True, slots=True)
+class FrameInfo:
+    frame_number: int
+    timestamp: int
 
 
 @dataclass(frozen=True)
-class MarkerSample(Sample):
-    label: str
+class Record:
+    samples_by_type: dict[Type[T], list[Sample[T]]]
+    frames_info: list[FrameInfo]
+    first_timestamp: Optional[int]
+    last_timestamp: Optional[int]
 
+    def __getitem__(self, item: Type[T]) -> list[Sample[T]]:
+        return self.get_samples_by_type(item)
 
-@dataclass(frozen=True)
-class LslStreamInfo():
-    # Stream unique identifier this data comes from
-    stream_id: str
-    # XML containing channel format, number of channels, metadata, etc
-    xml_header: str
+    def get_metadata(self) -> RecordMetadata:
+        if RecordMetadata not in self.samples_by_type:
+            raise ValueError("The record does not contain any metadata.")
+        return self.samples_by_type[RecordMetadata][0].payload
 
+    def get_frame_count(self) -> int:
+        return len(self.frames_info)
 
-@dataclass(frozen=True)
-class LslSample(Sample):
-    stream_id: str
-    channel_values: list[float | int | str]
+    def get_samples_by_type(self, payload_type: Type[T]) -> list[Sample[T]]:
+        return self.samples_by_type.get(payload_type, [])
 
+    def get_samples_in_time_range(self, start: Optional[int], end: Optional[int]) -> dict[Type[T], list[Sample[T]]]:
+        samples_in_time_range = {}
+        for payload_type, samples in self.samples_by_type.items():
+            samples_in_time_range[payload_type] = [sample for sample in samples if
+                                                   (start is None or sample.timestamp >= start) and
+                                                   (end is None or sample.timestamp <= end)]
+        return samples_in_time_range
 
-@dataclass(frozen=True)
-class LslOpenStream(Sample):
-    stream_id: str
-    xml_header: str
+    def get_samples_by_type_in_time_range(self, start: Optional[int], end: Optional[int],
+                                          payload_type: Type[T]) -> list[Sample[T]]:
+        return [sample for sample in self.samples_by_type[payload_type] if
+                (start is None or sample.timestamp >= start) and
+                (end is None or sample.timestamp <= end)]
 
-
-@dataclass(frozen=True)
-class LslCloseStream(Sample):
-    stream_id: str
-
-
-@dataclass(frozen=True)
-class RecorderVersion:
-    name: str
-    major: str
-    minor: str
-    patch: str
-
-
-@dataclass(frozen=True)
-class RecordMetadata():
-    start_time: datetime
-    name: str
-    extra_metadata: str
-    recorder_version: RecorderVersion
-
-
-@dataclass(frozen=True)
-class Record():
-    metadata: RecordMetadata
-    frames: list[FrameSample]
-    lsl_samples: list[LslSample]
-    lsl_open_streams: list[LslOpenStream]
-    lsl_close_streams: list[LslCloseStream]
-    markers: list[MarkerSample]
-    raw_samples: list[RawSample]
+    def get_sample_timestamp_since_epoch(self, sample: Sample) -> int:
+        """Returns the absolute timestamp of the sample since epoch in nanoseconds."""
+        if RecordMetadata not in self.samples_by_type:
+            raise ValueError("Unable to determine the absolute timestamp due to missing metadata sample in the record.")
+        metadata = self.samples_by_type[RecordMetadata][0].payload
+        return metadata.start_time.ToNanoseconds() + sample.timestamp

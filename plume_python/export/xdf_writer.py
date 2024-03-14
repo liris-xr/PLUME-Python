@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as ET
 from enum import Enum
 from io import BufferedWriter, BytesIO
-from struct import *
 
 import numpy as np
 
@@ -19,6 +18,7 @@ formats = dict(
 )
 
 DataType = np.int8 | np.int16 | np.int32 | np.int64 | np.uint8 | np.uint16 | np.uint32 | np.uint64 | np.float32 | np.float64 | str
+
 
 class ChunkTag(Enum):
     FILE_HEADER = 1
@@ -43,7 +43,6 @@ def write_file_header(output: BufferedWriter, version: str, datetime: str):
 
 
 def write_chunk(output: BufferedWriter, chunk_tag: ChunkTag, content: bytes, stream_id: np.uint32 = None):
-
     if not isinstance(content, bytes):
         raise Exception("Content should be bytes.")
 
@@ -62,13 +61,14 @@ def write_chunk(output: BufferedWriter, chunk_tag: ChunkTag, content: bytes, str
 
 
 def write_stream_header(output: BufferedWriter, xml_header: str | bytes, stream_id: np.uint32 = None):
-
     if isinstance(xml_header, str):
         xml_header = bytes(xml_header, encoding=STR_ENCODING)
 
     write_chunk(output, ChunkTag.STREAM_HEADER, xml_header, None if stream_id is None else np.uint32(stream_id))
 
-def write_stream_footer(output: BufferedWriter, first_timestamp: np.float64, last_timestamp: np.float64, sample_count: np.uint64, stream_id: np.uint32 = None):
+
+def write_stream_footer(output: BufferedWriter, first_timestamp: float, last_timestamp: float,
+                        sample_count: int, stream_id: np.uint32 = None):
     first_timestamp = np.float64(first_timestamp)
     last_timestamp = np.float64(last_timestamp)
     sample_count = np.uint64(sample_count)
@@ -85,16 +85,18 @@ def write_stream_footer(output: BufferedWriter, first_timestamp: np.float64, las
     write_chunk(output, ChunkTag.STREAM_FOOTER, xml_str, None if stream_id is None else np.uint32(stream_id))
 
 
-def write_stream_sample(output: BufferedWriter, sample: np.ndarray, timestamp: np.float64, channel_format: str, stream_id: np.uint32 = None):
+def write_stream_sample(output: BufferedWriter, sample: np.ndarray, timestamp: float, channel_format: str,
+                        stream_id: np.uint32 = None):
     if channel_format not in formats:
         raise Exception("Unsupported channel format '{}'".format(channel_format))
 
     fmt = formats[channel_format]
-    write_stream_sample_chunk(output, np.array([sample], dtype=fmt), np.array([timestamp], dtype=np.float64), channel_format, None if stream_id is None else np.uint32(stream_id))
+    write_stream_sample_chunk(output, np.array([sample], dtype=fmt), np.array([timestamp], dtype=np.float64),
+                              channel_format, None if stream_id is None else np.uint32(stream_id))
 
 
-def write_stream_sample_chunk(output: BufferedWriter, chunk: np.ndarray, timestamps: np.ndarray, channel_format: str, stream_id: np.uint32 = None):
-
+def write_stream_sample_chunk(output: BufferedWriter, chunk: np.ndarray, timestamps: np.ndarray, channel_format: str,
+                              stream_id: np.uint32 = None):
     if channel_format not in formats:
         raise Exception("Unsupported channel format '{}'".format(channel_format))
 
@@ -142,7 +144,6 @@ def write_timestamp(output: BufferedWriter, timestamp: np.float64 = None):
 
 
 def write_variable_length_integer(output: BufferedWriter, val: np.uint64):
-
     if not isinstance(val, np.uint64):
         raise Exception("Unsupported data type " + str(type(val)))
 
@@ -157,8 +158,8 @@ def write_variable_length_integer(output: BufferedWriter, val: np.uint64):
         write(output, np.uint64(val))
 
 
-def write_fixed_length_integer(output: BufferedWriter, val: np.int8 | np.int16 | np.int32 | np.int64 | np.uint8 | np.uint16 | np.uint32 | np.uint64):
-
+def write_fixed_length_integer(output: BufferedWriter,
+                               val: np.int8 | np.int16 | np.int32 | np.int64 | np.uint8 | np.uint16 | np.uint32 | np.uint64):
     if not isinstance(val, np.int8 | np.int16 | np.int32 | np.int64 | np.uint8 | np.uint16 | np.uint32 | np.uint64):
         raise Exception("Unsupported data type " + str(type(val)))
 
@@ -167,7 +168,6 @@ def write_fixed_length_integer(output: BufferedWriter, val: np.int8 | np.int16 |
 
 
 def write(output: BufferedWriter, val: DataType | bytes):
-
     if isinstance(val, str):
         output.write(bytes(val, encoding=STR_ENCODING))
     elif isinstance(val, bytes):

@@ -1,5 +1,7 @@
-import pytest
 import os
+
+import pytest
+
 from plume_python.parser import parse_record_from_file
 
 

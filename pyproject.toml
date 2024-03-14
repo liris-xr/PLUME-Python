@@ -16,10 +16,13 @@ protobuf = "^4.25.3"
 delimited-protobuf = "^1.0.0"
 pandas = "^2.2.1"
 
-
 [tool.poetry.group.test.dependencies]
 pytest = "^8.1.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[virtualenvs]
+create = true
+in-project = true
