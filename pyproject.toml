@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "plume"
-version = "1.0.0"
+name = "plume-python"
+version = "0.1.8"
 description = "Set of utilities to work with PLM record files."
 authors = ["Charles JAVERLIAT <charles.javerliat@gmail.com>"]
 license = "GPLv3"
@@ -16,6 +16,9 @@ protobuf = "^4.25.3"
 delimited-protobuf = "^1.0.0"
 pandas = "^2.2.1"
 
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.1.1"
 
 [build-system]
 requires = ["poetry-core"]

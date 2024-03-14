@@ -1,12 +1,10 @@
 <a name="readme-top"></a>
 <div align="center">
-    <a href="https://github.com/liris-xr/PLUME">
-        <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="/Documentation~/Images/plume_banner_dark.png">
-            <source media="(prefers-color-scheme: light)" srcset="/Documentation~/Images/plume_banner_light.png">
-            <img alt="PLUME banner." src="/Documentation~/Images/plume_banner_light.png">
-        </picture>
-    </a>
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_banner_dark.png">
+        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_banner_light.png">
+        <img alt="PLUME banner." src="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_banner_light.png">
+    </picture>
     <br />
     <br />
     <p align="center">
@@ -27,7 +25,7 @@
     </p>
 </div>
 
-<img alt="PLUME Python" src="/Documentation~/Images/plume_python.png">
+<img alt="PLUME Python" src="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_python.png">
 
 <details>
     <summary>Table of Contents</summary>
@@ -51,48 +49,69 @@
 </details>
 
 ## About PLUME Python
-The interoperability of PLUME record files allows for other language to load those files for external analysis. PLUME Python is a module that can load record files using the Protobuf package to filter and convert the data into more commonly used formats in data analysis like pandas dataframe or CSV files. Embedded data such as LabStreamingLayer's samples can be exported to XDF files for external use in tools such as SigViewer, EEGLAB or MoBILAB.
+
+The interoperability of PLUME record files allows for other language to load those files for external analysis. PLUME
+Python is a module that can load record files using the Protobuf package to filter and convert the data into more
+commonly used formats in data analysis like pandas dataframe or CSV files. Embedded data such as LabStreamingLayer's
+samples can be exported to XDF files for external use in tools such as SigViewer, EEGLAB or MoBILAB.
 
 ## Getting Started
+
 ### Prerequisites
+
 * Python 3.10 or later
 * protobuf
 * pandas
 
 ### Installation
+
 Download the latest release or clone the repository.
 
 ### Usage
+
 Use the CLI to load and convert your records
 
 ```
 python cli.py input_file output_dir --csv --xdf --descriptors [DESCRIPTORS ...]
 ```
+
 * **input_file**: Input PLUME record file (.plm) to be converted.
-* **output_dir**: Output directory where all generated files will be saved. Directory will be created if it does not exist.
+* **output_dir**: Output directory where all generated files will be saved. Directory will be created if it does not
+  exist.
 * **--csv**: Convert to CSV with optional filters.
 * **--xdf**: Convert markers and physiological signals to XDF .
-* **-descriptors**: Descriptor name used for filtering which samples to output as CSV files. Short name will automatically be preprended (eg. TransformUpdate -> plume.sample.unity.TransformUpdate).
+* **-descriptors**: Descriptor name used for filtering which samples to output as CSV files. Short name will
+  automatically be preprended (eg. TransformUpdate -> plume.sample.unity.TransformUpdate).
 
 ## Customization
-If you have customized your PLUME Record as instructed <a href="https://github.com/liris-xr/PLUME-Recorder?tab=readme-ov-file#customisation">here</a>, import your generated protos for Python in the samples folder: `PLUME-Python/plume/samples`.
+
+If you have customized your PLUME Record as
+instructed <a href="https://github.com/liris-xr/PLUME-Recorder?tab=readme-ov-file#customisation">here</a>, import your
+generated protos for Python in the samples folder: `PLUME-Python/plume/samples`.
 
 ## Roadmap
+
 See the [open issues](https://github.com/liris-xr/PLUME/issues) for a full list of proposed features (and known issues).
 
 ## Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
+contributions you make are **greatly appreciated**.
 Don't forget to give the project a star! Thanks again!
 
 ## License
-Distributed under the <a rel="license" href="https://github.com/liris-xr/PLUME-Python/blob/master/LICENSE">GPLv3 License</a>.
+
+Distributed under the <a rel="license" href="https://github.com/liris-xr/PLUME-Python/blob/master/LICENSE">GPLv3
+License</a>.
 
 ## Contact
+
 Charles JAVERLIAT - charles.javerliat@gmail.com
 
 Sophie VILLENAVE - sophie.villenave@ec-lyon.fr
 
 ## Citation
+
 ```
 @article{javerliat_plume_2024,
 	title = {{PLUME}: {Record}, {Replay}, {Analyze} and {Share} {User} {Behavior} in {6DoF} {XR} {Experiences}},
