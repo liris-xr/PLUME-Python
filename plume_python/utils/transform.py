@@ -8,7 +8,7 @@ import numpy as np
 import quaternion
 from tqdm import tqdm
 
-from ..record import Record
+from ..record import Record, FrameDataSample
 from ..samples.unity import transform_pb2
 
 
@@ -128,12 +128,20 @@ def compute_transforms_time_series(record: Record, included_guids: set[str] = No
     result: dict[str, list[TimestampedTransform]] = {}
     current_transforms: dict[str, Transform] = {}
 
-    creation_samples = groupby(record[transform_pb2.TransformCreate], lambda x: x.frame_number)
-    destruction_samples = groupby(record[transform_pb2.TransformDestroy], lambda x: x.frame_number)
-    update_samples = groupby(record[transform_pb2.TransformUpdate], lambda x: x.frame_number)
+    creation_samples: dict[int, list[FrameDataSample[transform_pb2.TransformCreate]]] = {}
+    destruction_samples: dict[int, list[FrameDataSample[transform_pb2.TransformDestroy]]] = {}
+    update_samples: dict[int, list[FrameDataSample[transform_pb2.TransformUpdate]]] = {}
+
+    for frame_number, s in groupby(record[transform_pb2.TransformCreate], lambda x: x.frame_number):
+        creation_samples[frame_number] = list(s)
+
+    for frame_number, s in groupby(record[transform_pb2.TransformDestroy], lambda x: x.frame_number):
+        destruction_samples[frame_number] = list(s)
+
+    for frame_number, s in groupby(record[transform_pb2.TransformUpdate], lambda x: x.frame_number):
+        update_samples[frame_number] = list(s)
 
     for frame in tqdm(record.frames_info, desc="Computing world positions"):
-
         # Add newly created transforms
         if frame.frame_number in creation_samples:
             for creation_sample in creation_samples[frame.frame_number]:
@@ -188,6 +196,6 @@ def compute_transforms_time_series(record: Record, included_guids: set[str] = No
                                                          local_position=t.get_local_position(),
                                                          local_rotation=t.get_local_rotation(),
                                                          local_to_world_mtx=t.get_local_to_world_matrix())
-            result[t.get_guid()].append(timestamped_transform)
+            result.setdefault(t.get_guid(), list[TimestampedTransform]()).append(timestamped_transform)
 
     return result

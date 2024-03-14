@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "plume-python"
-version = "0.1.9"
+version = "0.1.10"
 description = "Set of utilities to work with PLM record files."
 authors = ["Charles JAVERLIAT <charles.javerliat@gmail.com>"]
 license = "GPLv3"
