@@ -65,7 +65,11 @@ samples can be exported to XDF files for external use in tools such as SigViewer
 
 ### Installation
 
-Download the latest release or clone the repository.
+To install the latest release, use pip:
+
+```shell
+pip install plume-python
+```
 
 ### Usage
 
