@@ -57,12 +57,6 @@ samples can be exported to XDF files for external use in tools such as SigViewer
 
 ## Getting Started
 
-### Prerequisites
-
-* Python 3.10 or later
-* protobuf
-* pandas
-
 ### Installation
 
 To install the latest release, use pip:
