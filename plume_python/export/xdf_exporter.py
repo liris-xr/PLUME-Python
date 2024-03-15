@@ -2,9 +2,10 @@ from plume_python.export.xdf_writer import *
 from plume_python.record import Record
 from plume_python.samples.common import marker_pb2
 from plume_python.samples.lsl import lsl_stream_pb2
+from typing import BinaryIO
 
 
-def export_xdf_from_record(output_buf, record: Record):
+def export_xdf_from_record(output_file: BinaryIO, record: Record):
     datetime_str = record.get_metadata().start_time.ToDatetime().astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
     # Add a colon separator to the offset segment
     datetime_str = "{0}:{1}".format(datetime_str[:-2], datetime_str[-2:])
@@ -14,10 +15,10 @@ def export_xdf_from_record(output_buf, record: Record):
     stream_max_time = {}
     stream_sample_count = {}
 
-    write_file_header(output_buf, "1.0", datetime_str)
+    write_file_header(output_file, "1.0", datetime_str)
 
     marker_stream_id = np.uint64(1)
-    write_marker_stream_header(output_buf, marker_stream_id)
+    write_marker_stream_header(output_file, marker_stream_id)
     stream_channel_format[marker_stream_id] = "string"
     stream_min_time[marker_stream_id] = None
     stream_max_time[marker_stream_id] = None
@@ -31,7 +32,7 @@ def export_xdf_from_record(output_buf, record: Record):
         stream_min_time[stream_id] = None
         stream_max_time[stream_id] = None
         stream_sample_count[stream_id] = 0
-        write_stream_header(output_buf, lsl_open_stream.payload.xml_header, stream_id)
+        write_stream_header(output_file, lsl_open_stream.payload.xml_header, stream_id)
 
     for lsl_sample in record[lsl_stream_pb2.StreamSample]:
         stream_id = np.uint64(lsl_sample.payload.stream_id) + 1
@@ -65,7 +66,7 @@ def export_xdf_from_record(output_buf, record: Record):
         else:
             raise ValueError(f"Unsupported channel format: {channel_format}")
 
-        write_stream_sample(output_buf, val, t, channel_format, stream_id)
+        write_stream_sample(output_file, val, t, channel_format, stream_id)
 
     for marker_sample in record[marker_pb2.Marker]:
         t = marker_sample.timestamp / 1_000_000_000.0  # convert time to seconds
@@ -81,16 +82,17 @@ def export_xdf_from_record(output_buf, record: Record):
             stream_sample_count[marker_stream_id] += 1
 
         val = np.array([marker_sample.payload.label], dtype=np.str_)
-        write_stream_sample(output_buf, val, t, "string", marker_stream_id)
+        write_stream_sample(output_file, val, t, "string", marker_stream_id)
 
     for lsl_close_stream in record[lsl_stream_pb2.StreamClose]:
         stream_id = np.uint64(lsl_close_stream.payload.stream_id) + 1
         sample_count = stream_sample_count[stream_id]
-        write_stream_footer(output_buf, stream_min_time[stream_id], stream_max_time[stream_id], sample_count, stream_id)
+        write_stream_footer(output_file, stream_min_time[stream_id], stream_max_time[stream_id], sample_count,
+                            stream_id)
 
     # Write marker stream footer
     # stream_id = 1 is reserved for the marker stream
-    write_stream_footer(output_buf, stream_min_time[marker_stream_id], stream_max_time[marker_stream_id],
+    write_stream_footer(output_file, stream_min_time[marker_stream_id], stream_max_time[marker_stream_id],
                         stream_sample_count[marker_stream_id], marker_stream_id)
 
 

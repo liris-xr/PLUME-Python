@@ -32,7 +32,7 @@ def samples_to_dataframe(samples: list[Sample[T]]) -> pd.DataFrame:
     return pd.json_normalize(sample_data)
 
 
-def record_to_dataframes(record: Record) -> dict[type, pd.DataFrame]:
+def record_to_dataframes(record: Record) -> dict[Type[T], pd.DataFrame]:
     dataframes: dict[Type[T], pd.DataFrame] = {}
 
     for payload_type, samples in record.samples_by_type.items():

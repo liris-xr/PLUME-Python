@@ -4,3 +4,4 @@ from . import record
 from . import utils
 from . import samples
 from . import export
+from . import cli
