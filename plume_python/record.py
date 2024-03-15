@@ -57,8 +57,8 @@ class Record:
                                                    (end is None or sample.timestamp <= end)]
         return samples_in_time_range
 
-    def get_samples_by_type_in_time_range(self, start: Optional[int], end: Optional[int],
-                                          payload_type: Type[T]) -> list[Sample[T]]:
+    def get_samples_by_type_in_time_range(self, payload_type: Type[T], start: Optional[int], end: Optional[int]) -> \
+            list[Sample[T]]:
         return [sample for sample in self.samples_by_type[payload_type] if
                 (start is None or sample.timestamp >= start) and
                 (end is None or sample.timestamp <= end)]

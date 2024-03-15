@@ -1,5 +1,6 @@
 from typing import BinaryIO, Any, Optional, TypeVar, cast, Type
 from warnings import warn
+from tqdm import tqdm
 
 from delimited_protobuf import read as _read_delimited
 from google.protobuf import descriptor_pool as _descriptor_pool
@@ -37,7 +38,7 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
     first_timestamp: Optional[int] = None
     last_timestamp: Optional[int] = None
 
-    for packed_sample in packed_samples:
+    for packed_sample in tqdm(packed_samples, desc="Unpacking samples", unit="samples"):
 
         unpacked_payload = unpack_any(packed_sample.payload, default_descriptor_pool)
         if unpacked_payload is None:
@@ -81,11 +82,13 @@ def parse_packed_samples_from_stream(data_stream: BinaryIO) -> list[packed_sampl
     """Parses packed samples from a binary stream and returns a list of packed samples."""
     packed_samples = []
 
+    pbar = tqdm(desc="Parsing packed samples", unit="bytes", total=len(data_stream.getbuffer()))
     while data_stream.tell() < len(data_stream.getbuffer()):
         packed_sample = _read_delimited(data_stream, packed_sample_pb2.PackedSample)
 
         if packed_sample is not None:
             packed_samples.append(packed_sample)
+        pbar.update(data_stream.tell() - pbar.n)
 
     return packed_samples
 
