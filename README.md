@@ -26,7 +26,8 @@ PLUME Python is a Python package that allows you to load and extract data from P
 
 ## Getting Started
 
-PLUME Python can be installed directly from PyPI using the following command:
+PLUME Python can be installed directly from PyPI (requires Python >= 3.10) using the following command:
+
 ```bash
 pip install plume-python
 ```
