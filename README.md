@@ -1,80 +1,43 @@
-<a name="readme-top"></a>
 <div align="center">
-    <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_banner_dark.png">
-        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_banner_light.png">
-        <img alt="PLUME banner." src="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_banner_light.png">
-    </picture>
-    <br />
-    <br />
-    <p align="center">
-        <strong>PLUME: Record, Replay, Analyze and Share User Behavior in 6DoF XR Experiences</strong>
-        <br />
-        Charles Javerliat, Sophie Villenave, Pierre Raimbaud, Guillaume Lavoué
-        <br />
-        <em>(Journal Track) IEEE Conference on Virtual Reality and 3D User Interfaces</em>
-        <br />
-        <a href="https://www.youtube.com/watch?v=_6krSw7fNqg"><strong>Video »</strong><a>
-        <a href="https://hal.science/hal-04488824"><strong>Paper »</strong></a>
-        <a href="https://github.com/liris-xr/PLUME/wiki/"><strong>Explore the docs »</strong></a>
-        <br />
-        <br />
-        <a href="https://github.com/liris-xr/PLUME/issues">Report Bug</a>
-        ·
-        <a href="https://github.com/liris-xr/PLUME/issues">Request Feature</a>
+    <a href="https://github.com/liris-xr/PLUME">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="Resources~/Images/plume_python_dark.png">
+            <source media="(prefers-color-scheme: light)" srcset="Resources~/Images/plume_python_light.png">
+            <img alt="PLUME banner." src="Resources~/Images/plume_python_light.png" width="350">
+        </picture>
+    </a><br/><br/>
+    <p>
+        <a href="https://opensource.org/license/gpl-3-0"><img alt="License badge" src="https://img.shields.io/badge/license-GPLv3-blue.svg"/></a>
+        <a href="https://discord.gg/c3evqEWMge"><img alt="Discord badge" src="https://img.shields.io/discord/1151165491767935107?logo=discord&logoColor=white&label=discord"/></a>
     </p>
 </div>
+<p align="center">
+    Charles Javerliat, Sophie Villenave, Pierre Raimbaud, Guillaume Lavoué
+    <br />
+    <em>IEEE Conference on Virtual Reality and 3D User Interfaces (Journal Track)</em>
+    <br />
+    <a href="https://www.youtube.com/watch?v=_6krSw7fNqg"><strong>Video »</strong></a>&emsp;
+    <a href="https://hal.science/hal-04488824"><strong>Paper »</strong></a>&emsp;
+    <a href="https://liris-xr.github.io/PLUME/"><strong>Explore the docs »</strong></a>
+    <br />
+</p>
 
-<img alt="PLUME Python" src="https://raw.githubusercontent.com/liris-xr/PLUME-Python/master/Documentation%7E/Images/plume_python.png">
-
-<details>
-    <summary>Table of Contents</summary>
-    <ol>
-        <li><a href="#about-plume-python">About PLUME Python</a></li>
-        <li>
-            <a href="#getting-started">Getting Started</a>
-            <ul>
-                <li><a href="#prerequisites">Prerequisites</a></li>
-                <li><a href="#installation">Installation</a></li>
-                <li><a href="#usage">Usage</a></li>
-            </ul>
-        </li>
-        <li><a href="#customization">Customization</a></li>
-        <li><a href="#customization">Roadmap</a></li>
-        <li><a href="#contributing">Contributing</a></li>
-        <li><a href="#license">License</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#citation">Citation</a></li>
-    </ol>
-</details>
-
-## About PLUME Python
-
-The interoperability of PLUME record files allows for other language to load those files for external analysis. PLUME
-Python is a module that can load record files using the Protobuf package to filter and convert the data into more
-commonly used formats in data analysis like pandas dataframe or CSV files. Embedded data such as LabStreamingLayer's
-samples can be exported to XDF files for external use in tools such as SigViewer, EEGLAB or MoBILAB.
+PLUME Python is a Python package that allows you to load and extract data from PLUME record files. The package also comes with a set of utilities to simplify the conversion of the data into more commonly used formats in data analysis like pandas dataframe or CSV files. Embedded data such as LabStreamingLayer's samples can be exported to XDF files for external use in tools such as SigViewer, EEGLAB or MoBILAB.
 
 ## Getting Started
 
-### Installation
-
-To install the latest release, use pip:
-
-```shell
+PLUME Python can be installed directly from PyPI using the following command:
+```bash
 pip install plume-python
 ```
 
-### Usage
-
-#### CLI
-
-```shell
+Basic CLI commands are available for simple operations:
+```bash
 Usage: plume-python [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --help  Show this message and exit.
-  
+
 Commands:
   export-csv               Export samples from the record to CSV files.
   export-world-transforms  Export world transforms of a GameObject with the given GUID to a CSV file.
@@ -83,7 +46,7 @@ Commands:
   find-name                Find the name(s) of a GameObject with the given GUID in the record.
 ```
 
-#### API
+For more advanced usage, the package can be imported in a Python script:
 
 ```python
 import plume_python as plm
@@ -125,29 +88,29 @@ with open("path/to/output.xdf", "wb") as xdf_file:
     xdf_exporter.export_xdf_from_record(xdf_file, record)
 ```
 
-## Roadmap
+Please refer to the [getting started guide](https://liris-xr.github.io/PLUME/get-started/) for more information on getting started with PLUME.
 
-See the [open issues](https://github.com/liris-xr/PLUME/issues) for a full list of proposed features (and known issues).
+## Documentation
+
+The full documentation is available at [liris-xr.github.io/PLUME/](https://liris-xr.github.io/PLUME/). It includes a detailed description of the installation process, the file format specifications, the usage of the different tools, etc.
+
+[![Button Docs]][Explore the docs]
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
-contributions you make are **greatly appreciated**.
-Don't forget to give the project a star! Thanks again!
-
-## License
-
-Distributed under the <a rel="license" href="https://github.com/liris-xr/PLUME-Python/blob/master/LICENSE">GPLv3
-License</a>.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. You can [open an issue](https://github.com/liris-xr/PLUME-Recorder/issues) to report a bug, request a feature, or submit a pull request.
 
 ## Contact
+
+Discord server **(Recommended)** <a href="https://discord.gg/c3evqEWMge">
+            <img alt="Discord badge" src="https://img.shields.io/discord/1151165491767935107?logo=discord&logoColor=white&label=discord"/>
+        </a>
 
 Charles JAVERLIAT - charles.javerliat@gmail.com
 
 Sophie VILLENAVE - sophie.villenave@ec-lyon.fr
 
 ## Citation
-
 ```
 @article{javerliat_plume_2024,
 	title = {{PLUME}: {Record}, {Replay}, {Analyze} and {Share} {User} {Behavior} in {6DoF} {XR} {Experiences}},
@@ -160,3 +123,6 @@ Sophie VILLENAVE - sophie.villenave@ec-lyon.fr
 	pages = {1--11}
 }
 ```
+
+[Button Docs]: https://img.shields.io/badge/Explore%20the%20docs-%E2%86%92-brightgreen
+[Explore the docs]: https://liris-xr.github.io/PLUME/
