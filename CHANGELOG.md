@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.12]
 
+### Added
+
+- Added `get_timeless_samples` method to `Record` class to extract samples without timestamps.
+
 ### Changed
 
-- Updated the required version of Python to >=3.7.1
+- Updated the required version of Python to >=3.10
 
 ### Fixed
 
