@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "plume-python"
-version = "0.1.11"
+version = "0.1.12"
 description = "Set of utilities to work with PLM record files."
 authors = ["Charles JAVERLIAT <charles.javerliat@gmail.com>"]
 license = "GPLv3"
@@ -8,18 +8,18 @@ readme = "README.md"
 repository = "https://github.com/liris-xr/PLUME-Python"
 
 [tool.poetry.dependencies]
-python = "^3.12"
-numpy = "^1.26.4"
+python = "^3.7.1"
+numpy = "^1.21.0"
 numpy-quaternion = "^2023.0.3"
-tqdm = "^4.66.2"
-lz4 = "^4.3.3"
-protobuf = "^4.25.3"
+tqdm = "^4.66.4"
+lz4 = "^4.3.2"
+protobuf = "^3.12.4"
 delimited-protobuf = "^1.0.0"
-pandas = "^2.2.1"
-click = "^8.1.7"
+pandas = "^1.2.2"
+click = "^8.0.3"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.1.1"
+pytest = "^7.4.4"
 
 [tool.poetry.scripts]
 plume-python = "plume_python.cli:cli"
