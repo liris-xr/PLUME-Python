@@ -1,6 +1,4 @@
 import pytest
-import os.path
-import plume_python as plm
 
 
 def test_filter_time_range():
