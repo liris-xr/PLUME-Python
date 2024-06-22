@@ -91,6 +91,7 @@ with open("path/to/output.xdf", "wb") as xdf_file:
 
 Please refer to the [getting started guide](https://liris-xr.github.io/PLUME/get-started/) for more information on getting started with PLUME.
 
+
 ## Documentation
 
 The full documentation is available at [liris-xr.github.io/PLUME/](https://liris-xr.github.io/PLUME/). It includes a detailed description of the installation process, the file format specifications, the usage of the different tools, etc.
@@ -100,6 +101,15 @@ The full documentation is available at [liris-xr.github.io/PLUME/](https://liris
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. You can [open an issue](https://github.com/liris-xr/PLUME-Recorder/issues) to report a bug, request a feature, or submit a pull request.
+
+### Development setup
+Use the following commands to install the package in dev mode and run tests:
+```sh
+# Install the package with dev dependencies
+make install
+# Running tests locally with pytest
+make tests
+```
 
 ## Contact
 

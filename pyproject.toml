@@ -18,8 +18,14 @@ delimited-protobuf = "^1.0.0"
 pandas = "^1.2.2"
 click = "^8.0.3"
 
-[tool.poetry.group.test.dependencies]
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
+
+[tool.setuptools.packages.find]
+exclude = ["tests"]
 
 [tool.poetry.scripts]
 plume-python = "plume_python.cli:cli"
@@ -27,7 +33,3 @@ plume-python = "plume_python.cli:cli"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[virtualenvs]
-create = true
-in-project = true
