@@ -1,3 +1,7 @@
+.vscode/
+.idea/
+.DS_Store
+.python-version
 poetry.toml
 
 # Byte-compiled / optimized / DLL files
