@@ -54,9 +54,7 @@ def write_file_header(output: BinaryIO, version: str, datetime: str):
     write_chunk(output, ChunkTag.FILE_HEADER, xml_str)
 
 
-def write_chunk(
-    output: BinaryIO, chunk_tag: ChunkTag, content: bytes, stream_id: np.uint32 = None
-):
+def write_chunk(output: BinaryIO, chunk_tag: ChunkTag, content: bytes, stream_id: np.uint32 = None):
     if not isinstance(content, bytes):
         raise Exception("Content should be bytes.")
 
@@ -74,9 +72,7 @@ def write_chunk(
     write(output, content)
 
 
-def write_stream_header(
-    output: BinaryIO, xml_header: str | bytes, stream_id: np.uint32 = None
-):
+def write_stream_header(output: BinaryIO, xml_header: str | bytes, stream_id: np.uint32 = None):
     if isinstance(xml_header, str):
         xml_header = bytes(xml_header, encoding=STR_ENCODING)
 
@@ -210,25 +206,11 @@ def write_variable_length_integer(output: BinaryIO, val: np.uint64):
 
 def write_fixed_length_integer(
     output: BinaryIO,
-    val: np.int8
-    | np.int16
-    | np.int32
-    | np.int64
-    | np.uint8
-    | np.uint16
-    | np.uint32
-    | np.uint64,
+    val: np.int8 | np.int16 | np.int32 | np.int64 | np.uint8 | np.uint16 | np.uint32 | np.uint64,
 ):
     if not isinstance(
         val,
-        np.int8
-        | np.int16
-        | np.int32
-        | np.int64
-        | np.uint8
-        | np.uint16
-        | np.uint32
-        | np.uint64,
+        np.int8 | np.int16 | np.int32 | np.int64 | np.uint8 | np.uint16 | np.uint32 | np.uint64,
     ):
         raise Exception("Unsupported data type " + str(type(val)))
 

@@ -31,6 +31,10 @@ exclude = ["tests"]
 [tool.poetry.scripts]
 plume-python = "plume_python.cli:cli"
 
+[tool.ruff]
+line-length = 119
+target-version = "py39"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

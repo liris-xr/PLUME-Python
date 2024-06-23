@@ -15,24 +15,12 @@ from ..samples.unity import transform_pb2
 @dataclass(slots=True)
 class Transform:
     _guid: str
-    _local_position: np.ndarray = field(
-        default_factory=lambda: np.array(3, dtype=np.float32)
-    )
-    _local_rotation: quaternion.quaternion = field(
-        default_factory=lambda: quaternion.quaternion(1, 0, 0, 0)
-    )
-    _local_scale: np.ndarray = field(
-        default_factory=lambda: np.array(4, dtype=np.float32)
-    )
-    _local_T_mtx: np.ndarray = field(
-        default_factory=lambda: np.eye(4, dtype=np.float32)
-    )
-    _local_R_mtx: np.ndarray = field(
-        default_factory=lambda: np.eye(4, dtype=np.float32)
-    )
-    _local_S_mtx: np.ndarray = field(
-        default_factory=lambda: np.eye(4, dtype=np.float32)
-    )
+    _local_position: np.ndarray = field(default_factory=lambda: np.array(3, dtype=np.float32))
+    _local_rotation: quaternion.quaternion = field(default_factory=lambda: quaternion.quaternion(1, 0, 0, 0))
+    _local_scale: np.ndarray = field(default_factory=lambda: np.array(4, dtype=np.float32))
+    _local_T_mtx: np.ndarray = field(default_factory=lambda: np.eye(4, dtype=np.float32))
+    _local_R_mtx: np.ndarray = field(default_factory=lambda: np.eye(4, dtype=np.float32))
+    _local_S_mtx: np.ndarray = field(default_factory=lambda: np.eye(4, dtype=np.float32))
     _local_to_world_mtx: np.ndarray = None
     _parent: Optional[Transform] = None
     _dirty: bool = True
@@ -83,9 +71,7 @@ class Transform:
             if self._parent is None:
                 self._local_to_world_mtx = trs_mtx
             else:
-                self._local_to_world_mtx = (
-                    self._parent.get_local_to_world_matrix() @ trs_mtx
-                )
+                self._local_to_world_mtx = self._parent.get_local_to_world_matrix() @ trs_mtx
 
             self._dirty = False
 
@@ -95,9 +81,7 @@ class Transform:
         return self.get_local_to_world_matrix()[0:3, 3].transpose()
 
     def get_world_rotation(self) -> quaternion:
-        return quaternion.from_rotation_matrix(
-            self.get_local_to_world_matrix()[0:3, 0:3]
-        )
+        return quaternion.from_rotation_matrix(self.get_local_to_world_matrix()[0:3, 0:3])
 
     def get_world_scale(self) -> np.ndarray:
         local_to_world_mtx = self.get_local_to_world_matrix()
@@ -133,9 +117,7 @@ class TimestampedTransform:
         return scale
 
 
-def compute_transform_time_series(
-    record: Record, guid: str
-) -> list[TimestampedTransform]:
+def compute_transform_time_series(record: Record, guid: str) -> list[TimestampedTransform]:
     transform_time_series = compute_transforms_time_series(record, {guid})
     return transform_time_series.get(guid, {})
 
@@ -146,27 +128,17 @@ def compute_transforms_time_series(
     result: dict[str, list[TimestampedTransform]] = {}
     current_transforms: dict[str, Transform] = {}
 
-    creation_samples: dict[
-        int, list[FrameDataSample[transform_pb2.TransformCreate]]
-    ] = {}
-    destruction_samples: dict[
-        int, list[FrameDataSample[transform_pb2.TransformDestroy]]
-    ] = {}
+    creation_samples: dict[int, list[FrameDataSample[transform_pb2.TransformCreate]]] = {}
+    destruction_samples: dict[int, list[FrameDataSample[transform_pb2.TransformDestroy]]] = {}
     update_samples: dict[int, list[FrameDataSample[transform_pb2.TransformUpdate]]] = {}
 
-    for frame_number, s in groupby(
-        record[transform_pb2.TransformCreate], lambda x: x.frame_number
-    ):
+    for frame_number, s in groupby(record[transform_pb2.TransformCreate], lambda x: x.frame_number):
         creation_samples[frame_number] = list(s)
 
-    for frame_number, s in groupby(
-        record[transform_pb2.TransformDestroy], lambda x: x.frame_number
-    ):
+    for frame_number, s in groupby(record[transform_pb2.TransformDestroy], lambda x: x.frame_number):
         destruction_samples[frame_number] = list(s)
 
-    for frame_number, s in groupby(
-        record[transform_pb2.TransformUpdate], lambda x: x.frame_number
-    ):
+    for frame_number, s in groupby(record[transform_pb2.TransformUpdate], lambda x: x.frame_number):
         update_samples[frame_number] = list(s)
 
     for frame in tqdm(record.frames_info, desc="Computing world positions"):
@@ -205,9 +177,7 @@ def compute_transforms_time_series(
                     local_transform.set_local_rotation(q)
                 if update_sample.payload.HasField("local_scale"):
                     local_scale = update_sample.payload.local_scale
-                    local_transform.set_local_scale(
-                        np.array([local_scale.x, local_scale.y, local_scale.z])
-                    )
+                    local_transform.set_local_scale(np.array([local_scale.x, local_scale.y, local_scale.z]))
                 if update_sample.payload.HasField("parent_transform_id"):
                     parent_guid = update_sample.payload.parent_transform_id.component_id
                     if parent_guid == "00000000000000000000000000000000":  # null guid
@@ -222,11 +192,7 @@ def compute_transforms_time_series(
         if included_guids is None:
             included_transforms = current_transforms.values()
         else:
-            included_transforms = [
-                current_transforms[guid]
-                for guid in included_guids
-                if guid in current_transforms
-            ]
+            included_transforms = [current_transforms[guid] for guid in included_guids if guid in current_transforms]
 
         for t in included_transforms:
             timestamped_transform = TimestampedTransform(
@@ -239,8 +205,6 @@ def compute_transforms_time_series(
                 local_rotation=t.get_local_rotation(),
                 local_to_world_mtx=t.get_local_to_world_matrix(),
             )
-            result.setdefault(t.get_guid(), list[TimestampedTransform]()).append(
-                timestamped_transform
-            )
+            result.setdefault(t.get_guid(), list[TimestampedTransform]()).append(timestamped_transform)
 
     return result

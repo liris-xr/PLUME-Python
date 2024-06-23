@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import TypeVar, Generic, Optional, Type
 from .samples.record_pb2 import RecordMetadata
 
-from google.protobuf.message import Message
+from google.protobuf.message import Message  # type: ignore
 
 
 T = TypeVar("T", bound=Message)
@@ -52,15 +52,10 @@ class Record:
 
     def get_timeless_samples(self) -> list[Sample[T]]:
         return [
-            sample
-            for samples in self.samples_by_type.values()
-            for sample in samples
-            if not sample.is_timestamped()
+            sample for samples in self.samples_by_type.values() for sample in samples if not sample.is_timestamped()
         ]
 
-    def get_samples_in_time_range(
-        self, start: Optional[int], end: Optional[int]
-    ) -> dict[Type[T], list[Sample[T]]]:
+    def get_samples_in_time_range(self, start: Optional[int], end: Optional[int]) -> dict[Type[T], list[Sample[T]]]:
         samples_in_time_range = {}
 
         for payload_type, samples in self.samples_by_type.items():

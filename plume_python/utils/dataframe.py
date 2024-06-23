@@ -63,9 +63,7 @@ def samples_to_dataframe(samples: list[Sample[T]]) -> pd.DataFrame:
         for sample in samples:
             sample_payload_fields_value = MessageToDict(sample.payload, True)
             if sample.is_timestamped():
-                sample_data.append(
-                    {"timestamp": sample.timestamp} | sample_payload_fields_value
-                )
+                sample_data.append({"timestamp": sample.timestamp} | sample_payload_fields_value)
             else:
                 sample_data.append(sample_payload_fields_value)
 

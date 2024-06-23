@@ -1,6 +1,6 @@
 import os.path
 
-import click
+import click  # type: ignore
 
 from plume_python import parser
 from plume_python.export.xdf_exporter import export_xdf_from_record
@@ -36,17 +36,13 @@ def export_xdf(record_path: str, xdf_output_path: str | None):
         xdf_output_path = record_path.replace(".plm", ".xdf")
 
     if os.path.exists(xdf_output_path):
-        if not click.confirm(
-            f"File '{xdf_output_path}' already exists, do you want to overwrite it?"
-        ):
+        if not click.confirm(f"File '{xdf_output_path}' already exists, do you want to overwrite it?"):
             return
 
     with open(xdf_output_path, "wb") as xdf_output_file:
         record = parser.parse_record_from_file(record_path)
         export_xdf_from_record(xdf_output_file, record)
-        click.echo(
-            "Exported xdf from record: " + record_path + " to " + xdf_output_path
-        )
+        click.echo("Exported xdf from record: " + record_path + " to " + xdf_output_path)
 
 
 @click.command()
@@ -134,24 +130,14 @@ def export_csv(record_path: str, output_dir: str | None, filter: str):
         for sample_type, df in dataframes.items():
             file_path = os.path.join(output_dir, sample_type.__name__ + ".csv")
             df.to_csv(file_path)
-            click.echo(
-                "Exported CSV for sample type: "
-                + sample_type.__name__
-                + " to "
-                + file_path
-            )
+            click.echo("Exported CSV for sample type: " + sample_type.__name__ + " to " + file_path)
     else:
         sample_types = sample_types_from_names(filters)
         for sample_type in sample_types:
             df = samples_to_dataframe(record.get_samples_by_type(sample_type))
             file_path = os.path.join(output_dir, sample_type.__name__ + ".csv")
             df.to_csv(file_path)
-            click.echo(
-                "Exported CSV for sample type: "
-                + sample_type.__name__
-                + " to "
-                + file_path
-            )
+            click.echo("Exported CSV for sample type: " + sample_type.__name__ + " to " + file_path)
 
 
 cli.add_command(export_csv)
