@@ -24,7 +24,9 @@ def find_first_name_by_guid(record: Record, guid: str) -> Optional[str]:
     return None
 
 
-def find_identifier_by_game_object_id(record: Record, game_object_id: str) -> Optional[GameObjectIdentifier]:
+def find_identifier_by_game_object_id(
+    record: Record, game_object_id: str
+) -> Optional[GameObjectIdentifier]:
     for go_update_sample in record[GameObjectUpdate]:
         go_update = go_update_sample.payload
         if go_update.id.game_object_id == game_object_id:
@@ -32,20 +34,27 @@ def find_identifier_by_game_object_id(record: Record, game_object_id: str) -> Op
     return None
 
 
-def find_identifiers_by_name(record: Record, name: str) -> list[GameObjectIdentifier]:
+def find_identifiers_by_name(
+    record: Record, name: str
+) -> list[GameObjectIdentifier]:
     identifiers: list[GameObjectIdentifier] = []
     known_guids: set[str] = set()
 
     for go_update_sample in record[GameObjectUpdate]:
         go_update = go_update_sample.payload
         if go_update.HasField("name"):
-            if name == go_update.name and go_update.id.game_object_id not in known_guids:
+            if (
+                name == go_update.name
+                and go_update.id.game_object_id not in known_guids
+            ):
                 identifiers.append(go_update.id)
                 known_guids.add(go_update.id.game_object_id)
     return identifiers
 
 
-def find_first_identifier_by_name(record: Record, name: str) -> Optional[GameObjectIdentifier]:
+def find_first_identifier_by_name(
+    record: Record, name: str
+) -> Optional[GameObjectIdentifier]:
     for go_update_sample in record[GameObjectUpdate]:
         go_update = go_update_sample.payload
         if go_update.HasField("name"):

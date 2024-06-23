@@ -2,9 +2,8 @@ from dataclasses import dataclass
 from typing import TypeVar, Generic, Optional, Type
 from .samples.record_pb2 import RecordMetadata
 
-from google.protobuf.message import Message
+from google.protobuf.message import Message  # type: ignore
 
-from .samples import record_pb2
 
 T = TypeVar("T", bound=Message)
 
@@ -65,7 +64,6 @@ class Record:
         samples_in_time_range = {}
 
         for payload_type, samples in self.samples_by_type.items():
-
             samples = [
                 sample
                 for sample in samples

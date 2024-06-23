@@ -2,10 +2,10 @@ from typing import BinaryIO, Any, Optional, TypeVar, cast, Type
 from warnings import warn
 from tqdm import tqdm
 
-from delimited_protobuf import read as _read_delimited
-from google.protobuf import descriptor_pool as _descriptor_pool
-from google.protobuf.message import Message
-from google.protobuf.message_factory import GetMessageClass
+from delimited_protobuf import read as _read_delimited  # type: ignore
+from google.protobuf import descriptor_pool as _descriptor_pool  # type: ignore
+from google.protobuf.message import Message  # type: ignore
+from google.protobuf.message_factory import GetMessageClass  # type: ignore
 
 from . import file_reader
 from .record import Record, Sample, FrameDataSample, FrameInfo
@@ -20,11 +20,15 @@ def unpack_any(
 ) -> Optional[Message]:
     """Unpacks an Any message into its original type using the provided descriptor pool."""
     try:
-        descriptor = descriptor_pool.FindMessageTypeByName(any_payload.TypeName())
+        descriptor = descriptor_pool.FindMessageTypeByName(
+            any_payload.TypeName()
+        )
         unpacked = GetMessageClass(descriptor)()
         success = any_payload.Unpack(unpacked)
         if not success:
-            warn(f"Failed to unpack payload with type name {any_payload.TypeName()}")
+            warn(
+                f"Failed to unpack payload with type name {any_payload.TypeName()}"
+            )
             return None
         return unpacked
     except KeyError:
@@ -40,18 +44,25 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
     first_timestamp: Optional[int] = None
     last_timestamp: Optional[int] = None
 
-    for packed_sample in tqdm(packed_samples, desc="Unpacking samples", unit="samples"):
-
-        unpacked_payload = unpack_any(packed_sample.payload, default_descriptor_pool)
+    for packed_sample in tqdm(
+        packed_samples, desc="Unpacking samples", unit="samples"
+    ):
+        unpacked_payload = unpack_any(
+            packed_sample.payload, default_descriptor_pool
+        )
         if unpacked_payload is None:
             continue
         timestamp = (
-            packed_sample.timestamp if packed_sample.HasField("timestamp") else None
+            packed_sample.timestamp
+            if packed_sample.HasField("timestamp")
+            else None
         )
 
         if timestamp is not None:
             last_timestamp = (
-                timestamp if last_timestamp is None else max(last_timestamp, timestamp)
+                timestamp
+                if last_timestamp is None
+                else max(last_timestamp, timestamp)
             )
             if first_timestamp is None:
                 first_timestamp = timestamp
@@ -80,7 +91,9 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
         else:
             sample = Sample(timestamp=timestamp, payload=unpacked_payload)
             payload_type = type(unpacked_payload)
-            samples_by_type.setdefault(payload_type, list[Sample[T]]()).append(sample)
+            samples_by_type.setdefault(payload_type, list[Sample[T]]()).append(
+                sample
+            )
 
     return Record(
         samples_by_type=samples_by_type,
@@ -103,10 +116,14 @@ def parse_packed_samples_from_stream(
     packed_samples = []
 
     pbar = tqdm(
-        desc="Parsing packed samples", unit="bytes", total=len(data_stream.getbuffer())
+        desc="Parsing packed samples",
+        unit="bytes",
+        total=len(data_stream.getbuffer()),
     )
     while data_stream.tell() < len(data_stream.getbuffer()):
-        packed_sample = _read_delimited(data_stream, packed_sample_pb2.PackedSample)
+        packed_sample = _read_delimited(
+            data_stream, packed_sample_pb2.PackedSample
+        )
 
         if packed_sample is not None:
             packed_samples.append(packed_sample)

@@ -10,7 +10,7 @@ def _is_lz4_compressed(raw_bytes: bytes) -> bool:
 
 
 def read_file(filepath: str) -> BinaryIO:
-    if not filepath.endswith('.plm'):
+    if not filepath.endswith(".plm"):
         raise ValueError("File must be a .plm file")
 
     with open(filepath, "rb") as file:
