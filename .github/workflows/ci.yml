@@ -24,6 +24,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install poetry
         uses: abatilo/actions-poetry@v2
+      - name: Set up virtualenv
+        run: |
+          poetry config settings.virtualenvs.in-project true
       - uses: actions/cache@v3
         name: Cache
         with:
