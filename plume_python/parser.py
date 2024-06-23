@@ -41,7 +41,6 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
     last_timestamp: Optional[int] = None
 
     for packed_sample in tqdm(packed_samples, desc="Unpacking samples", unit="samples"):
-
         unpacked_payload = unpack_any(packed_sample.payload, default_descriptor_pool)
         if unpacked_payload is None:
             continue

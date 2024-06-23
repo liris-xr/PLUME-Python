@@ -23,6 +23,7 @@ optional = true
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
+pre-commit = "^3.7.1"
 
 [tool.setuptools.packages.find]
 exclude = ["tests"]

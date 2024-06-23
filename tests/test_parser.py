@@ -22,7 +22,13 @@ def test_parse_record():
 
 def test_simple_filtering():
     record = cast(parser.Record, pytest.record)
-    filtered_lsl = [lsl_sample for lsl_sample in record[lsl_stream_pb2.StreamSample] if
-                    0 <= lsl_sample.timestamp <= 5_000_000_000]
-    filtered_transform_updates = [frame for frame in record[transform_pb2.TransformUpdate] if
-                                  0 <= frame.timestamp <= 5_000_000_000]
+    filtered_lsl = [
+        lsl_sample
+        for lsl_sample in record[lsl_stream_pb2.StreamSample]
+        if 0 <= lsl_sample.timestamp <= 5_000_000_000
+    ]
+    filtered_transform_updates = [
+        frame
+        for frame in record[transform_pb2.TransformUpdate]
+        if 0 <= frame.timestamp <= 5_000_000_000
+    ]
