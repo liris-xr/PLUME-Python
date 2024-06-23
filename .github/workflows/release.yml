@@ -2,6 +2,7 @@ name: Release
 
 on:
   release:
+    types: [released]
 
 defaults:
   run:
