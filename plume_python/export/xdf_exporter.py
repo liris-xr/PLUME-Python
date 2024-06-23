@@ -15,7 +15,12 @@ import numpy as np
 
 
 def export_xdf_from_record(output_file: BinaryIO, record: Record):
-    datetime_str = record.get_metadata().start_time.ToDatetime().astimezone().strftime("%Y-%m-%dT%H:%M:%S%z")
+    datetime_str = (
+        record.get_metadata()
+        .start_time.ToDatetime()
+        .astimezone()
+        .strftime("%Y-%m-%dT%H:%M:%S%z")
+    )
     # Add a colon separator to the offset segment
     datetime_str = "{0}:{1}".format(datetime_str[:-2], datetime_str[-2:])
 
@@ -35,22 +40,32 @@ def export_xdf_from_record(output_file: BinaryIO, record: Record):
 
     for lsl_open_stream in record[lsl_stream_pb2.StreamOpen]:
         xml_header = ET.fromstring(lsl_open_stream.payload.xml_header)
-        stream_id = np.uint64(lsl_open_stream.payload.stream_id) + 1  # reserve id = 1 for the marker stream
+        stream_id = (
+            np.uint64(lsl_open_stream.payload.stream_id) + 1
+        )  # reserve id = 1 for the marker stream
         channel_format = xml_header.find("channel_format").text
         stream_channel_format[stream_id] = channel_format
         stream_min_time[stream_id] = None
         stream_max_time[stream_id] = None
         stream_sample_count[stream_id] = 0
-        write_stream_header(output_file, lsl_open_stream.payload.xml_header, stream_id)
+        write_stream_header(
+            output_file, lsl_open_stream.payload.xml_header, stream_id
+        )
 
     for lsl_sample in record[lsl_stream_pb2.StreamSample]:
         stream_id = np.uint64(lsl_sample.payload.stream_id) + 1
         channel_format = stream_channel_format[stream_id]
         t = lsl_sample.timestamp / 1_000_000_000.0  # convert time to seconds
 
-        if stream_min_time[stream_id] is None or t < stream_min_time[stream_id]:
+        if (
+            stream_min_time[stream_id] is None
+            or t < stream_min_time[stream_id]
+        ):
             stream_min_time[stream_id] = t
-        if stream_max_time[stream_id] is None or t > stream_max_time[stream_id]:
+        if (
+            stream_max_time[stream_id] is None
+            or t > stream_max_time[stream_id]
+        ):
             stream_max_time[stream_id] = t
 
         if stream_id not in stream_sample_count:
@@ -59,30 +74,59 @@ def export_xdf_from_record(output_file: BinaryIO, record: Record):
             stream_sample_count[stream_id] += 1
 
         if channel_format == "string":
-            val = np.array([x for x in lsl_sample.payload.string_values.value], dtype=np.str_)
+            val = np.array(
+                [x for x in lsl_sample.payload.string_values.value],
+                dtype=np.str_,
+            )
         elif channel_format == "int8":
-            val = np.array([x for x in lsl_sample.payload.int8_values.value], dtype=np.int8)
+            val = np.array(
+                [x for x in lsl_sample.payload.int8_values.value],
+                dtype=np.int8,
+            )
         elif channel_format == "int16":
-            val = np.array([x for x in lsl_sample.payload.int16_values.value], dtype=np.int16)
+            val = np.array(
+                [x for x in lsl_sample.payload.int16_values.value],
+                dtype=np.int16,
+            )
         elif channel_format == "int32":
-            val = np.array([x for x in lsl_sample.payload.int32_values.value], dtype=np.int32)
+            val = np.array(
+                [x for x in lsl_sample.payload.int32_values.value],
+                dtype=np.int32,
+            )
         elif channel_format == "int64":
-            val = np.array([x for x in lsl_sample.payload.int64_values.value], dtype=np.int64)
+            val = np.array(
+                [x for x in lsl_sample.payload.int64_values.value],
+                dtype=np.int64,
+            )
         elif channel_format == "float32":
-            val = np.array([x for x in lsl_sample.payload.float_values.value], dtype=np.float32)
+            val = np.array(
+                [x for x in lsl_sample.payload.float_values.value],
+                dtype=np.float32,
+            )
         elif channel_format == "double64":
-            val = np.array([x for x in lsl_sample.payload.double_values.value], dtype=np.float64)
+            val = np.array(
+                [x for x in lsl_sample.payload.double_values.value],
+                dtype=np.float64,
+            )
         else:
             raise ValueError(f"Unsupported channel format: {channel_format}")
 
         write_stream_sample(output_file, val, t, channel_format, stream_id)
 
     for marker_sample in record[marker_pb2.Marker]:
-        t = marker_sample.timestamp / 1_000_000_000.0  # convert time to seconds
+        t = (
+            marker_sample.timestamp / 1_000_000_000.0
+        )  # convert time to seconds
 
-        if stream_min_time[marker_stream_id] is None or t < stream_min_time[marker_stream_id]:
+        if (
+            stream_min_time[marker_stream_id] is None
+            or t < stream_min_time[marker_stream_id]
+        ):
             stream_min_time[marker_stream_id] = t
-        if stream_max_time[marker_stream_id] is None or t > stream_max_time[marker_stream_id]:
+        if (
+            stream_max_time[marker_stream_id] is None
+            or t > stream_max_time[marker_stream_id]
+        ):
             stream_max_time[marker_stream_id] = t
 
         if marker_stream_id not in stream_sample_count:
@@ -128,4 +172,6 @@ def write_marker_stream_header(output_buf, marker_stream_id):
     channel_count_el.text = "1"
     nominal_srate_el.text = "0.0"
     xml = ET.tostring(info_el, encoding=STR_ENCODING, xml_declaration=True)
-    write_stream_header(output_buf, xml, marker_stream_id)  # stream_id = 1 is reserved for the marker stream
+    write_stream_header(
+        output_buf, xml, marker_stream_id
+    )  # stream_id = 1 is reserved for the marker stream

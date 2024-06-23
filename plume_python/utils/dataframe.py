@@ -51,7 +51,9 @@ def samples_to_dataframe(samples: list[Sample[T]]) -> pd.DataFrame:
     if isinstance(samples[0], FrameDataSample):
         frame_samples = cast(list[FrameDataSample[T]], samples)
         for frame_sample in frame_samples:
-            sample_payload_fields_value = MessageToDict(frame_sample.payload, True)
+            sample_payload_fields_value = MessageToDict(
+                frame_sample.payload, True
+            )
             sample_data.append(
                 {
                     "timestamp": frame_sample.timestamp,
@@ -63,7 +65,10 @@ def samples_to_dataframe(samples: list[Sample[T]]) -> pd.DataFrame:
         for sample in samples:
             sample_payload_fields_value = MessageToDict(sample.payload, True)
             if sample.is_timestamped():
-                sample_data.append({"timestamp": sample.timestamp} | sample_payload_fields_value)
+                sample_data.append(
+                    {"timestamp": sample.timestamp}
+                    | sample_payload_fields_value
+                )
             else:
                 sample_data.append(sample_payload_fields_value)
 

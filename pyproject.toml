@@ -32,7 +32,7 @@ exclude = ["tests"]
 plume-python = "plume_python.cli:cli"
 
 [tool.ruff]
-line-length = 119
+line-length = 79
 target-version = "py39"
 
 [build-system]

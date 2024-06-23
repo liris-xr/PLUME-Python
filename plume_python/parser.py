@@ -15,14 +15,20 @@ from .samples.unity import frame_pb2
 T = TypeVar("T", bound=Message)
 
 
-def unpack_any(any_payload: Any, descriptor_pool: _descriptor_pool.DescriptorPool) -> Optional[Message]:
+def unpack_any(
+    any_payload: Any, descriptor_pool: _descriptor_pool.DescriptorPool
+) -> Optional[Message]:
     """Unpacks an Any message into its original type using the provided descriptor pool."""
     try:
-        descriptor = descriptor_pool.FindMessageTypeByName(any_payload.TypeName())
+        descriptor = descriptor_pool.FindMessageTypeByName(
+            any_payload.TypeName()
+        )
         unpacked = GetMessageClass(descriptor)()
         success = any_payload.Unpack(unpacked)
         if not success:
-            warn(f"Failed to unpack payload with type name {any_payload.TypeName()}")
+            warn(
+                f"Failed to unpack payload with type name {any_payload.TypeName()}"
+            )
             return None
         return unpacked
     except KeyError:
@@ -38,23 +44,39 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
     first_timestamp: Optional[int] = None
     last_timestamp: Optional[int] = None
 
-    for packed_sample in tqdm(packed_samples, desc="Unpacking samples", unit="samples"):
-        unpacked_payload = unpack_any(packed_sample.payload, default_descriptor_pool)
+    for packed_sample in tqdm(
+        packed_samples, desc="Unpacking samples", unit="samples"
+    ):
+        unpacked_payload = unpack_any(
+            packed_sample.payload, default_descriptor_pool
+        )
         if unpacked_payload is None:
             continue
-        timestamp = packed_sample.timestamp if packed_sample.HasField("timestamp") else None
+        timestamp = (
+            packed_sample.timestamp
+            if packed_sample.HasField("timestamp")
+            else None
+        )
 
         if timestamp is not None:
-            last_timestamp = timestamp if last_timestamp is None else max(last_timestamp, timestamp)
+            last_timestamp = (
+                timestamp
+                if last_timestamp is None
+                else max(last_timestamp, timestamp)
+            )
             if first_timestamp is None:
                 first_timestamp = timestamp
 
         if isinstance(unpacked_payload, frame_pb2.Frame):
             frame = cast(frame_pb2.Frame, unpacked_payload)
-            frames_info.append(FrameInfo(frame_number=frame.frame_number, timestamp=timestamp))
+            frames_info.append(
+                FrameInfo(frame_number=frame.frame_number, timestamp=timestamp)
+            )
 
             for packed_frame_data in frame.data:
-                unpacked_frame_data = unpack_any(packed_frame_data, default_descriptor_pool)
+                unpacked_frame_data = unpack_any(
+                    packed_frame_data, default_descriptor_pool
+                )
                 if unpacked_frame_data is None:
                     continue
                 frame_data_sample = FrameDataSample(
@@ -63,11 +85,15 @@ def parse_record_from_stream(data_stream: BinaryIO) -> Record:
                     payload=unpacked_frame_data,
                 )
                 payload_type = type(unpacked_frame_data)
-                samples_by_type.setdefault(payload_type, list[FrameDataSample[T]]()).append(frame_data_sample)
+                samples_by_type.setdefault(
+                    payload_type, list[FrameDataSample[T]]()
+                ).append(frame_data_sample)
         else:
             sample = Sample(timestamp=timestamp, payload=unpacked_payload)
             payload_type = type(unpacked_payload)
-            samples_by_type.setdefault(payload_type, list[Sample[T]]()).append(sample)
+            samples_by_type.setdefault(payload_type, list[Sample[T]]()).append(
+                sample
+            )
 
     return Record(
         samples_by_type=samples_by_type,
@@ -89,9 +115,15 @@ def parse_packed_samples_from_stream(
     """Parses packed samples from a binary stream and returns a list of packed samples."""
     packed_samples = []
 
-    pbar = tqdm(desc="Parsing packed samples", unit="bytes", total=len(data_stream.getbuffer()))
+    pbar = tqdm(
+        desc="Parsing packed samples",
+        unit="bytes",
+        total=len(data_stream.getbuffer()),
+    )
     while data_stream.tell() < len(data_stream.getbuffer()):
-        packed_sample = _read_delimited(data_stream, packed_sample_pb2.PackedSample)
+        packed_sample = _read_delimited(
+            data_stream, packed_sample_pb2.PackedSample
+        )
 
         if packed_sample is not None:
             packed_samples.append(packed_sample)
