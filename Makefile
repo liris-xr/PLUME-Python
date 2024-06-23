@@ -6,4 +6,4 @@ install:
 .PHONY: tests
 tests:
 	@echo "--- 🧪 Running tests ---"
-	pytest tests/
+	poetry run pytest
