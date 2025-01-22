@@ -6,8 +6,8 @@ from plume_python.export.xdf_writer import (
     write_stream_footer,
 )
 from plume_python.record import Record
-from plume_python.samples.common import marker_pb2
-from plume_python.samples.lsl import lsl_stream_pb2
+from plume.sample.common import marker_pb2
+from plume.sample.lsl import lsl_stream_pb2
 from typing import BinaryIO
 
 import xml.etree.ElementTree as ET

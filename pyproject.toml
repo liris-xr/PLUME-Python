@@ -17,6 +17,8 @@ protobuf = "^5.0.0"
 delimited-protobuf = "^1.0.0"
 pandas = "^2.2.2"
 click = "^8.0.3"
+betterproto = "^1.2.5"
+plume-toolbox-plume-protos-v1-protocolbuffers-python = {version = "29.3.0.1.20250123163357+02ed96c285b2", source = "buf"}
 
 [tool.poetry.group.dev]
 optional = true
@@ -24,6 +26,11 @@ optional = true
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
 pre-commit = "^3.7.1"
+
+[[tool.poetry.source]]
+name = "buf"
+url = "https://buf.build/gen/python"
+priority = "supplemental"
 
 [tool.setuptools.packages.find]
 exclude = ["tests"]

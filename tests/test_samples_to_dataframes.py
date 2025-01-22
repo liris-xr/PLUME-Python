@@ -1,6 +1,6 @@
 import pytest
 
-from plume_python.samples.common import marker_pb2
+from plume.sample.common import marker_pb2
 from plume_python.utils.dataframe import samples_to_dataframe, record_to_dataframes
 
 

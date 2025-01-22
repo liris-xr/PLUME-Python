@@ -4,8 +4,8 @@ from typing import cast
 import pytest
 
 from plume_python import parser
-from plume_python.samples.lsl import lsl_stream_pb2
-from plume_python.samples.unity import transform_pb2
+from plume.sample.lsl import lsl_stream_pb2
+from plume.sample.unity import transform_pb2
 
 
 def test_parse_samples():

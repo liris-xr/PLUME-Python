@@ -4,7 +4,7 @@ import click  # type: ignore
 
 from plume_python import parser
 from plume_python.export.xdf_exporter import export_xdf_from_record
-from plume_python.samples import sample_types_from_names
+from plume.sample import sample_types_from_names
 from plume_python.utils.dataframe import (
     record_to_dataframes,
     samples_to_dataframe,

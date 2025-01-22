@@ -52,7 +52,7 @@ For more advanced usage, the package can be imported in a Python script:
 ```python
 import plume_python as plm
 from plume_python.utils.dataframe import samples_to_dataframe, record_to_dataframes
-from plume_python.samples.unity import transform_pb2
+from plume.sample.unity import transform_pb2
 from plume_python.export import xdf_exporter
 from plume_python.utils.game_object import find_names_by_guid, find_first_identifier_by_name
 

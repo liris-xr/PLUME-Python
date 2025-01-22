@@ -1,5 +1,4 @@
 from io import BytesIO
-from typing import BinaryIO
 
 import lz4.frame
 
@@ -9,7 +8,7 @@ def _is_lz4_compressed(raw_bytes: bytes) -> bool:
     return magic_number == bytes.fromhex("184d2204")
 
 
-def read_file(filepath: str) -> BinaryIO:
+def read_file(filepath: str) -> BytesIO:
     if not filepath.endswith(".plm"):
         raise ValueError("File must be a .plm file")
 
