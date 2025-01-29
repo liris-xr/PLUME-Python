@@ -1,42 +1,47 @@
 from __future__ import annotations
-from typing import List, Dict
-from plume_python.proxy.unity.scene import Scene
-from plume_python.proxy.unity.component import Component
-from plume_python.proxy.unity.gameobject import GameObject
+from plume_python.proxy.unity.scene import SceneCollection
+from typing import Optional
 
-from dataclasses import dataclass
 
-@dataclass(frozen=True)
 class Frame:
-    frame_number: int
-    time_ns: int
+    _time_ns: int
+    _frame_number: int
+    _scenes: SceneCollection
 
-    scenes: Dict[str, Scene] = {}
-    gameobjects: Dict[str, GameObject] = {}
-    components: Dict[str, Component] = {}
-
-    def __init__(self, frame_number: int, time_ns: int):
-        self._frame_number = frame_number
+    def __init__(
+        self,
+        time_ns: int = 0,
+        frame_number: int = 0,
+        scenes: Optional[SceneCollection] = None,
+    ):
         self._time_ns = time_ns
-        self._scenes = {}
-        self._gameobjects = {}
-        self._components = {}
+        self._frame_number = frame_number
+        self._scenes = scenes if scenes else SceneCollection()
 
-    def shallow_copy(self) -> Frame:
-        frame_copy = Frame(self._frame_number, self._time_ns)
-        frame_copy._scenes = self._scenes.copy()
-        frame_copy._gameobjects = self._gameobjects.copy()
-        frame_copy._components = self._components.copy()
-        return frame_copy
+    def deepcopy(self) -> Frame:
+        copy = Frame(
+            time_ns=self._time_ns,
+            frame_number=self._frame_number,
+            scenes=self._scenes.deepcopy(),
+        )
+        return copy
+
+    @property
+    def frame_number(self) -> int:
+        return self._frame_number
+
+    @property
+    def frame_number(self) -> int:
+        return self._frame_number
+
+    @property
+    def scenes(self) -> SceneCollection:
+        return self._scenes
+
+    @property
+    def time_ns(self) -> int:
+        return self._time_ns
 
     @property
     def time_s(self) -> float:
         return self._time_ns / 1e9
-    
-    @property
-    def frame_number(self) -> int:
-        return self._frame_number
-    
-    @property
-    def scenes(self) -> List[Scene]:
-        return self._scenes.copy()

@@ -18,7 +18,8 @@ delimited-protobuf = "^1.0.0"
 pandas = "^2.2.2"
 click = "^8.0.3"
 betterproto = "^1.2.5"
-plume-toolbox-plume-protos-v1-protocolbuffers-python = {version = "29.3.0.1.20250123163357+02ed96c285b2", source = "buf"}
+plume-toolbox-plume-protos-v1-protocolbuffers-python = {version = "29.3.0.1.20250128075449+1aa80b5932a5", source = "buf"}
+typing-extensions = "^4.12.2"
 
 [tool.poetry.group.dev]
 optional = true

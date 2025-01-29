@@ -1,73 +1,103 @@
-from typing import List
-from plume_python.proxy.unity.gameobject import GameObject
-from enum import Enum
+from __future__ import annotations
 
-class SceneLoadMode(Enum):
-    SINGLE = 0
-    ADDITIVE = 1
+from typing import List, Union, Optional, Iterable, Iterator
+from plume_python.proxy.unity.game_object import GameObjectCollection
+from uuid import UUID
+
 
 class Scene:
-    _uuid: str
-    _runtime_idx: int
-    _build_idx: int
+    _guid: UUID
     _name: str
-    _path: str
-    _mode: SceneLoadMode
+    _asset_bundle_path: str
+    _game_objects: GameObjectCollection
 
-    _game_objects: List[GameObject]
-
-    def __init__(self, uuid: str, runtime_idx: int, build_idx: int, name: str, path: str, mode: SceneLoadMode):
-        self._uuid = uuid
-        self._runtime_idx = runtime_idx
-        self._build_idx = build_idx
+    def __init__(
+        self,
+        guid: Union[str, UUID],
+        name: str,
+        asset_bundle_path: str,
+        game_objects: Optional[GameObjectCollection] = None,
+    ):
+        self._guid = UUID(guid) if isinstance(guid, str) else guid
         self._name = name
-        self._path = path
-        self._mode = mode
-        self._game_objects = []
-
-    def _add_game_object(self, game_object: GameObject):
-        if game_object in self._game_objects:
-            raise ValueError('GameObject already belongs to this Scene')
-        if game_object._scene is not None and game_object._scene != self:
-            raise ValueError('GameObject already belongs to another Scene')
-        game_object._scene = self
-        self._game_objects.append(game_object)
-
-    def _remove_game_object(self, game_object: GameObject):
-        if game_object._scene != self:
-            raise ValueError('GameObject does not belong to this Scene')
-        if game_object not in self._game_objects:
-            raise ValueError('GameObject does not belong to this Scene')
-        game_object._scene = None
-        self._game_objects.remove(game_object)
-
-    def __hash__(self):
-        return hash(self._uuid)
+        self._asset_bundle_path = asset_bundle_path
+        self._game_objects = game_objects if game_objects else GameObjectCollection()
 
     @property
-    def uuid(self) -> str:
-        return self._uuid
-    
-    @property
-    def runtime_idx(self) -> int:
-        return self._runtime_idx
-    
-    @property
-    def build_idx(self) -> int:
-        return self._build_idx
-    
+    def guid(self) -> UUID:
+        return self._guid
+
     @property
     def name(self) -> str:
         return self._name
-    
+
     @property
-    def path(self) -> str:
-        return self._path
-    
+    def asset_bundle_path(self) -> str:
+        return self._asset_bundle_path
+
     @property
-    def mode(self) -> SceneLoadMode:
-        return self._mode
-    
-    @property
-    def game_objects(self) -> List[GameObject]:
-        return self._game_objects.copy()
+    def game_objects(self) -> GameObjectCollection:
+        return self._game_objects
+
+    def deepcopy(self) -> Scene:
+        new_scene = Scene(
+            guid=self._guid,
+            name=self._name,
+            asset_bundle_path=self._asset_bundle_path,
+            game_objects=self._game_objects.deepcopy(),
+        )
+        for game_object in new_scene.game_objects:
+            game_object._scene = new_scene
+        return new_scene
+
+
+class SceneCollection(Iterable[Scene]):
+    _scenes: List[Scene]
+    _guid_to_scene: dict[UUID, Scene]
+
+    def __init__(self, scenes: List[Scene] = []):
+        self._scenes = scenes.copy()
+        self._guid_to_scene = {scene.guid: scene for scene in self._scenes}
+
+    def __len__(self) -> int:
+        return len(self._scenes)
+
+    def __getitem__(self, index: int) -> Scene:
+        return self._scenes[index]
+
+    def __iter__(self) -> Iterator[Scene]:
+        return iter(self._scenes)
+
+    def __contains__(self, scene: Scene) -> bool:
+        return scene.guid in self._guid_to_scene
+
+    def _remove_scene(self, scene: Scene) -> bool:
+        if scene is None or scene.guid not in self._guid_to_scene:
+            return False
+        self._scenes.remove(scene)
+        del self._guid_to_scene[scene.guid]
+        return True
+
+    def _add_scene(self, scene: Scene):
+        self._scenes.append(scene)
+        self._guid_to_scene[scene.guid] = scene
+
+    def _remove(self, guid: Union[str, UUID]) -> bool:
+        scene = self.get_by_guid(guid)
+        return self._remove_scene(scene)
+
+    def get_by_guid(self, guid: Union[str, UUID]) -> Optional[Scene]:
+        try:
+            guid = UUID(guid) if isinstance(guid, str) else guid
+        except ValueError:
+            return None
+        return self._guid_to_scene.get(guid, None)
+
+    def get_by_name(self, name: str) -> Optional[Scene]:
+        for scene in self._scenes:
+            if scene.name == name:
+                return scene
+        return None
+
+    def deepcopy(self) -> SceneCollection:
+        return SceneCollection([scene.deepcopy() for scene in self._scenes])
