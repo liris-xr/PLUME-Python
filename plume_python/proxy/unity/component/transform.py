@@ -54,6 +54,7 @@ class Transform(Component):
     def deepcopy(self) -> Transform:
         return Transform(
             guid=self.guid,
+            game_object=self.game_object,
             sibling_index=self._sibling_index,
             local_position=self._local_position.deepcopy(),
             local_rotation=self._local_rotation.deepcopy(),
