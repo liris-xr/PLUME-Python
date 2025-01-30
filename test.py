@@ -20,4 +20,4 @@ for frame in tqdm(record_decoder.frames):
     scene = frame.scenes.first_with_name("HouseObjectivesSteamAudio")
     egg1 = scene.game_objects.first_with_name("Egg (1)")
     mfs_go = scene.game_objects.with_component_type(MeshFilter)
-    print(len(mfs_go))
+    # print(len(mfs_go))

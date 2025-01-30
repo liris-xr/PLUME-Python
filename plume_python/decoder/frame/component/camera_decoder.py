@@ -13,8 +13,16 @@ from plume_python.proxy.common.color import Color
 from plume_python.proxy.common.vector2 import Vector2
 from plume_python.proxy.common.vector3 import Vector3
 from plume_python.proxy.unity.frame import Frame
-from plume_python.proxy.unity.component.camera import Camera
-from plume_python.decoder.frame.frame_decoder import get_or_create_component, get_or_create_asset, destroy_component
+from plume_python.proxy.unity.component.camera import (
+    Camera,
+    CameraGateFitMode,
+    CameraStereoTargetEyeMask,
+)
+from plume_python.decoder.frame.frame_decoder import (
+    get_or_create_component,
+    get_or_create_asset,
+    destroy_component,
+)
 
 
 @register_frame_data_decoder(CameraCreate)
@@ -89,7 +97,9 @@ class CameraUpdateDecoder(FrameDataDecoder[CameraUpdate]):
         if data.HasField("depth_texture_mode"):
             camera._depth_texture_mode = data.depth_texture_mode
         if data.HasField("clear_stencil_after_lighting_pass"):
-            camera._clear_stencil_after_lighting_pass = data.clear_stencil_after_lighting_pass
+            camera._clear_stencil_after_lighting_pass = (
+                data.clear_stencil_after_lighting_pass
+            )
         if data.HasField("use_physical_properties"):
             camera._use_physical_properties = data.use_physical_properties
         if data.HasField("sensor_size"):
@@ -105,7 +115,7 @@ class CameraUpdateDecoder(FrameDataDecoder[CameraUpdate]):
         if data.HasField("focal_length"):
             camera._focal_length = data.focal_length
         if data.HasField("gate_fit"):
-            camera._gate_fit = data.gate_fit
+            camera._gate_fit = CameraGateFitMode.from_message(data.gate_fit)
         if data.HasField("rect"):
             camera._rect = Rect(
                 x=data.rect.x,
@@ -131,13 +141,17 @@ class CameraUpdateDecoder(FrameDataDecoder[CameraUpdate]):
         if data.HasField("non_jittered_projection_matrix"):
             camera._non_jittered_projection_matrix = data.non_jittered_projection_matrix
         if data.HasField("use_jittered_projection_matrix_for_transparent_rendering"):
-            camera._use_jittered_projection_matrix_for_transparent_rendering = data.use_jittered_projection_matrix_for_transparent_rendering
+            camera._use_jittered_projection_matrix_for_transparent_rendering = (
+                data.use_jittered_projection_matrix_for_transparent_rendering
+            )
         if data.HasField("stereo_separation"):
             camera._stereo_separation = data.stereo_separation
         if data.HasField("stereo_convergence"):
             camera._stereo_convergence = data.stereo_convergence
         if data.HasField("stereo_target_eye"):
-            camera._stereo_target_eye = data.stereo_target_eye
+            camera._stereo_target_eye = CameraStereoTargetEyeMask.from_message(
+                data.stereo_target_eye
+            )
 
 
 @register_frame_data_decoder(CameraDestroy)

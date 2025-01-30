@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+from plume.sample.unity.camera_pb2 import (
+    CameraGateFitMode as CameraGateFitModeSample,
+    CameraStereoTargetEyeMask as CameraStereoTargetEyeMaskSample,
+)
+
 from plume_python.proxy.unity.component import Component
 from plume_python.proxy.unity.game_object import GameObject
 from plume_python.proxy.common.vector2 import Vector2
@@ -11,6 +16,64 @@ from plume_python.proxy.unity.asset import Asset
 
 from typing import Union, Optional, List
 from uuid import UUID
+
+from enum import Enum
+
+
+class CameraGateFitMode(Enum):
+    UNSPECIFIED = 0
+    NONE = 1
+    VERTICAL = 2
+    HORIZONTAL = 3
+    FILL = 4
+    OVERSCAN = 5
+
+    @staticmethod
+    def from_message(gate_fit: CameraGateFitModeSample):
+        if gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_NONE:
+            return CameraGateFitMode.NONE
+        elif gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_VERTICAL:
+            return CameraGateFitMode.VERTICAL
+        elif gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_HORIZONTAL:
+            return CameraGateFitMode.HORIZONTAL
+        elif gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_FILL:
+            return CameraGateFitMode.FILL
+        elif gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_OVERSCAN:
+            return CameraGateFitMode.OVERSCAN
+        else:
+            return CameraGateFitMode.UNSPECIFIED
+
+class CameraStereoTargetEyeMask(Enum):
+    UNSPECIFIED = 0
+    NONE = 1
+    LEFT = 2
+    RIGHT = 3
+    BOTH = 4
+
+    @staticmethod
+    def from_message(stereo_target_eye_mask: CameraStereoTargetEyeMaskSample):
+        if (
+            stereo_target_eye_mask
+            == CameraStereoTargetEyeMaskSample.CAMERA_STEREO_TARGET_EYE_MASK_NONE
+        ):
+            return CameraStereoTargetEyeMask.NONE
+        elif (
+            stereo_target_eye_mask
+            == CameraStereoTargetEyeMaskSample.CAMERA_STEREO_TARGET_EYE_MASK_LEFT
+        ):
+            return CameraStereoTargetEyeMask.LEFT
+        elif (
+            stereo_target_eye_mask
+            == CameraStereoTargetEyeMaskSample.CAMERA_STEREO_TARGET_EYE_MASK_RIGHT
+        ):
+            return CameraStereoTargetEyeMask.RIGHT
+        elif (
+            stereo_target_eye_mask
+            == CameraStereoTargetEyeMaskSample.CAMERA_STEREO_TARGET_EYE_MASK_BOTH
+        ):
+            return CameraStereoTargetEyeMask.BOTH
+        else:
+            return CameraStereoTargetEyeMask.UNSPECIFIED
 
 
 class Camera(Component):
@@ -44,7 +107,7 @@ class Camera(Component):
     _sensor_size: Vector2
     _lens_shift: Vector2
     _focal_length: float
-    _gate_fit: int
+    _gate_fit: CameraGateFitMode
     _rect: Rect
     _pixel_rect: Rect
     _target_texture: Optional[Asset]
@@ -55,7 +118,7 @@ class Camera(Component):
     _use_jittered_projection_matrix_for_transparent_rendering: bool
     _stereo_separation: float
     _stereo_convergence: float
-    _stereo_target_eye: int
+    _stereo_target_eye: CameraStereoTargetEyeMask
 
     def __init__(
         self,
@@ -75,7 +138,7 @@ class Camera(Component):
         transparency_sort_mode: int = 0,
         transparency_sort_axis: Optional[Vector3] = None,
         depth: float = 0.0,
-        aspect: float = 1.777778,
+        aspect: float = 16 / 9,
         culling_mask: int = -1,
         event_mask: int = -1,
         layer_cull_spherical: bool = False,
@@ -91,7 +154,7 @@ class Camera(Component):
         sensor_size: Optional[Vector2] = None,
         lens_shift: Optional[Vector2] = None,
         focal_length: float = 50.0,
-        gate_fit: int = 0,
+        gate_fit: CameraGateFitMode = CameraGateFitMode.NONE,
         rect: Optional[Rect] = None,
         pixel_rect: Optional[Rect] = None,
         target_texture: Optional[Asset] = None,
@@ -102,7 +165,7 @@ class Camera(Component):
         use_jittered_projection_matrix_for_transparent_rendering: bool = True,
         stereo_separation: float = 0.064,
         stereo_convergence: float = 1.0,
-        stereo_target_eye: int = 3,
+        stereo_target_eye: int = CameraStereoTargetEyeMask.BOTH,
     ):
         super().__init__(guid, game_object)
         self._near_clip_plane = near_clip_plane
@@ -124,10 +187,16 @@ class Camera(Component):
         self._event_mask = event_mask
         self._layer_cull_spherical = layer_cull_spherical
         self._camera_type = camera_type
-        self._layer_cull_distances = layer_cull_distances if layer_cull_distances else []
+        self._layer_cull_distances = (
+            layer_cull_distances if layer_cull_distances else []
+        )
         self._use_occlusion_culling = use_occlusion_culling
         self._culling_matrix = culling_matrix
-        self._background_color = background_color if background_color else Color(0.1921569, 0.3019608, 0.4745098, 0)
+        self._background_color = (
+            background_color
+            if background_color
+            else Color(0.1921569, 0.3019608, 0.4745098, 0)
+        )
         self._clear_flags = clear_flags
         self._depth_texture_mode = depth_texture_mode
         self._clear_stencil_after_lighting_pass = clear_stencil_after_lighting_pass
@@ -140,10 +209,20 @@ class Camera(Component):
         self._pixel_rect = pixel_rect
         self._target_texture = target_texture
         self._target_display = target_display
-        self._world_to_camera_matrix = world_to_camera_matrix if world_to_camera_matrix else Matrix4x4()
-        self._projection_matrix = projection_matrix if projection_matrix else Matrix4x4()
-        self._non_jittered_projection_matrix = non_jittered_projection_matrix if non_jittered_projection_matrix else Matrix4x4()
-        self._use_jittered_projection_matrix_for_transparent_rendering = use_jittered_projection_matrix_for_transparent_rendering
+        self._world_to_camera_matrix = (
+            world_to_camera_matrix if world_to_camera_matrix else Matrix4x4()
+        )
+        self._projection_matrix = (
+            projection_matrix if projection_matrix else Matrix4x4()
+        )
+        self._non_jittered_projection_matrix = (
+            non_jittered_projection_matrix
+            if non_jittered_projection_matrix
+            else Matrix4x4()
+        )
+        self._use_jittered_projection_matrix_for_transparent_rendering = (
+            use_jittered_projection_matrix_for_transparent_rendering
+        )
         self._stereo_separation = stereo_separation
         self._stereo_convergence = stereo_convergence
         self._stereo_target_eye = stereo_target_eye
@@ -270,7 +349,7 @@ class Camera(Component):
         return self._focal_length
 
     @property
-    def gate_fit(self) -> int:
+    def gate_fit(self) -> CameraGateFitMode:
         return self._gate_fit
 
     @property
@@ -314,7 +393,7 @@ class Camera(Component):
         return self._stereo_convergence
 
     @property
-    def stereo_target_eye(self) -> int:
+    def stereo_target_eye(self) -> CameraStereoTargetEyeMask:
         return self._stereo_target_eye
 
     def __repr__(self):
@@ -344,7 +423,11 @@ class Camera(Component):
             orthographic=self._orthographic,
             opaque_sort_mode=self._opaque_sort_mode,
             transparency_sort_mode=self._transparency_sort_mode,
-            transparency_sort_axis=self._transparency_sort_axis.deepcopy() if self._transparency_sort_axis else None,
+            transparency_sort_axis=(
+                self._transparency_sort_axis.deepcopy()
+                if self._transparency_sort_axis
+                else None
+            ),
             depth=self._depth,
             aspect=self._aspect,
             culling_mask=self._culling_mask,
@@ -353,8 +436,12 @@ class Camera(Component):
             camera_type=self._camera_type,
             layer_cull_distances=self._layer_cull_distances.copy(),
             use_occlusion_culling=self._use_occlusion_culling,
-            culling_matrix=self._culling_matrix.deepcopy() if self._culling_matrix else None,
-            background_color=self._background_color.deepcopy() if self._background_color else None,
+            culling_matrix=(
+                self._culling_matrix.deepcopy() if self._culling_matrix else None
+            ),
+            background_color=(
+                self._background_color.deepcopy() if self._background_color else None
+            ),
             clear_flags=self._clear_flags,
             depth_texture_mode=self._depth_texture_mode,
             clear_stencil_after_lighting_pass=self._clear_stencil_after_lighting_pass,
@@ -365,11 +452,23 @@ class Camera(Component):
             gate_fit=self._gate_fit,
             rect=self._rect.deepcopy() if self._rect else None,
             pixel_rect=self._pixel_rect.deepcopy() if self._pixel_rect else None,
-            target_texture=self._target_texture.deepcopy() if self._target_texture else None,
+            target_texture=(
+                self._target_texture.deepcopy() if self._target_texture else None
+            ),
             target_display=self._target_display,
-            world_to_camera_matrix=self._world_to_camera_matrix.deepcopy() if self._world_to_camera_matrix else None,
-            projection_matrix=self._projection_matrix.deepcopy() if self._projection_matrix else None,
-            non_jittered_projection_matrix=self._non_jittered_projection_matrix.deepcopy() if self._non_jittered_projection_matrix else None,
+            world_to_camera_matrix=(
+                self._world_to_camera_matrix.deepcopy()
+                if self._world_to_camera_matrix
+                else None
+            ),
+            projection_matrix=(
+                self._projection_matrix.deepcopy() if self._projection_matrix else None
+            ),
+            non_jittered_projection_matrix=(
+                self._non_jittered_projection_matrix.deepcopy()
+                if self._non_jittered_projection_matrix
+                else None
+            ),
             use_jittered_projection_matrix_for_transparent_rendering=self._use_jittered_projection_matrix_for_transparent_rendering,
             stereo_separation=self._stereo_separation,
             stereo_convergence=self._stereo_convergence,
