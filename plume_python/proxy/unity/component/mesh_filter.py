@@ -23,10 +23,6 @@ class MeshFilter(Component):
     @property
     def mesh(self) -> Optional[Asset]:
         return self._mesh
-
-    @mesh.setter
-    def mesh(self, value: Optional[Asset]):
-        self._mesh = value
-
+    
     def __repr__(self):
         return f"MeshFilter(guid={self.guid}, mesh={self._mesh})"

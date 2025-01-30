@@ -10,6 +10,7 @@ from typing import (
     Type,
     TYPE_CHECKING,
     Optional,
+    Generic,
 )
 from uuid import UUID
 
@@ -17,6 +18,7 @@ if TYPE_CHECKING:
     from plume_python.proxy.unity.game_object import GameObject
 
 TU = TypeVar("TU", bound="Component")
+TV = TypeVar("TV", bound="Component")
 
 
 class Component(ABC):
@@ -39,10 +41,10 @@ class Component(ABC):
         return f"{type(self).__name__}(guid={self.guid}, game_object={self.game_object.name})"
 
 
-class ComponentCollection(Iterable[Component]):
+class ComponentCollection(Iterable[Component], Generic[TU]):
     _components: List[Component]
     _guid_to_component: dict[UUID, Component]
-    _type_to_components: dict[Type[TU], List[Component]]
+    _type_to_components: dict[Type, List[Component]]
 
     def __init__(self, components: List[Component] = []):
         self._components = components.copy()
@@ -58,10 +60,10 @@ class ComponentCollection(Iterable[Component]):
     def __len__(self) -> int:
         return len(self._components)
 
-    def __getitem__(self, index: int) -> Component:
+    def __getitem__(self, index: int) -> TU:
         return self._components[index]
 
-    def __iter__(self) -> Iterator[Component]:
+    def __iter__(self) -> Iterator[TU]:
         return iter(self._components)
 
     def __contains__(self, component: Component) -> bool:
@@ -92,18 +94,18 @@ class ComponentCollection(Iterable[Component]):
             return None
         return self._guid_to_component.get(guid, None)
     
-    def first_with_type(self, component_type: Type[TU]) -> Optional[Component]:
+    def first_with_type(self, component_type: Type[TV]) -> Optional[TV]:
         components = self._type_to_components.get(component_type, [])
         if len(components) == 0:
             return None
         return components[0]
 
-    def with_type(self, component_type: Type[TU]) -> ComponentCollection:
-        return ComponentCollection(
+    def with_type(self, component_type: Type[TV]) -> ComponentCollection[TV]:
+        return ComponentCollection[TV](
             self._type_to_components.get(component_type, [])
         )
     
-    def with_game_object(self, game_object: GameObject) -> ComponentCollection:
+    def with_game_object(self, game_object: GameObject) -> ComponentCollection[TU]:
         game_object_guid = game_object.guid
         return ComponentCollection(
             [

@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from plume_python.proxy.unity.scene import Scene
 
 TC = TypeVar("TC", bound="Component")
+TU = TypeVar("TU", bound="Component")
 
 class GameObject:
     _guid: UUID
@@ -68,7 +69,7 @@ class GameObject:
         return self.components.first_with_type(Transform)
 
     @property
-    def components(self) -> ComponentCollection:
+    def components(self) -> ComponentCollection[Component]:
         return self._components
 
     def __repr__(self):
