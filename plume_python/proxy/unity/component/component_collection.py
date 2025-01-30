@@ -1,12 +1,11 @@
 from __future__ import annotations
 
+from plume_python.proxy.collection import Collection
 from plume_python.proxy.unity.component import Component
 
 from typing import (
     Union,
     List,
-    Iterable,
-    Iterator,
     TypeVar,
     Type,
     TYPE_CHECKING,
@@ -21,33 +20,18 @@ if TYPE_CHECKING:
 TU = TypeVar("TU", bound="Component")
 TV = TypeVar("TV", bound="Component")
 
-class ComponentCollection(Iterable[Component], Generic[TU]):
-    _components: List[Component]
+class ComponentCollection(Collection[TU], Generic[TU]):
     _guid_to_component: dict[UUID, Component]
     _type_to_components: dict[Type, List[Component]]
 
-    def __init__(self, components: List[Component] = []):
-        self._components = components.copy()
-
+    def __post_init__(self):
         self._guid_to_component = {
-            component.guid: component for component in self._components
+            component.guid: component for component in self
         }
 
         self._type_to_components = {}
-        for component in self._components:
+        for component in self:
             self._type_to_components.setdefault(type(component), []).append(component)
-
-    def __len__(self) -> int:
-        return len(self._components)
-
-    def __getitem__(self, index: int) -> TU:
-        return self._components[index]
-
-    def __iter__(self) -> Iterator[TU]:
-        return iter(self._components)
-
-    def __contains__(self, component: Component) -> bool:
-        return component in self._components
 
     def _remove_by_guid(self, guid: Union[str, UUID]) -> bool:
         try:
@@ -57,20 +41,22 @@ class ComponentCollection(Iterable[Component], Generic[TU]):
         component = self._guid_to_component.get(guid, None)
         if component is None:
             return False
-        self._components.remove(component)
+        if not super()._remove(component):
+            return False
         self._type_to_components[type(component)].remove(component)
         del self._guid_to_component[component.guid]
         return True
 
-    def _add(self, component: Component) -> bool:
+    def _add(self, component: TU) -> bool:
         if component.guid in self._guid_to_component:
             return False
-        self._components.append(component)
+        if not super()._add(component):
+            return False
         self._guid_to_component[component.guid] = component
         self._type_to_components.setdefault(type(component), []).append(component)
         return True
 
-    def with_guid(self, guid: Union[str, UUID]) -> Component:
+    def with_guid(self, guid: Union[str, UUID]) -> TU:
         try:
             guid = UUID(guid) if isinstance(guid, str) else guid
         except ValueError:
@@ -93,7 +79,7 @@ class ComponentCollection(Iterable[Component], Generic[TU]):
         return ComponentCollection(
             [
                 component
-                for component in self._components
+                for component in self
                 if component.game_object.guid == game_object_guid
             ]
         )

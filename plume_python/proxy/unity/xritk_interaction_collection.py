@@ -2,44 +2,21 @@ from __future__ import annotations
 
 from plume_python.proxy.unity.component.xr_base_interactable import XRBaseInteractable
 from plume_python.proxy.unity.component.xr_base_interactor import XRBaseInteractor
-from plume_python.proxy.unity.xritk_interaction import XRITKInteraction, XRITKInteractionType
+from plume_python.proxy.unity.xritk_interaction import (
+    XRITKInteraction,
+    XRITKInteractionType,
+)
 
-from typing import List, Iterator, Iterable
+from plume_python.proxy.collection import Collection
 
-class XRITKInteractionCollection(Iterable[XRITKInteraction]):
-    _interactions: List[XRITKInteraction]
+from typing import List
 
-    def __init__(self, interactions: List[XRITKInteraction] = []):
-        self._interactions = interactions.copy()
 
-    def __len__(self) -> int:
-        return len(self._interactions)
-
-    def __getitem__(self, index: int) -> XRITKInteraction:
-        return self._interactions[index]
-
-    def __iter__(self) -> Iterator[XRITKInteraction]:
-        return iter(self._interactions)
-
-    def __contains__(self, interaction: XRITKInteraction) -> bool:
-        return interaction in self._interactions
-
-    def _add(self, interaction: XRITKInteraction):
-        self._interactions.append(interaction)
-
-    def _remove(self, interaction: XRITKInteraction) -> bool:
-        if interaction in self._interactions:
-            self._interactions.remove(interaction)
-            return True
-        return False
+class XRITKInteractionCollection(Collection[XRITKInteraction]):
 
     def with_type(self, type: XRITKInteractionType) -> XRITKInteractionCollection:
         return XRITKInteractionCollection(
-            [
-                interaction
-                for interaction in self._interactions
-                if interaction.type == type
-            ]
+            [interaction for interaction in self if interaction.type == type]
         )
 
     def with_interactor(
@@ -48,7 +25,7 @@ class XRITKInteractionCollection(Iterable[XRITKInteraction]):
         return XRITKInteractionCollection(
             [
                 interaction
-                for interaction in self._interactions
+                for interaction in self
                 if interaction.interactor.guid == interactor.guid
             ]
         )
@@ -60,7 +37,7 @@ class XRITKInteractionCollection(Iterable[XRITKInteraction]):
         return XRITKInteractionCollection(
             [
                 interaction
-                for interaction in self._interactions
+                for interaction in self
                 if interaction.interactor.guid in interactors_guids
             ]
         )
@@ -71,7 +48,7 @@ class XRITKInteractionCollection(Iterable[XRITKInteraction]):
         return XRITKInteractionCollection(
             [
                 interaction
-                for interaction in self._interactions
+                for interaction in self
                 if interaction.interactable.guid == interactable.guid
             ]
         )
@@ -83,7 +60,7 @@ class XRITKInteractionCollection(Iterable[XRITKInteraction]):
         return XRITKInteractionCollection(
             [
                 interaction
-                for interaction in self._interactions
+                for interaction in self
                 if interaction.interactable.guid in interactables_guids
             ]
         )
@@ -94,7 +71,7 @@ class XRITKInteractionCollection(Iterable[XRITKInteraction]):
         return XRITKInteractionCollection(
             [
                 interaction
-                for interaction in self._interactions
+                for interaction in self
                 if interaction.interactor.guid == interactor.guid
                 and interaction.interactable.guid == interactable.guid
             ]

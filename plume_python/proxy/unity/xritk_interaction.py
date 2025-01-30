@@ -44,6 +44,14 @@ class XRITKInteraction:
     interactable: XRBaseInteractable
     type: XRITKInteractionType
 
+    def __hash__(self):
+        return hash((self.interactor, self.interactable, self.type))
+    
+    def __eq__(self, other):
+        if not isinstance(other, XRITKInteraction):
+            return False
+        return self.interactor == other.interactor and self.interactable == other.interactable and self.type == other.type
+
 
 class XRITKInteractionCollection(Iterable[XRITKInteraction]):
     _interactions: List[XRITKInteraction]

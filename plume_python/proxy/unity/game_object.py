@@ -83,5 +83,8 @@ class GameObject:
             return False
         return self._guid == other._guid
 
+    def __str__(self):
+        return f"\"{self._name}\" (guid={self._guid}, scene=\"{self._scene.name}\", components={', '.join([str(self._components)])})"
+
     def __repr__(self):
-        return f"GameObject(guid={self._guid}, scene={self._scene.name}, name={self._name}, active={self._active}, tag={self._tag}, layer={self._layer}, components=[{', '.join([str(type(component).__name__) for component in self._components])}])"
+        return f"GameObject(guid={self._guid}, scene={self._scene}, name=\"{self._name}\", active={self._active}, tag=\"{self._tag}\", layer={self._layer}, components={self._components})"
