@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 import io
-from typing import Union, Type, TypeVar, Optional, Sequence
+from typing import Union, Type, TypeVar, Optional, Sequence, Tuple
 from delimited_protobuf import read as _read_delimited
 from plume.sample import packed_sample_pb2
-from plume_python.utils.samples import (
+from plume_python.decoder.sample_registry import (
     get_descriptor_from_type_name,
     get_message_class_from_type_name,
 )
-from plume_python.reader.sample import Sample
 from google.protobuf.message import Message
 from warnings import warn
 
@@ -52,13 +51,22 @@ class SampleStreamReader:
 
     def parse_next(
         self, type_filter: Optional[Union[Type[T], Sequence[Type[T]]]] = None
-    ) -> Sample[T]:
+    ) -> Tuple[T, Optional[int]]:
+        """
+        Parse the next sample of the given type from the stream.
+
+        Args:
+            type_filter: The type of the sample to parse. If None, any sample will be parsed.
+
+        Returns:
+            A tuple containing the parsed sample and an optional timestamp of the sample in nanoseconds.
+        """
 
         while True:
             packed_sample = self.read_next()
 
             if packed_sample is None:
-                return None
+                return None, None
 
             if type_filter is not None:
                 expected_descriptors = (
@@ -89,13 +97,8 @@ class SampleStreamReader:
                 )
                 return None
 
-            return Sample(
-                time_ns=(
-                    packed_sample.timestamp
-                    if packed_sample.HasField("timestamp")
-                    else None
-                ),
-                payload=parsed_payload,
+            return parsed_payload, (
+                packed_sample.timestamp if packed_sample.HasField("timestamp") else None
             )
 
     @staticmethod

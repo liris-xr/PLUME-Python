@@ -9,7 +9,7 @@ from plume.sample.unity.game_object_pb2 import (
 )
 
 from plume_python.proxy.unity.frame import Frame
-from plume_python.decoder.frame.utils import (
+from plume_python.decoder.frame.frame_decoder import (
     get_or_create_game_object,
     get_or_create_scene,
     destroy_game_object,

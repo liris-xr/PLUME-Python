@@ -1,5 +1,4 @@
 from plume_python.reader.sample_stream_reader import SampleStreamReader
-from plume_python.reader.sample import Sample
 from plume.sample.unity.frame_pb2 import Frame as FrameSample
 from plume_python.proxy.unity.frame import Frame
 from plume_python.decoder.frame.frame_decoder import decode_frame
@@ -25,14 +24,12 @@ class RecordDecoder:
     def frames(self) -> Generator[Frame, None, None]:
 
         while True:
-            frame_sample: Sample[FrameSample] = self._frames_samples_reader.parse_next(
-                FrameSample
-            )
+            frame_sample, time_ns = self._frames_samples_reader.parse_next(FrameSample)
 
             if frame_sample is None:
                 return
 
-            decode_frame(self._decoded_frame, frame_sample)
+            decode_frame(self._decoded_frame, frame_sample, time_ns)
             yield self._decoded_frame
 
     @property

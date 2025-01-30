@@ -6,7 +6,6 @@ from google.protobuf.message import Message
 from pathlib import Path
 from glob import glob
 import importlib
-import pkgutil
 
 from plume_python.decoder.frame.frame_data_decoder import FrameDataDecoder
 

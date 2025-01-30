@@ -10,7 +10,7 @@ from plume.sample.unity.transform_pb2 import (
 
 from plume_python.proxy.unity.frame import Frame
 from plume_python.proxy.unity.component.transform import Transform
-from plume_python.decoder.frame.utils import get_or_create_component, destroy_component
+from plume_python.decoder.frame.frame_decoder import get_or_create_component, destroy_component
 
 
 @register_frame_data_decoder(TransformCreate)

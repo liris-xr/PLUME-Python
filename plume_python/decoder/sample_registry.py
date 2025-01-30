@@ -16,7 +16,7 @@ T = TypeVar("T", bound=Message)
 _db = symbol_database.Default()
 
 
-def register_pb2_modules_from_module(module):
+def _register_pb2_modules_from_module(module):
     """
     Import all generated *_pb2.py modules dynamically.
     """
@@ -51,4 +51,4 @@ def get_message_class_from_type_name(type_name: str) -> Type[T]:
         return None
 
 
-register_pb2_modules_from_module(plume.sample)
+_register_pb2_modules_from_module(plume.sample)
