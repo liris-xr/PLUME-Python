@@ -1,6 +1,6 @@
 from __future__ import annotations
-from plume_python.proxy.unity.scene import SceneCollection
-from plume_python.proxy.unity.asset import AssetCollection
+from plume_python.proxy.unity.scene_collection import SceneCollection
+from plume_python.proxy.unity.asset_collection import AssetCollection
 from plume_python.proxy.unity.xritk_interaction import XRITKInteractionCollection
 from typing import Optional, List
 

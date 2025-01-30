@@ -1,7 +1,12 @@
 from __future__ import annotations
 
-from typing import List, Union, Iterable, Iterator, TYPE_CHECKING, Optional, Type, TypeVar
-from plume_python.proxy.unity.component import ComponentCollection, Component
+from typing import (
+    Union,
+    TYPE_CHECKING,
+    Optional,
+)
+from plume_python.proxy.unity.component import Component
+from plume_python.proxy.unity.component import ComponentCollection
 from plume_python.proxy.unity.component.transform import Transform
 
 from uuid import UUID
@@ -9,8 +14,6 @@ from uuid import UUID
 if TYPE_CHECKING:
     from plume_python.proxy.unity.scene import Scene
 
-TC = TypeVar("TC", bound="Component")
-TU = TypeVar("TU", bound="Component")
 
 class GameObject:
     _guid: UUID
@@ -72,139 +75,13 @@ class GameObject:
     def components(self) -> ComponentCollection[Component]:
         return self._components
 
+    def __hash__(self):
+        return hash(self._guid)
+
+    def __eq__(self, other):
+        if not isinstance(other, GameObject):
+            return False
+        return self._guid == other._guid
+
     def __repr__(self):
         return f"GameObject(guid={self._guid}, scene={self._scene.name}, name={self._name}, active={self._active}, tag={self._tag}, layer={self._layer}, components=[{', '.join([str(type(component).__name__) for component in self._components])}])"
-
-
-class GameObjectCollection(Iterable[GameObject]):
-    _game_objects: List[GameObject]
-    _guid_to_game_object: dict[UUID, GameObject]
-    _name_to_game_objects: dict[str, List[GameObject]]
-
-    def __init__(self, game_objects: List[GameObject] = []):
-        self._game_objects = game_objects.copy()
-        self._guid_to_game_object = {
-            game_object.guid: game_object for game_object in self._game_objects
-        }
-        self._name_to_game_objects = {}
-        for game_object in self._game_objects:
-            self._name_to_game_objects.setdefault(game_object.name, []).append(
-                game_object
-            )
-
-    def __len__(self) -> int:
-        return len(self._game_objects)
-
-    def __getitem__(self, index: int) -> GameObject:
-        return self._game_objects[index]
-
-    def __iter__(self) -> Iterator[GameObject]:
-        return iter(self._game_objects)
-
-    def __contains__(self, game_object: GameObject) -> bool:
-        return game_object in self._game_objects
-
-    def _remove_by_guid(self, guid: Union[str, UUID]) -> bool:
-        try:
-            guid = UUID(guid) if isinstance(guid, str) else guid
-        except ValueError:
-            return False
-        game_object = self._guid_to_game_object.get(guid, None)
-        if game_object is None:
-            return False
-        self._game_objects.remove(game_object)
-
-        if game_object.name in self._name_to_game_objects:
-            self._name_to_game_objects[game_object.name].remove(game_object)
-
-        del self._guid_to_game_object[game_object.guid]
-        return True
-
-    def _add(self, game_object: GameObject):
-        self._game_objects.append(game_object)
-        self._guid_to_game_object[game_object.guid] = game_object
-        if game_object.name in self._name_to_game_objects:
-            self._name_to_game_objects[game_object.name].append(game_object)
-        else:
-            self._name_to_game_objects[game_object.name] = [game_object]
-
-    def with_guid(self, guid: Union[str, UUID]) -> GameObject:
-        try:
-            guid = UUID(guid) if isinstance(guid, str) else guid
-        except ValueError:
-            return None
-        return self._guid_to_game_object.get(guid, None)
-
-    def first_with_name(self, name: str) -> Optional[GameObject]:
-        gameobjects = self._name_to_game_objects.get(name, [])
-        if len(gameobjects) == 0:
-            return None
-        return gameobjects[0]
-
-    def with_name(self, name: str) -> GameObjectCollection:
-        """
-        Retrieve one or more game objects with the specified name.
-
-        Args:
-            name (str): The name of the game objects to retrieve.
-
-        Returns:
-            GameObjectCollection: A collection of game objects that match the specified name.
-        """
-        return GameObjectCollection(
-            self._name_to_game_objects.get(name, [])
-        )
-    
-    def with_tag(self, tag: str) -> GameObjectCollection:
-        """
-        Retrieve one or more game objects with the specified tag.
-
-        Args:
-            tag (str): The tag of the game objects to retrieve.
-
-        Returns:
-            GameObjectCollection: A collection of game objects that match the specified tag.
-        """
-        return GameObjectCollection(
-            [
-                game_object
-                for game_object in self._game_objects
-                if game_object.tag == tag
-            ]
-        )
-    
-    def with_layer(self, layer: int) -> GameObjectCollection:
-        """
-        Retrieve one or more game objects with the specified layer.
-
-        Args:
-            layer (int): The layer of the game objects to retrieve.
-
-        Returns:
-            GameObjectCollection: A collection of game objects that match the specified layer.
-        """
-        return GameObjectCollection(
-            [
-                game_object
-                for game_object in self._game_objects
-                if game_object.layer == layer
-            ]
-        )
-    
-    def with_component_type(self, component_type: Type[TC]) -> GameObjectCollection:
-        """
-        Retrieve one or more game objects that have at least one component of the specified type.
-
-        Args:
-            component_type (type): The type of component that the game objects must have.
-
-        Returns:
-            GameObjectCollection: A collection of game objects that have the specified component type.
-        """
-        return GameObjectCollection(
-            [
-                game_object
-                for game_object in self._game_objects
-                if len(game_object.components.with_type(component_type)) > 0
-            ]
-        )
