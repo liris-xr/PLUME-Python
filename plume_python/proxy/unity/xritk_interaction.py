@@ -7,8 +7,6 @@ from plume.sample.unity.xritk.xritk_interaction_pb2 import (
 from plume_python.proxy.unity.component.xr_base_interactable import XRBaseInteractable
 from plume_python.proxy.unity.component.xr_base_interactor import XRBaseInteractor
 
-from plume_python.proxy.unity.game_object import GameObject
-
 from enum import Enum
 from typing import List, Iterator, Iterable
 
