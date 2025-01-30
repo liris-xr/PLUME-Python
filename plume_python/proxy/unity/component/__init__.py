@@ -96,6 +96,12 @@ class ComponentCollection(Iterable[Component]):
             return None
         return self._guid_to_component.get(guid, None)
     
+    def first_with_type(self, component_type: Type[TU]) -> Optional[Component]:
+        components = self._type_to_components.get(component_type, [])
+        if len(components) == 0:
+            return None
+        return components[0]
+
     def with_type(self, component_type: Type[TU]) -> ComponentCollection:
         return ComponentCollection(
             self._type_to_components.get(component_type, [])

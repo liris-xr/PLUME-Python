@@ -65,7 +65,7 @@ class GameObject:
 
     @property
     def transform(self) -> Transform:
-        return self.components.get_first_by_type(Transform)
+        return self.components.first_with_type(Transform)
 
     @property
     def components(self) -> ComponentCollection:
@@ -149,7 +149,10 @@ class GameObjectCollection(Iterable[GameObject]):
         return self._guid_to_game_object.get(guid, None)
 
     def first_with_name(self, name: str) -> Optional[GameObject]:
-        return self._name_to_game_objects.get(name, [None])[0]
+        gameobjects = self._name_to_game_objects.get(name, [])
+        if len(gameobjects) == 0:
+            return None
+        return gameobjects[0]
 
     def with_name(self, name: str) -> GameObjectCollection:
         """
