@@ -114,7 +114,7 @@ class GameObjectCollection(Iterable[GameObject]):
         return iter(self._game_objects)
 
     def __contains__(self, game_object: GameObject) -> bool:
-        return game_object.guid in self._guid_to_game_object
+        return game_object in self._game_objects
 
     def _remove_by_guid(self, guid: Union[str, UUID]) -> bool:
         try:

@@ -69,22 +69,22 @@ class SceneCollection(Iterable[Scene]):
         return iter(self._scenes)
 
     def __contains__(self, scene: Scene) -> bool:
-        return scene.guid in self._guid_to_scene
+        return scene in self._scenes
 
-    def _remove_scene(self, scene: Scene) -> bool:
+    def _remove(self, scene: Scene) -> bool:
         if scene is None or scene.guid not in self._guid_to_scene:
             return False
         self._scenes.remove(scene)
         del self._guid_to_scene[scene.guid]
         return True
 
-    def _add_scene(self, scene: Scene):
+    def _add(self, scene: Scene):
         self._scenes.append(scene)
         self._guid_to_scene[scene.guid] = scene
 
-    def _remove(self, guid: Union[str, UUID]) -> bool:
+    def _remove_by_guid(self, guid: Union[str, UUID]) -> bool:
         scene = self.get_by_guid(guid)
-        return self._remove_scene(scene)
+        return self._remove(scene)
 
     def get_by_guid(self, guid: Union[str, UUID]) -> Optional[Scene]:
         try:

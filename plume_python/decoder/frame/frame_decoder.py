@@ -94,7 +94,7 @@ def get_or_create_scene(frame: Frame, scene_id: SceneIdentifier) -> Scene:
             name=scene_id.name,
             asset_bundle_path=scene_id.asset_bundle_path,
         )
-        frame.scenes._add_scene(scene)
+        frame.scenes._add(scene)
 
     return scene
 
@@ -189,7 +189,7 @@ def destroy_scene(frame: Frame, scene_id: SceneIdentifier) -> bool:
     if scene is None:
         return False
 
-    frame.scenes._remove(scene)
+    frame.scenes._remove_by_guid(scene)
     return True
 
 

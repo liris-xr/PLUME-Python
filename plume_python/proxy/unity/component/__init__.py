@@ -69,7 +69,7 @@ class ComponentCollection(Iterable[Component]):
         return iter(self._components)
 
     def __contains__(self, component: Component) -> bool:
-        return component.guid in self._guid_to_component
+        return component in self._components
 
     def _remove_by_guid(self, guid: Union[str, UUID]) -> bool:
         try:
