@@ -16,13 +16,13 @@ class RecordDecoder:
         self._frame_decoder = FrameDecoder(filepath)
         self._marker_decoder = MarkerDecoder(filepath)
         self._signal_decoder = LslStreamDecoder(filepath)
-        self._input_decoder = InputActionDecoder(filepath)
+        self._input_action_decoder = InputActionDecoder(filepath)
 
     def close(self):
         self._frame_decoder.close()
         self._marker_decoder.close()
         self._signal_decoder.close()
-        self._input_decoder.close()
+        self._input_action_decoder.close()
 
     @property
     def frames(self) -> Iterator[Frame]:
@@ -37,5 +37,5 @@ class RecordDecoder:
         return self._signal_decoder
 
     @property
-    def inputs(self) -> Iterator[InputAction]:
-        return self._input_decoder
+    def input_actions(self) -> Iterator[InputAction]:
+        return self._input_action_decoder
