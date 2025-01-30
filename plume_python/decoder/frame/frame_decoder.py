@@ -19,11 +19,13 @@ from plume_python.proxy.unity.game_object import GameObject
 from plume_python.proxy.unity.component import Component
 from plume_python.proxy.unity.component.transform import Transform
 
+from uuid import UUID
 from google.protobuf.message import Message
 from warnings import warn
 
 from typing import TypeVar, Type, Iterator
 
+NULL_GUID = UUID(int=0)
 TV = TypeVar("TV", bound=Component)
 
 class FrameDecoder(Iterator[Frame]):
@@ -81,8 +83,14 @@ def get_or_create_scene(frame: Frame, scene_id: SceneIdentifier) -> Scene:
     scene = frame.scenes.get_by_guid(scene_id.guid)
 
     if scene is None:
+
+        scene_guid = UUID(scene_id.guid)
+
+        if scene_guid == NULL_GUID:
+            return None
+
         scene = Scene(
-            guid=scene_id.guid,
+            guid=scene_guid,
             name=scene_id.name,
             asset_bundle_path=scene_id.asset_bundle_path,
         )
@@ -96,11 +104,20 @@ def get_or_create_game_object(
 ) -> GameObject:
     scene = get_or_create_scene(frame, game_object_id.scene)
 
+    if scene is None:
+        return None
+
     game_object = scene.game_objects.get_by_guid(game_object_id.guid)
 
     if game_object is None:
+
+        game_object_guid = UUID(game_object_id.guid)
+
+        if game_object_guid == NULL_GUID:
+            return None
+
         game_object = GameObject(
-            guid=game_object_id.guid,
+            guid=game_object_guid,
             scene=scene,
         )
         scene.game_objects._add(game_object)
@@ -123,6 +140,10 @@ def get_or_create_component(
     component_proxy_type: Type[TV],
 ) -> TV:
     game_object = get_or_create_game_object(frame, component_id.game_object)
+
+    if game_object is None:
+        return None
+
     component = game_object.components.get_by_guid(component_id.guid)
 
     if component is not None and not isinstance(component, component_proxy_type):
@@ -131,8 +152,13 @@ def get_or_create_component(
         )
 
     if component is None:
+        component_guid = UUID(component_id.guid)
+
+        if component_guid == NULL_GUID:
+            return None
+
         component = component_proxy_type(
-            guid=component_id.guid,
+            guid=component_guid,
             game_object=game_object,
         )
         game_object.components._add(component)
@@ -144,8 +170,13 @@ def get_or_create_asset(frame: Frame, asset_id: AssetIdentifier) -> None:
     asset = frame.assets.get_by_guid(asset_id.guid)
 
     if asset is None:
+        asset_uuid = UUID(asset_id.guid)
+
+        if asset_uuid == NULL_GUID:
+            return None
+
         asset = Asset(
-            guid=asset_id.guid,
+            guid=asset_uuid,
             asset_bundle_path=asset_id.asset_bundle_path,
         )
         frame.assets._add(asset)

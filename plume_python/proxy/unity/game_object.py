@@ -66,7 +66,7 @@ class GameObject:
         return self._components
 
     def __repr__(self):
-        return f"GameObject(guid={self._guid}, scene={self._scene}, name={self._name}, active={self._active}, tag={self._tag}, layer={self._layer}, components=[{', '.join([str(type(component).__name__) for component in self._components])}])"
+        return f"GameObject(guid={self._guid}, scene={self._scene.name}, name={self._name}, active={self._active}, tag={self._tag}, layer={self._layer}, components=[{', '.join([str(type(component).__name__) for component in self._components])}])"
 
     def deepcopy(self) -> GameObject:
         new_game_object = GameObject(

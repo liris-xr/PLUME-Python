@@ -43,7 +43,8 @@ class GameObjectUpdateDecoder(FrameDataDecoder[GameObjectUpdate]):
             old_scene = game_object.scene
             old_scene.game_objects._remove_by_guid(game_object.guid)
             new_scene = get_or_create_scene(frame, data.scene)
-            new_scene.game_objects._add(game_object)
+            if new_scene is not None:
+                new_scene.game_objects._add(game_object)
             game_object._scene = new_scene
 
 
