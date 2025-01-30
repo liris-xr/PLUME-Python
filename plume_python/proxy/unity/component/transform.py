@@ -6,9 +6,12 @@ from plume_python.proxy.common.quaternion import Quaternion
 
 from typing import Union, Optional, TYPE_CHECKING, List
 from uuid import UUID
+import numpy as np
+import functools
 
 if TYPE_CHECKING:
     from plume_python.proxy.unity.game_object import GameObject
+
 
 class Transform(Component):
     _parent: Optional[Transform]
@@ -39,10 +42,52 @@ class Transform(Component):
         )
         self._local_scale = local_scale if local_scale else Vector3(1, 1, 1)
 
+    def _invalidate_cached_world_matrix(self):
+        self.__dict__.pop("world_matrix", None)
+        for child in self._children:
+            child._invalidate_cached_world_matrix()
+
+    @functools.cached_property
+    def world_matrix(self) -> np.ndarray:
+
+        T = np.eye(4, dtype=np.float32)
+        T[:3, 3] = self._local_position.numpy()
+
+        R = np.eye(4, dtype=np.float32)
+        R[:3, :3] = self._local_rotation.as_matrix()
+
+        S = np.eye(4, dtype=np.float32)
+        S[:3, :3] *= self._local_scale.numpy()
+
+        local_matrix = T @ R @ S
+
+        if self._parent:
+            return self._parent.world_matrix @ local_matrix
+
+        return local_matrix
+
+    @property
+    def world_position(self) -> Vector3:
+        x = self.world_matrix[0, 3]
+        y = self.world_matrix[1, 3]
+        z = self.world_matrix[2, 3]
+        return Vector3(x, y, z)
+
+    @property
+    def world_rotation(self) -> Quaternion:
+        return Quaternion.from_matrix(self.world_matrix[:3, :3])
+
+    @property
+    def world_scale(self) -> Vector3:
+        scale_x = np.linalg.norm(self.world_matrix[:3, 0])
+        scale_y = np.linalg.norm(self.world_matrix[:3, 1])
+        scale_z = np.linalg.norm(self.world_matrix[:3, 2])
+        return Vector3(scale_x, scale_y, scale_z)
+
     @property
     def parent(self) -> Optional[Transform]:
         return self._parent
-    
+
     @property
     def children(self) -> List[Transform]:
         return self._children.copy()

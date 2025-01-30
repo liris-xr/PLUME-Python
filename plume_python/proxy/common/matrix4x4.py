@@ -3,6 +3,7 @@ import numpy as np
 
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class Matrix4x4:
     m00: float = 0.0
@@ -22,7 +23,7 @@ class Matrix4x4:
     m32: float = 0.0
     m33: float = 0.0
 
-    def to_numpy(self) -> np.ndarray:
+    def numpy(self) -> np.ndarray:
         return np.array(
             [
                 [self.m00, self.m01, self.m02, self.m03],
@@ -32,7 +33,6 @@ class Matrix4x4:
             ],
             dtype=np.float32,
         )
-    
+
     def __repr__(self) -> str:
         return f"Matrix4x4([[{self.m00:.2f}, {self.m01:.2f}, {self.m02:.2f}, {self.m03:.2f}], [{self.m10:.2f}, {self.m11:.2f}, {self.m12:.2f}, {self.m13:.2f}], [{self.m20:.2f}, {self.m21:.2f}, {self.m22:.2f}, {self.m23:.2f}], [{self.m30:.2f}, {self.m31:.2f}, {self.m32:.2f}, {self.m33:.2f}])"
-    

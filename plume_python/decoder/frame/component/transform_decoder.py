@@ -39,6 +39,7 @@ class TransformUpdateDecoder(FrameDataDecoder[TransformUpdate]):
                 prev_parent._children.remove(t)
             if new_parent is not None:
                 new_parent._children.append(t)
+            t._invalidate_cached_world_matrix()
 
         if data.HasField("sibling_idx"):
             t._sibling_index = data.sibling_idx
@@ -47,6 +48,7 @@ class TransformUpdateDecoder(FrameDataDecoder[TransformUpdate]):
             t._local_position = Vector3(
                 data.local_position.x, data.local_position.y, data.local_position.z
             )
+            t._invalidate_cached_world_matrix()
 
         if data.HasField("local_rotation"):
             t._local_rotation = Quaternion(
@@ -55,11 +57,13 @@ class TransformUpdateDecoder(FrameDataDecoder[TransformUpdate]):
                 data.local_rotation.z,
                 data.local_rotation.w,
             )
+            t._invalidate_cached_world_matrix()
 
         if data.HasField("local_scale"):
             t._local_scale = Vector3(
                 data.local_scale.x, data.local_scale.y, data.local_scale.z
             )
+            t._invalidate_cached_world_matrix()
 
 
 @register_frame_data_decoder(TransformDestroy)
