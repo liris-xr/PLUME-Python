@@ -37,16 +37,3 @@ class MeshRenderer(Renderer):
             realtime_lightmap_index,
             realtime_lightmap_scale_offset,
         )
-
-    def deepcopy(self) -> MeshRenderer:
-        return MeshRenderer(
-            self.guid,
-            self.game_object,
-            self.enabled,
-            self.materials,
-            self.local_bounds,
-            self.lightmap_index,
-            self.lightmap_scale_offset,
-            self.realtime_lightmap_index,
-            self.realtime_lightmap_scale_offset,
-        )

@@ -26,16 +26,6 @@ class Frame:
         self._assets = assets if assets else AssetCollection()
         self._xritk_interactions = xritk_interactions if xritk_interactions else []
 
-    def deepcopy(self) -> Frame:
-        copy = Frame(
-            time_ns=self._time_ns,
-            frame_number=self._frame_number,
-            scenes=self._scenes.deepcopy(),
-            assets=self._assets.deepcopy(),
-            xritk_interactions=[interaction.deepcopy() for interaction in self._xritk_interactions]
-        )
-        return copy
-
     @property
     def frame_number(self) -> int:
         return self._frame_number

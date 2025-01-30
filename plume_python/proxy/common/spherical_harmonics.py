@@ -9,13 +9,6 @@ class SphericalHarmonicsL1:
     sh_ar: Vector4 = Vector4()
     sh_ag: Vector4 = Vector4()
     sh_ab: Vector4 = Vector4()
-
-    def deepcopy(self) -> SphericalHarmonicsL1:
-        return SphericalHarmonicsL1(
-            sh_ar=self.sh_ar.deepcopy(),
-            sh_ag=self.sh_ag.deepcopy(),
-            sh_ab=self.sh_ab.deepcopy(),
-        )
     
 @dataclass(frozen=True)
 class SphericalHarmonicsL2:
@@ -46,34 +39,3 @@ class SphericalHarmonicsL2:
     shb6: float = 0.0
     shb7: float = 0.0
     shb8: float = 0.0
-
-    def deepcopy(self) -> SphericalHarmonicsL2:
-        return SphericalHarmonicsL2(
-            shr0=self.shr0,
-            shr1=self.shr1,
-            shr2=self.shr2,
-            shr3=self.shr3,
-            shr4=self.shr4,
-            shr5=self.shr5,
-            shr6=self.shr6,
-            shr7=self.shr7,
-            shr8=self.shr8,
-            shg0=self.shg0,
-            shg1=self.shg1,
-            shg2=self.shg2,
-            shg3=self.shg3,
-            shg4=self.shg4,
-            shg5=self.shg5,
-            shg6=self.shg6,
-            shg7=self.shg7,
-            shg8=self.shg8,
-            shb0=self.shb0,
-            shb1=self.shb1,
-            shb2=self.shb2,
-            shb3=self.shb3,
-            shb4=self.shb4,
-            shb5=self.shb5,
-            shb6=self.shb6,
-            shb7=self.shb7,
-            shb8=self.shb8,
-        )

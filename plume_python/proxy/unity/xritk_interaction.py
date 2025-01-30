@@ -44,13 +44,6 @@ class XRITKInteraction:
     interactable: XRBaseInteractable
     type: XRITKInteractionType
 
-    def deepcopy(self) -> XRITKInteraction:
-        return XRITKInteraction(
-            interactor=self.interactor.deepcopy(),
-            interactable=self.interactable.deepcopy(),
-            type=self.type,
-        )
-
 
 class XRITKInteractionCollection(Iterable[XRITKInteraction]):
     _interactions: List[XRITKInteraction]
@@ -144,9 +137,4 @@ class XRITKInteractionCollection(Iterable[XRITKInteraction]):
                 if interaction.interactor.guid == interactor.guid
                 and interaction.interactable.guid == interactable.guid
             ]
-        )
-
-    def deepcopy(self) -> XRITKInteractionCollection:
-        return XRITKInteractionCollection(
-            [interaction.deepcopy() for interaction in self._interactions]
         )

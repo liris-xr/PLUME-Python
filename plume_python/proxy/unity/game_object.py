@@ -74,20 +74,6 @@ class GameObject:
     def __repr__(self):
         return f"GameObject(guid={self._guid}, scene={self._scene.name}, name={self._name}, active={self._active}, tag={self._tag}, layer={self._layer}, components=[{', '.join([str(type(component).__name__) for component in self._components])}])"
 
-    def deepcopy(self) -> GameObject:
-        new_game_object = GameObject(
-            guid=self._guid,
-            scene=self._scene,
-            name=self._name,
-            active=self._active,
-            tag=self._tag,
-            layer=self._layer,
-            components=self._components.deepcopy(),
-        )
-        for component in new_game_object.components:
-            component._game_object = new_game_object
-        return new_game_object
-
 
 class GameObjectCollection(Iterable[GameObject]):
     _game_objects: List[GameObject]
@@ -220,9 +206,4 @@ class GameObjectCollection(Iterable[GameObject]):
                 for game_object in self._game_objects
                 if len(game_object.components.with_type(component_type)) > 0
             ]
-        )
-
-    def deepcopy(self) -> GameObjectCollection:
-        return GameObjectCollection(
-            [game_object.deepcopy() for game_object in self._game_objects]
         )

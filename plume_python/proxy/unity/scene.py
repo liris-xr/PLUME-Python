@@ -41,17 +41,6 @@ class Scene:
 
     def __repr__(self) -> str:
         return f"Scene(guid={self._guid}, name={self._name}, n_game_objects={len(self._game_objects)})"
-    
-    def deepcopy(self) -> Scene:
-        new_scene = Scene(
-            guid=self._guid,
-            name=self._name,
-            asset_bundle_path=self._asset_bundle_path,
-            game_objects=self._game_objects.deepcopy(),
-        )
-        for game_object in new_scene.game_objects:
-            game_object._scene = new_scene
-        return new_scene
 
 
 class SceneCollection(Iterable[Scene]):
@@ -109,6 +98,3 @@ class SceneCollection(Iterable[Scene]):
 
     def __repr__(self) -> str:
         return f"SceneCollection(scenes={[scene.name for scene in self._scenes]})"
-
-    def deepcopy(self) -> SceneCollection:
-        return SceneCollection([scene.deepcopy() for scene in self._scenes])

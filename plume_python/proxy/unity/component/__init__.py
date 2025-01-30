@@ -38,10 +38,6 @@ class Component(ABC):
     def __repr__(self) -> str:
         return f"{type(self).__name__}(guid={self.guid}, game_object={self.game_object.name})"
 
-    @abstractmethod
-    def deepcopy(self) -> Component:
-        raise NotImplementedError
-
 
 class ComponentCollection(Iterable[Component]):
     _components: List[Component]
@@ -115,9 +111,4 @@ class ComponentCollection(Iterable[Component]):
                 for component in self._components
                 if component.game_object.guid == game_object_guid
             ]
-        )
-
-    def deepcopy(self) -> ComponentCollection:
-        return ComponentCollection(
-            [component.deepcopy() for component in self._components]
         )

@@ -9,9 +9,6 @@ class Asset:
     guid: UUID
     asset_bundle_path: str
 
-    def deepcopy(self) -> Asset:
-        return Asset(self.guid, self.asset_bundle_path)
-    
 
 class AssetCollection(Iterable[Asset]):
     _assets: List[Asset]
@@ -54,6 +51,3 @@ class AssetCollection(Iterable[Asset]):
         except ValueError:
             return None
         return self._guid_to_asset.get(guid, None)
-
-    def deepcopy(self) -> AssetCollection:
-        return AssetCollection([asset.deepcopy() for asset in self._assets])

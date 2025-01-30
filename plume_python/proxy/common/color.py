@@ -19,9 +19,6 @@ class Color:
     def to_hex(self) -> str:
         return f"#{int(self.r * 255):02x}{int(self.g * 255):02x}{int(self.b * 255):02x}{int(self.a * 255):02x}"
 
-    def deepcopy(self) -> Color:
-        return Color(r=self.r, g=self.g, b=self.b)
-
 class ColorSpace(Enum):
     UNSPECIFIED = 0
     GAMMA = 1

@@ -19,10 +19,3 @@ class XRBaseInteractable(Component):
     ):
         super().__init__(guid, game_object)
         self._enabled = enabled
-
-    def deepcopy(self) -> XRBaseInteractable:
-        return XRBaseInteractable(
-            guid=self.guid,
-            game_object=self.game_object,
-            enabled=self._enabled
-        )

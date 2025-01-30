@@ -23,10 +23,3 @@ class XRBaseInteractor(Component):
     @property
     def enabled(self) -> bool:
         return self._enabled
-
-    def deepcopy(self) -> XRBaseInteractor:
-        return XRBaseInteractor(
-            guid=self.guid,
-            game_object=self.game_object,
-            enabled=self._enabled
-        )

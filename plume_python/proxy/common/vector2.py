@@ -10,6 +10,3 @@ class Vector2:
 
     def to_numpy(self) -> np.ndarray:
         return np.array([self._x, self._y], dtype=np.float32)
-
-    def deepcopy(self) -> Vector2:
-        return Vector2(x=self.x, y=self.y)

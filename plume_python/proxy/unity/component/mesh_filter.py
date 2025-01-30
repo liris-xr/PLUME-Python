@@ -30,10 +30,3 @@ class MeshFilter(Component):
 
     def __repr__(self):
         return f"MeshFilter(guid={self.guid}, mesh={self._mesh})"
-
-    def deepcopy(self) -> MeshFilter:
-        return MeshFilter(
-            guid=self.guid,
-            game_object=self.game_object,
-            mesh=self._mesh.deepcopy() if self._mesh else None,
-        )

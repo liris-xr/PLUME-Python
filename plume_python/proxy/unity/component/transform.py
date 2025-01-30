@@ -51,13 +51,3 @@ class Transform(Component):
 
     def __repr__(self):
         return f"Transform(guid={self.guid}, sibling_index={self._sibling_index}, local_position={self._local_position}, local_rotation={self._local_rotation}, local_scale={self._local_scale})"
-
-    def deepcopy(self) -> Transform:
-        return Transform(
-            guid=self.guid,
-            game_object=self.game_object,
-            sibling_index=self._sibling_index,
-            local_position=self._local_position.deepcopy(),
-            local_rotation=self._local_rotation.deepcopy(),
-            local_scale=self._local_scale.deepcopy(),
-        )

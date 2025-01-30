@@ -12,6 +12,3 @@ class Quaternion:
 
     def to_numpy(self) -> np.ndarray:
         return np.array([self.x, self.y, self.z, self.w], dtype=np.float32)
-
-    def deepcopy(self) -> Quaternion:
-        return Quaternion(x=self.x, y=self.y, z=self.z, w=self.w)
