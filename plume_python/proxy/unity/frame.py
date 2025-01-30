@@ -20,14 +20,14 @@ class Frame:
         self._time_ns = time_ns
         self._frame_number = frame_number
         self._scenes = scenes if scenes else SceneCollection()
-        self._assets = AssetCollection()
+        self._assets = assets if assets else AssetCollection()
 
     def deepcopy(self) -> Frame:
         copy = Frame(
             time_ns=self._time_ns,
             frame_number=self._frame_number,
             scenes=self._scenes.deepcopy(),
-            assets=self._assets.deepcopy(),
+            assets=self._assets.deepcopy()
         )
         return copy
 
