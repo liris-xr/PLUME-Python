@@ -45,3 +45,6 @@ class Frame:
     @property
     def time_s(self) -> float:
         return self._time_ns / 1e9
+
+    def __repr__(self):
+        return f"Frame(frame_number={self._frame_number}, scenes={[scene.name for scene in self._scenes]}, time_ns={self._time_ns})"

@@ -9,6 +9,8 @@ from plume_python.decoder.sample_registry import get_message_class_from_type_nam
 from plume_python.decoder.frame.frame_data_decoder_registry import (
     get_frame_data_decoder,
 )
+
+from plume_python.reader.sample_stream_reader import SampleStreamReader
 from plume_python.proxy.unity.frame import Frame
 from plume_python.proxy.unity.scene import Scene
 from plume_python.proxy.unity.game_object import GameObject
@@ -18,9 +20,31 @@ from plume_python.proxy.unity.component.transform import Transform
 from google.protobuf.message import Message
 from warnings import warn
 
-from typing import TypeVar, Type
+from typing import TypeVar, Type, Iterator
 
 TV = TypeVar("TV", bound=Component)
+
+class FrameDecoder(Iterator[Frame]):
+
+    _stream_reader: SampleStreamReader
+    _decoded_frame: Frame
+
+    def __init__(self, filepath: str):
+        self._stream_reader = SampleStreamReader.open(filepath)
+        self._decoded_frame = Frame()
+
+    def close(self):
+        self._stream_reader.close()
+
+    def __next__(self) -> Frame:
+        frame_sample, time_ns = self._stream_reader.parse_next(FrameSample)
+
+        if frame_sample is None:
+            raise StopIteration
+
+        decode_frame(self._decoded_frame, frame_sample, time_ns)
+        return self._decoded_frame
+    
 
 def decode_frame(frame: Frame, frame_sample: FrameSample, time_ns: int):
 

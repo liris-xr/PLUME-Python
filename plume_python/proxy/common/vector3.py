@@ -29,7 +29,7 @@ class Vector3:
         return np.array([self._x, self._y, self._z], dtype=np.float32)
 
     def __repr__(self):
-        return f"Vector3(x={self._x}, y={self._y}, z={self._z})"
+        return f"Vector3(x={self._x:.2f}, y={self._y:.2f}, z={self._z:.2f})"
 
     def deepcopy(self) -> Vector3:
         return Vector3(self._x, self._y, self._z)

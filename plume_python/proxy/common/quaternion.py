@@ -35,7 +35,7 @@ class Quaternion:
         return np.array([self._x, self._y, self._z, self._w], dtype=np.float32)
 
     def __repr__(self) -> str:
-        return f"Quaternion(x={self._x}, y={self._y}, z={self._z}, w={self._w})"
+        return f"Quaternion(x={self._x:.2f}, y={self._y:.2f}, z={self._z:.2f}, w={self._w:.2f})"
 
     def deepcopy(self) -> Quaternion:
         return Quaternion(self._x, self._y, self._z, self._w)

@@ -1,45 +1,41 @@
-from plume_python.reader.sample_stream_reader import SampleStreamReader
-from plume.sample.unity.frame_pb2 import Frame as FrameSample
 from plume_python.proxy.unity.frame import Frame
-from plume_python.decoder.frame.frame_decoder import decode_frame
-from typing import Generator
+from plume_python.proxy.common.marker import Marker
+from plume_python.proxy.lsl.stream import LslStreamSample
+from plume_python.proxy.unity.input_action import InputAction
+
+from plume_python.decoder.frame.frame_decoder import FrameDecoder
+from plume_python.decoder.marker_decoder import MarkerDecoder
+from plume_python.decoder.lsl_stream_decoder import LslStreamDecoder
+from plume_python.decoder.input_action_decoder import InputActionDecoder
+
+from typing import Iterator
 
 
 class RecordDecoder:
     def __init__(self, filepath: str):
-        self._frames_samples_reader = SampleStreamReader.open(filepath)
-        self._markers_samples_reader = SampleStreamReader.open(filepath)
-        self._signals_samples_reader = SampleStreamReader.open(filepath)
-        self._inputs_samples_reader = SampleStreamReader.open(filepath)
-
-        self._decoded_frame = Frame()
+        self._frame_decoder = FrameDecoder(filepath)
+        self._marker_decoder = MarkerDecoder(filepath)
+        self._signal_decoder = LslStreamDecoder(filepath)
+        self._input_decoder = InputActionDecoder(filepath)
 
     def close(self):
-        self._frames_samples_reader.close()
-        self._markers_samples_reader.close()
-        self._signals_samples_reader.close()
-        self._inputs_samples_reader.close()
+        self._frame_decoder.close()
+        self._marker_decoder.close()
+        self._signal_decoder.close()
+        self._input_decoder.close()
 
     @property
-    def frames(self) -> Generator[Frame, None, None]:
-
-        while True:
-            frame_sample, time_ns = self._frames_samples_reader.parse_next(FrameSample)
-
-            if frame_sample is None:
-                return
-
-            decode_frame(self._decoded_frame, frame_sample, time_ns)
-            yield self._decoded_frame
+    def frames(self) -> Iterator[Frame]:
+        return self._frame_decoder
 
     @property
-    def markers(self):
-        pass
+    def markers(self) -> Iterator[Marker]:
+        return self._marker_decoder
 
     @property
-    def signals(self):
-        pass
+    def signals(self) -> Iterator[LslStreamSample]:
+        return self._signal_decoder
 
     @property
-    def inputs(self):
-        pass
+    def inputs(self) -> Iterator[InputAction]:
+        return self._input_decoder
