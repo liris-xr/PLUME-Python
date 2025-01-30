@@ -4,13 +4,15 @@ from plume_python.proxy.unity.component import Component
 from plume_python.proxy.common.vector3 import Vector3
 from plume_python.proxy.common.quaternion import Quaternion
 
-from typing import Union, Optional, TYPE_CHECKING
+from typing import Union, Optional, TYPE_CHECKING, List
 from uuid import UUID
 
 if TYPE_CHECKING:
     from plume_python.proxy.unity.game_object import GameObject
 
 class Transform(Component):
+    _parent: Optional[Transform]
+    _children: List[Transform]
     _sibling_index: int
     _local_position: Vector3
     _local_rotation: Quaternion
@@ -20,18 +22,30 @@ class Transform(Component):
         self,
         guid: Union[str, UUID],
         game_object: GameObject,
+        parent: Optional[Transform] = None,
+        children: Optional[List[Transform]] = None,
         sibling_index: int = 0,
         local_position: Optional[Vector3] = None,
         local_rotation: Optional[Quaternion] = None,
         local_scale: Optional[Vector3] = None,
     ):
         super().__init__(guid, game_object)
+        self._parent = parent
+        self._children = children if children else []
         self._sibling_index = sibling_index
         self._local_position = local_position if local_position else Vector3(0, 0, 0)
         self._local_rotation = (
             local_rotation if local_rotation else Quaternion(0, 0, 0, 1)
         )
         self._local_scale = local_scale if local_scale else Vector3(1, 1, 1)
+
+    @property
+    def parent(self) -> Optional[Transform]:
+        return self._parent
+    
+    @property
+    def children(self) -> List[Transform]:
+        return self._children.copy()
 
     @property
     def sibling_index(self) -> int:
