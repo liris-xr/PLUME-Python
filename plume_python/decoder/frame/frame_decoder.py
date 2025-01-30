@@ -3,6 +3,7 @@ from plume.sample.unity.identifiers_pb2 import (
     SceneIdentifier,
     GameObjectIdentifier,
     ComponentIdentifier,
+    AssetIdentifier
 )
 
 from plume_python.decoder.sample_registry import get_message_class_from_type_name
@@ -11,6 +12,7 @@ from plume_python.decoder.frame.frame_data_decoder_registry import (
 )
 
 from plume_python.reader.sample_stream_reader import SampleStreamReader
+from plume_python.proxy.unity.asset import Asset
 from plume_python.proxy.unity.frame import Frame
 from plume_python.proxy.unity.scene import Scene
 from plume_python.proxy.unity.game_object import GameObject
@@ -137,6 +139,18 @@ def get_or_create_component(
 
     return component
 
+
+def get_or_create_asset(frame: Frame, asset_id: AssetIdentifier) -> None:
+    asset = frame.assets.get_by_guid(asset_id.guid)
+
+    if asset is None:
+        asset = Asset(
+            guid=asset_id.guid,
+            asset_bundle_path=asset_id.asset_bundle_path,
+        )
+        frame.assets._add(asset)
+
+    return asset
 
 def destroy_scene(frame: Frame, scene_id: SceneIdentifier) -> bool:
     scene = frame.scenes.get_by_guid(scene_id.guid)

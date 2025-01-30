@@ -1,5 +1,6 @@
 from __future__ import annotations
 from plume_python.proxy.unity.scene import SceneCollection
+from plume_python.proxy.unity.asset import AssetCollection
 from typing import Optional
 
 
@@ -7,22 +8,26 @@ class Frame:
     _time_ns: int
     _frame_number: int
     _scenes: SceneCollection
+    _assets: AssetCollection
 
     def __init__(
         self,
         time_ns: int = 0,
         frame_number: int = 0,
         scenes: Optional[SceneCollection] = None,
+        assets: Optional[AssetCollection] = None,
     ):
         self._time_ns = time_ns
         self._frame_number = frame_number
         self._scenes = scenes if scenes else SceneCollection()
+        self._assets = AssetCollection()
 
     def deepcopy(self) -> Frame:
         copy = Frame(
             time_ns=self._time_ns,
             frame_number=self._frame_number,
             scenes=self._scenes.deepcopy(),
+            assets=self._assets.deepcopy(),
         )
         return copy
 
@@ -37,6 +42,10 @@ class Frame:
     @property
     def scenes(self) -> SceneCollection:
         return self._scenes
+    
+    @property
+    def assets(self) -> AssetCollection:
+        return self._assets
 
     @property
     def time_ns(self) -> int:
