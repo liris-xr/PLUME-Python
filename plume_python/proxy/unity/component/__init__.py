@@ -98,6 +98,12 @@ class ComponentCollection(Iterable[Component]):
 
     def get_by_type(self, component_type: Type[TU]) -> List[TU]:
         return self._type_to_components.get(component_type, [])
+    
+    def get_first_by_type(self, component_type: Type[TU]) -> Optional[TU]:
+        if component_type not in self._type_to_components:
+            return None
+        else:
+            return self._type_to_components[component_type][0]
 
     def deepcopy(self) -> ComponentCollection:
         return ComponentCollection(

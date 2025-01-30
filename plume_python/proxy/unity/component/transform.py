@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 from plume_python.proxy.unity.component import Component
-from plume_python.proxy.unity.game_object import GameObject
 from plume_python.proxy.common.vector3 import Vector3
 from plume_python.proxy.common.quaternion import Quaternion
 
-from typing import Union, Optional
+from typing import Union, Optional, TYPE_CHECKING
 from uuid import UUID
 
+if TYPE_CHECKING:
+    from plume_python.proxy.unity.game_object import GameObject
 
 class Transform(Component):
     _sibling_index: int

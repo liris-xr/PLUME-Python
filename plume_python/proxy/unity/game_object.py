@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import List, Union, Iterable, Iterator, TYPE_CHECKING, Optional
 from plume_python.proxy.unity.component import ComponentCollection
+from plume_python.proxy.unity.component.transform import Transform
 
 from uuid import UUID
 
@@ -62,6 +63,10 @@ class GameObject:
         return self._layer
 
     @property
+    def transform(self) -> Transform:
+        return self.components.get_first_by_type(Transform)
+
+    @property
     def components(self) -> ComponentCollection:
         return self._components
 
@@ -86,12 +91,18 @@ class GameObject:
 class GameObjectCollection(Iterable[GameObject]):
     _game_objects: List[GameObject]
     _guid_to_game_object: dict[UUID, GameObject]
+    _name_to_game_objects: dict[str, List[GameObject]]
 
     def __init__(self, game_objects: List[GameObject] = []):
         self._game_objects = game_objects.copy()
         self._guid_to_game_object = {
             game_object.guid: game_object for game_object in self._game_objects
         }
+        self._name_to_game_objects = {}
+        for game_object in self._game_objects:
+            self._name_to_game_objects.setdefault(game_object.name, []).append(
+                game_object
+            )
 
     def __len__(self) -> int:
         return len(self._game_objects)
@@ -114,12 +125,20 @@ class GameObjectCollection(Iterable[GameObject]):
         if game_object is None:
             return False
         self._game_objects.remove(game_object)
+
+        if game_object.name in self._name_to_game_objects:
+            self._name_to_game_objects[game_object.name].remove(game_object)
+
         del self._guid_to_game_object[game_object.guid]
         return True
 
     def _add(self, game_object: GameObject):
         self._game_objects.append(game_object)
         self._guid_to_game_object[game_object.guid] = game_object
+        if game_object.name in self._name_to_game_objects:
+            self._name_to_game_objects[game_object.name].append(game_object)
+        else:
+            self._name_to_game_objects[game_object.name] = [game_object]
 
     def get_by_guid(self, guid: Union[str, UUID]) -> GameObject:
         try:
@@ -128,11 +147,19 @@ class GameObjectCollection(Iterable[GameObject]):
             return None
         return self._guid_to_game_object.get(guid, None)
 
-    def get_by_name(self, name: str) -> GameObject:
-        for game_object in self._game_objects:
-            if game_object.name == name:
-                return game_object
-        raise KeyError(f"No game object with name '{name}' found")
+    def get_by_name(self, name: str) -> List[GameObject]:
+        return self._name_to_game_objects.get(name, [])
+
+    def get_first_by_name(self, name: str) -> Optional[GameObject]:
+        
+        if name not in self._name_to_game_objects:
+            print(self._name_to_game_objects.keys())
+            return None
+
+        if len(self._name_to_game_objects[name]) == 0:
+            return None
+
+        return self._name_to_game_objects[name][0]
 
     def deepcopy(self) -> GameObjectCollection:
         return GameObjectCollection(
