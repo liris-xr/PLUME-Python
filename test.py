@@ -2,6 +2,7 @@ from tqdm import tqdm
 from plume_python.decoder.record_decoder import RecordDecoder
 
 from plume_python.proxy.unity.component.xr_base_interactable import XRBaseInteractable
+from plume_python.proxy.unity.component.mesh_filter import MeshFilter
 
 record_decoder = RecordDecoder("tests/record.plm")
 
@@ -16,8 +17,7 @@ record_decoder = RecordDecoder("tests/record.plm")
 
 
 for frame in tqdm(record_decoder.frames):
-    scene1 = frame.scenes.get_by_name("HouseObjectivesSteamAudio")
-    egg1 = scene1.game_objects.get_first_by_name("Egg (1)")
-    egg1_local_pos = egg1.transform.local_position
-    egg1_local_pos_np = egg1_local_pos.to_numpy()
-    print(egg1_local_pos_np)
+    scene = frame.scenes.first_with_name("HouseObjectivesSteamAudio")
+    egg1 = scene.game_objects.first_with_name("Egg (1)")
+    mfs_go = scene.game_objects.with_component_type(MeshFilter)
+    print(len(mfs_go))

@@ -45,10 +45,10 @@ class AssetCollection(Iterable[Asset]):
         self._guid_to_asset[asset.guid] = asset
 
     def _remove_by_guid(self, guid: Union[str, UUID]) -> bool:
-        asset = self.get_by_guid(guid)
+        asset = self.with_guid(guid)
         return self._remove(asset)
 
-    def get_by_guid(self, guid: Union[str, UUID]) -> Optional[Asset]:
+    def with_guid(self, guid: Union[str, UUID]) -> Optional[Asset]:
         try:
             guid = UUID(guid) if isinstance(guid, str) else guid
         except ValueError:

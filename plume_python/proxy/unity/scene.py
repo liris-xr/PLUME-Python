@@ -39,6 +39,9 @@ class Scene:
     def game_objects(self) -> GameObjectCollection:
         return self._game_objects
 
+    def __repr__(self) -> str:
+        return f"Scene(guid={self._guid}, name={self._name}, n_game_objects={len(self._game_objects)})"
+    
     def deepcopy(self) -> Scene:
         new_scene = Scene(
             guid=self._guid,
@@ -86,18 +89,26 @@ class SceneCollection(Iterable[Scene]):
         scene = self.get_by_guid(guid)
         return self._remove(scene)
 
-    def get_by_guid(self, guid: Union[str, UUID]) -> Optional[Scene]:
+    def with_guid(self, guid: Union[str, UUID]) -> Scene:
         try:
             guid = UUID(guid) if isinstance(guid, str) else guid
         except ValueError:
             return None
         return self._guid_to_scene.get(guid, None)
 
-    def get_by_name(self, name: str) -> Optional[Scene]:
+    def first_with_name(self, name: str) -> Optional[Scene]:
         for scene in self._scenes:
             if scene.name == name:
                 return scene
         return None
+
+    def with_name(self, name: str) -> SceneCollection:
+        return SceneCollection(
+            [scene for scene in self._scenes if scene.name == name]
+        )
+
+    def __repr__(self) -> str:
+        return f"SceneCollection(scenes={[scene.name for scene in self._scenes]})"
 
     def deepcopy(self) -> SceneCollection:
         return SceneCollection([scene.deepcopy() for scene in self._scenes])

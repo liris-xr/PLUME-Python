@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from typing import List, Union, Iterable, Iterator, TYPE_CHECKING, Optional
-from plume_python.proxy.unity.component import ComponentCollection
+from typing import List, Union, Iterable, Iterator, TYPE_CHECKING, Optional, Type, TypeVar
+from plume_python.proxy.unity.component import ComponentCollection, Component
 from plume_python.proxy.unity.component.transform import Transform
 
 from uuid import UUID
@@ -9,6 +9,7 @@ from uuid import UUID
 if TYPE_CHECKING:
     from plume_python.proxy.unity.scene import Scene
 
+TC = TypeVar("TC", bound="Component")
 
 class GameObject:
     _guid: UUID
@@ -140,26 +141,83 @@ class GameObjectCollection(Iterable[GameObject]):
         else:
             self._name_to_game_objects[game_object.name] = [game_object]
 
-    def get_by_guid(self, guid: Union[str, UUID]) -> GameObject:
+    def with_guid(self, guid: Union[str, UUID]) -> GameObject:
         try:
             guid = UUID(guid) if isinstance(guid, str) else guid
         except ValueError:
             return None
         return self._guid_to_game_object.get(guid, None)
 
-    def get_by_name(self, name: str) -> List[GameObject]:
-        return self._name_to_game_objects.get(name, [])
+    def first_with_name(self, name: str) -> Optional[GameObject]:
+        return self._name_to_game_objects.get(name, [None])[0]
 
-    def get_first_by_name(self, name: str) -> Optional[GameObject]:
-        
-        if name not in self._name_to_game_objects:
-            print(self._name_to_game_objects.keys())
-            return None
+    def with_name(self, name: str) -> GameObjectCollection:
+        """
+        Retrieve one or more game objects with the specified name.
 
-        if len(self._name_to_game_objects[name]) == 0:
-            return None
+        Args:
+            name (str): The name of the game objects to retrieve.
 
-        return self._name_to_game_objects[name][0]
+        Returns:
+            GameObjectCollection: A collection of game objects that match the specified name.
+        """
+        return GameObjectCollection(
+            self._name_to_game_objects.get(name, [])
+        )
+    
+    def with_tag(self, tag: str) -> GameObjectCollection:
+        """
+        Retrieve one or more game objects with the specified tag.
+
+        Args:
+            tag (str): The tag of the game objects to retrieve.
+
+        Returns:
+            GameObjectCollection: A collection of game objects that match the specified tag.
+        """
+        return GameObjectCollection(
+            [
+                game_object
+                for game_object in self._game_objects
+                if game_object.tag == tag
+            ]
+        )
+    
+    def with_layer(self, layer: int) -> GameObjectCollection:
+        """
+        Retrieve one or more game objects with the specified layer.
+
+        Args:
+            layer (int): The layer of the game objects to retrieve.
+
+        Returns:
+            GameObjectCollection: A collection of game objects that match the specified layer.
+        """
+        return GameObjectCollection(
+            [
+                game_object
+                for game_object in self._game_objects
+                if game_object.layer == layer
+            ]
+        )
+    
+    def with_component_type(self, component_type: Type[TC]) -> GameObjectCollection:
+        """
+        Retrieve one or more game objects that have at least one component of the specified type.
+
+        Args:
+            component_type (type): The type of component that the game objects must have.
+
+        Returns:
+            GameObjectCollection: A collection of game objects that have the specified component type.
+        """
+        return GameObjectCollection(
+            [
+                game_object
+                for game_object in self._game_objects
+                if len(game_object.components.with_type(component_type)) > 0
+            ]
+        )
 
     def deepcopy(self) -> GameObjectCollection:
         return GameObjectCollection(

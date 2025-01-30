@@ -80,7 +80,7 @@ def decode_frame(frame: Frame, frame_sample: FrameSample, time_ns: int):
 
 
 def get_or_create_scene(frame: Frame, scene_id: SceneIdentifier) -> Scene:
-    scene = frame.scenes.get_by_guid(scene_id.guid)
+    scene = frame.scenes.with_guid(scene_id.guid)
 
     if scene is None:
 
@@ -107,7 +107,7 @@ def get_or_create_game_object(
     if scene is None:
         return None
 
-    game_object = scene.game_objects.get_by_guid(game_object_id.guid)
+    game_object = scene.game_objects.with_guid(game_object_id.guid)
 
     if game_object is None:
 
@@ -122,7 +122,7 @@ def get_or_create_game_object(
         )
         scene.game_objects._add(game_object)
 
-    transform = game_object.components.get_by_guid(game_object_id.transform_guid)
+    transform = game_object.components.with_guid(game_object_id.transform_guid)
 
     if transform is None:
         transform = Transform(
@@ -144,7 +144,7 @@ def get_or_create_component(
     if game_object is None:
         return None
 
-    component = game_object.components.get_by_guid(component_id.guid)
+    component = game_object.components.with_guid(component_id.guid)
 
     if component is not None and not isinstance(component, component_proxy_type):
         warn(
@@ -167,7 +167,7 @@ def get_or_create_component(
 
 
 def get_or_create_asset(frame: Frame, asset_id: AssetIdentifier) -> None:
-    asset = frame.assets.get_by_guid(asset_id.guid)
+    asset = frame.assets.with_guid(asset_id.guid)
 
     if asset is None:
         asset_uuid = UUID(asset_id.guid)
@@ -184,7 +184,7 @@ def get_or_create_asset(frame: Frame, asset_id: AssetIdentifier) -> None:
     return asset
 
 def destroy_scene(frame: Frame, scene_id: SceneIdentifier) -> bool:
-    scene = frame.scenes.get_by_guid(scene_id.guid)
+    scene = frame.scenes.with_guid(scene_id.guid)
 
     if scene is None:
         return False
@@ -194,12 +194,12 @@ def destroy_scene(frame: Frame, scene_id: SceneIdentifier) -> bool:
 
 
 def destroy_game_object(frame: Frame, game_object_id: GameObjectIdentifier) -> bool:
-    scene = frame.scenes.get_by_guid(game_object_id.scene.guid)
+    scene = frame.scenes.with_guid(game_object_id.scene.guid)
 
     if scene is None:
         return False
 
-    game_object = scene.game_objects.get_by_guid(game_object_id.guid)
+    game_object = scene.game_objects.with_guid(game_object_id.guid)
 
     if game_object is None:
         return False
@@ -213,17 +213,17 @@ def destroy_game_object(frame: Frame, game_object_id: GameObjectIdentifier) -> b
 
 
 def destroy_component(frame: Frame, component_id: ComponentIdentifier) -> bool:
-    scene = frame.scenes.get_by_guid(component_id.game_object.scene.guid)
+    scene = frame.scenes.with_guid(component_id.game_object.scene.guid)
 
     if scene is None:
         return False
 
-    game_object = scene.game_objects.get_by_guid(component_id.game_object.guid)
+    game_object = scene.game_objects.with_guid(component_id.game_object.guid)
 
     if game_object is None:
         return False
 
-    component = game_object.components.get_by_guid(component_id.guid)
+    component = game_object.components.with_guid(component_id.guid)
 
     if component is None:
         return False

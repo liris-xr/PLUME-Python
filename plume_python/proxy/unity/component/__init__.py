@@ -89,21 +89,27 @@ class ComponentCollection(Iterable[Component]):
         self._guid_to_component[component.guid] = component
         self._type_to_components.setdefault(type(component), []).append(component)
 
-    def get_by_guid(self, guid: Union[str, UUID]) -> Optional[Component]:
+    def with_guid(self, guid: Union[str, UUID]) -> Component:
         try:
             guid = UUID(guid) if isinstance(guid, str) else guid
         except ValueError:
             return None
         return self._guid_to_component.get(guid, None)
-
-    def get_by_type(self, component_type: Type[TU]) -> List[TU]:
-        return self._type_to_components.get(component_type, [])
     
-    def get_first_by_type(self, component_type: Type[TU]) -> Optional[TU]:
-        if component_type not in self._type_to_components:
-            return None
-        else:
-            return self._type_to_components[component_type][0]
+    def with_type(self, component_type: Type[TU]) -> ComponentCollection:
+        return ComponentCollection(
+            self._type_to_components.get(component_type, [])
+        )
+    
+    def with_game_object(self, game_object: GameObject) -> ComponentCollection:
+        game_object_guid = game_object.guid
+        return ComponentCollection(
+            [
+                component
+                for component in self._components
+                if component.game_object.guid == game_object_guid
+            ]
+        )
 
     def deepcopy(self) -> ComponentCollection:
         return ComponentCollection(
