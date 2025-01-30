@@ -45,3 +45,7 @@ class InputAction:
     binding_paths: List[str]
     type: InputActionType
     value: Union[int, bool, float, Vector2, Vector3, Quaternion, ButtonValue]
+
+    @property
+    def time_s(self) -> float:
+        return self.time_ns / 1e9
