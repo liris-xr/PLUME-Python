@@ -76,7 +76,7 @@ class GameObjectCollection(Collection[GameObject]):
         gameobjects = self._name_to_game_objects.get(name, [])
         if len(gameobjects) == 0:
             return None
-        return gameobjects
+        return gameobjects[0]
 
     def with_names(self, names: Sequence[str]) -> GameObjectCollection:
 
