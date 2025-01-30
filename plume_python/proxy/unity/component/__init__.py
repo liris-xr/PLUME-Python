@@ -34,6 +34,9 @@ class Component(ABC):
     @property
     def game_object(self) -> GameObject:
         return self._game_object
+    
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}(guid={self.guid}, game_object={self.game_object.name})"
 
     @abstractmethod
     def deepcopy(self) -> Component:
