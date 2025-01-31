@@ -14,7 +14,7 @@ class RecorderVersion:
 @dataclass(frozen=True)
 class RecordMetadata:
     recorder_version: RecorderVersion
-    start_timestamp: datetime
+    start_time: datetime
     name: str
     extra_metadata: str
 

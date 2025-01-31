@@ -22,7 +22,7 @@ def decode_record_metadata(filepath: str) -> RecordMetadata:
                     minor=metadata_sample.recorder_version.minor,
                     patch=metadata_sample.recorder_version.patch,
                 ),
-                start_timestamp=metadata_sample.start_time.ToDatetime(
+                start_time=metadata_sample.start_time.ToDatetime(
                     tzinfo=datetime.timezone.utc
                 ),
                 name=metadata_sample.name,
