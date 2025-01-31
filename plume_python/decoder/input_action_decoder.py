@@ -3,7 +3,7 @@ from plume.sample.common.vector2_pb2 import Vector2 as Vector2Sample
 from plume.sample.common.vector3_pb2 import Vector3 as Vector3Sample
 from plume.sample.common.quaternion_pb2 import Quaternion as QuaternionSample
 
-from plume_python.reader.sample_stream_reader import SampleStreamReader
+from plume_python.decoder.sample_stream_reader import SampleStreamReader
 from plume_python.proxy.unity.input_action import InputAction, InputActionType, ButtonValue
 from plume_python.proxy.common.vector2 import Vector2
 from plume_python.proxy.common.vector3 import Vector3

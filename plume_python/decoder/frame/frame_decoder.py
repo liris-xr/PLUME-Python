@@ -11,7 +11,7 @@ from plume_python.decoder.frame.frame_data_decoder_registry import (
     get_frame_data_decoder,
 )
 
-from plume_python.reader.sample_stream_reader import SampleStreamReader
+from plume_python.decoder.sample_stream_reader import SampleStreamReader
 from plume_python.proxy.unity.asset import Asset
 from plume_python.proxy.unity.frame import Frame
 from plume_python.proxy.unity.scene import Scene

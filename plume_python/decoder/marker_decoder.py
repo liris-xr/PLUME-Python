@@ -1,5 +1,5 @@
 from plume.sample.common.marker_pb2 import Marker as MarkerSample
-from plume_python.reader.sample_stream_reader import SampleStreamReader
+from plume_python.decoder.sample_stream_reader import SampleStreamReader
 from plume_python.proxy.common.marker import Marker
 
 from typing import Iterator

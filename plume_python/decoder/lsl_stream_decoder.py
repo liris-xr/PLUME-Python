@@ -1,5 +1,5 @@
 from plume.sample.lsl.lsl_stream_pb2 import StreamOpen, StreamClose, StreamSample
-from plume_python.reader.sample_stream_reader import SampleStreamReader
+from plume_python.decoder.sample_stream_reader import SampleStreamReader
 from plume_python.proxy.lsl.stream import LslStreamSample, LslStreamInfo, StreamChannelFormat
 
 from typing import Dict, Iterator
