@@ -23,11 +23,11 @@ class XRITKInteractionDecoder(FrameDataDecoder[XRITKInteractionSample]):
         interactable = get_or_create_component(
             frame, data.interactable, XRBaseInteractable
         )
-        interaction_type = XRITKInteractionType.from_message(data.type)
+        type = XRITKInteractionType.from_message(data.type)
 
         interaction = XRITKInteraction(
             interactor=interactor,
             interactable=interactable,
-            interaction_type=interaction_type,
+            type=type,
         )
         frame.xritk_interactions._add(interaction)
