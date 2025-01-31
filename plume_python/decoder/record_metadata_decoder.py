@@ -3,6 +3,9 @@ from plume_python.proxy.record_metadata import RecordMetadata, RecorderVersion
 from plume_python.decoder.sample_stream_reader import SampleStreamReader
 from plume.sample.record_pb2 import RecordMetadata as RecordMetadataSample
 
+import datetime
+
+
 def decode_record_metadata(filepath: str) -> RecordMetadata:
 
     with open(filepath, "rb") as f:
@@ -17,9 +20,11 @@ def decode_record_metadata(filepath: str) -> RecordMetadata:
                     name=metadata_sample.recorder_version.name,
                     major=metadata_sample.recorder_version.major,
                     minor=metadata_sample.recorder_version.minor,
-                    patch=metadata_sample.recorder_version.patch
+                    patch=metadata_sample.recorder_version.patch,
                 ),
-                start_timestamp=metadata_sample.start_time.ToDatetime(),
+                start_timestamp=metadata_sample.start_time.ToDatetime(
+                    tzinfo=datetime.timezone.utc
+                ),
                 name=metadata_sample.name,
-                extra_metadata=metadata_sample.extra_metadata
+                extra_metadata=metadata_sample.extra_metadata,
             )
