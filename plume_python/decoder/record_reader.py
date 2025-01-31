@@ -1,20 +1,26 @@
 from plume_python.proxy.unity.frame import Frame
-from plume_python.proxy.common.marker import Marker
 from plume_python.proxy.lsl.stream import LslStreamSample
 from plume_python.proxy.unity.input_action import InputAction
+from plume_python.proxy.record_metadata import RecordMetadata
 
 from plume_python.decoder.frame.frame_decoder import FrameDecoder
 from plume_python.decoder.marker_decoder import MarkerDecoder
 from plume_python.decoder.lsl_stream_decoder import LslStreamDecoder
 from plume_python.decoder.input_action_decoder import InputActionDecoder
+from plume_python.decoder.record_metadata_decoder import decode_record_metadata
 
 from typing import Generator
+from functools import cached_property
 
 
-class RecordDecoder:
-    
+class RecordReader:
+
     def __init__(self, filepath: str):
         self.filepath = filepath
+
+    @cached_property
+    def metadata(self) -> RecordMetadata:
+        return decode_record_metadata(self.filepath)
 
     @property
     def frames(self) -> Generator[Frame, None, None]:

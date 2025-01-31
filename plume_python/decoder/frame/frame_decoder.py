@@ -34,8 +34,15 @@ class FrameDecoder(Iterator[Frame]):
     _decoded_frame: Frame
 
     def __init__(self, filepath: str):
-        self._stream_reader = SampleStreamReader.open(filepath)
+        self._filepath = filepath
+        self._stream_reader = SampleStreamReader.open(self._filepath)
         self._decoded_frame = Frame()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
 
     def close(self):
         self._stream_reader.close()
