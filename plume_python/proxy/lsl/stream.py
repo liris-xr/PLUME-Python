@@ -32,6 +32,24 @@ class StreamChannelFormat(Enum):
             return StreamChannelFormat.STRING
         else:
             return StreamChannelFormat.UNDEFINED
+        
+    def to_string(self):
+        if self == StreamChannelFormat.DOUBLE64:
+            return "double64"
+        elif self == StreamChannelFormat.FLOAT32:
+            return "float32"
+        elif self == StreamChannelFormat.INT8:
+            return "int8"
+        elif self == StreamChannelFormat.INT16:
+            return "int16"
+        elif self == StreamChannelFormat.INT32:
+            return "int32"
+        elif self == StreamChannelFormat.INT64:
+            return "int64"
+        elif self == StreamChannelFormat.STRING:
+            return "string"
+        else:
+            return "undefined"
 
 @dataclass(frozen=True)
 class LslStreamInfo:
