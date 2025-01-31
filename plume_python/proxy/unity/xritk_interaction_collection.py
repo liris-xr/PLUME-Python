@@ -76,3 +76,6 @@ class XRITKInteractionCollection(Collection[XRITKInteraction]):
                 and interaction.interactable.guid == interactable.guid
             ]
         )
+
+    def _clear(self):
+        self._items.clear()

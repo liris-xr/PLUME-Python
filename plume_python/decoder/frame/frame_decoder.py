@@ -3,7 +3,7 @@ from plume.sample.unity.identifiers_pb2 import (
     SceneIdentifier,
     GameObjectIdentifier,
     ComponentIdentifier,
-    AssetIdentifier
+    AssetIdentifier,
 )
 
 from plume_python.decoder.sample_registry import get_message_class_from_type_name
@@ -27,6 +27,7 @@ from typing import TypeVar, Type, Iterator
 
 NULL_GUID = UUID(int=0)
 TV = TypeVar("TV", bound=Component)
+
 
 class FrameDecoder(Iterator[Frame]):
 
@@ -53,9 +54,10 @@ class FrameDecoder(Iterator[Frame]):
         if frame_sample is None:
             raise StopIteration
 
+        self._decoded_frame._xritk_interactions._clear()
         decode_frame(self._decoded_frame, frame_sample, time_ns)
         return self._decoded_frame
-    
+
 
 def decode_frame(frame: Frame, frame_sample: FrameSample, time_ns: int):
 
@@ -189,6 +191,7 @@ def get_or_create_asset(frame: Frame, asset_id: AssetIdentifier) -> None:
         frame.assets._add(asset)
 
     return asset
+
 
 def destroy_scene(frame: Frame, scene_id: SceneIdentifier) -> bool:
     scene = frame.scenes.with_guid(scene_id.guid)
