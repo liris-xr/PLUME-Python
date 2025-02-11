@@ -1,7 +1,7 @@
 import pytest
 
 from plume.sample.common import marker_pb2
-from plume_python.utils.dataframe import samples_to_dataframe, record_to_dataframes
+from plume.utils.dataframe import samples_to_dataframe, record_to_dataframes
 
 
 def test_export_record_dataframes():

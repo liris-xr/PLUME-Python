@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from plume_python.parser import parse_record_from_file
+from plume.parser import parse_record_from_file
 
 
 def pytest_configure():

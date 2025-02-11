@@ -1,6 +1,6 @@
 import pytest
 
-from plume_python.utils.game_object import (
+from plume.utils.game_object import (
     find_identifiers_by_name,
     find_first_identifier_by_name,
 )

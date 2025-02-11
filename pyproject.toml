@@ -6,6 +6,7 @@ authors = ["Charles JAVERLIAT <charles.javerliat@gmail.com>"]
 license = "GPLv3"
 readme = "README.md"
 repository = "https://github.com/liris-xr/PLUME-Python"
+packages = [ { include = "plume" } ]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -35,9 +36,6 @@ priority = "supplemental"
 
 [tool.setuptools.packages.find]
 exclude = ["tests"]
-
-[tool.poetry.scripts]
-plume-python = "plume_python.cli:cli"
 
 [tool.ruff]
 line-length = 79

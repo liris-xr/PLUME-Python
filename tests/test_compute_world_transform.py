@@ -1,6 +1,6 @@
 import pytest
 
-from plume_python.utils.transform import (
+from plume.utils.transform import (
     compute_transforms_time_series,
     compute_transform_time_series,
 )

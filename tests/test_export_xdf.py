@@ -1,6 +1,6 @@
 import pytest
 
-from plume_python.export.xdf_exporter import export_xdf_from_record
+from plume.export.xdf_exporter import export_xdf_from_record
 from pathlib import Path
 
 

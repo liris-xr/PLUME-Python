@@ -3,7 +3,7 @@ from typing import cast
 
 import pytest
 
-from plume_python import parser
+from plume import parser
 from plume.sample.lsl import lsl_stream_pb2
 from plume.sample.unity import transform_pb2
 
