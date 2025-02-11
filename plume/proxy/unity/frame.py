@@ -31,10 +31,6 @@ class Frame:
         return self._frame_number
 
     @property
-    def frame_number(self) -> int:
-        return self._frame_number
-
-    @property
     def scenes(self) -> SceneCollection:
         return self._scenes
     
