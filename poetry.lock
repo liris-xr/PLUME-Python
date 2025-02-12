@@ -634,48 +634,6 @@ dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
-name = "plume-toolbox-plume-protos-v1-protocolbuffers-pyi"
-version = "29.3.0.1.20250130141520+9b5975e8990f"
-description = "This package contains generated code for the protobuf module plume-toolbox/plume-protos-v1 when generated with the plugin protocolbuffers/pyi."
-optional = false
-python-versions = ">=3.8"
-groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
-files = [
-    {file = "plume_toolbox_plume_protos_v1_protocolbuffers_pyi-29.3.0.1.20250130141520+9b5975e8990f-py3-none-any.whl", hash = "sha256:13462079cf3a6f456bf0f2e19dc5254e535d260f76ad4ebaff118a87412eb995"},
-]
-
-[package.dependencies]
-protobuf = ">=5.29.3,<5.30.0"
-types-protobuf = ">=5.29,<6.0"
-
-[package.source]
-type = "legacy"
-url = "https://buf.build/gen/python"
-reference = "buf"
-
-[[package]]
-name = "plume-toolbox-plume-protos-v1-protocolbuffers-python"
-version = "29.3.0.1.20250130141520+9b5975e8990f"
-description = "This package contains generated code for the protobuf module plume-toolbox/plume-protos-v1 when generated with the plugin protocolbuffers/python."
-optional = false
-python-versions = ">=3.8"
-groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
-files = [
-    {file = "plume_toolbox_plume_protos_v1_protocolbuffers_python-29.3.0.1.20250130141520+9b5975e8990f-py3-none-any.whl", hash = "sha256:9c20eb8750cfcfadc5eae646b2bbdce0b1b35798aca5c2c1df78e3877063fa1f"},
-]
-
-[package.dependencies]
-plume-toolbox-plume-protos-v1-protocolbuffers-pyi = ">=29.3.0.1.20250130141520"
-protobuf = ">=5.29.3,<5.30.0"
-
-[package.source]
-type = "legacy"
-url = "https://buf.build/gen/python"
-reference = "buf"
-
-[[package]]
 name = "pre-commit"
 version = "3.8.0"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
@@ -926,19 +884,6 @@ slack = ["slack-sdk"]
 telegram = ["requests"]
 
 [[package]]
-name = "types-protobuf"
-version = "5.29.1.20250208"
-description = "Typing stubs for protobuf"
-optional = false
-python-versions = ">=3.9"
-groups = ["main"]
-markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
-files = [
-    {file = "types_protobuf-5.29.1.20250208-py3-none-any.whl", hash = "sha256:c5f8bfb4afdc1b5cbca1848f2c8b361a2090add7401f410b22b599ef647bf483"},
-    {file = "types_protobuf-5.29.1.20250208.tar.gz", hash = "sha256:c1acd6a59ab554dbe09b5d1fa7dd701e2fcfb2212937a3af1c03b736060b792a"},
-]
-
-[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
@@ -989,4 +934,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "0dbf1abd2d9d34fc19e77f50fe8ccb8bcfef7526b78f0ea9f791804ec3631126"
+content-hash = "de95a5c519e917c6d8923aecb48b34da75e65f1adcec0535b6b708d589c40106"

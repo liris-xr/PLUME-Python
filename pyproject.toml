@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "plume-python"
-version = "1.0.0"
+version = "1.1.0"
 description = "Set of utilities to work with PLM record files."
 authors = ["Charles JAVERLIAT <charles.javerliat@gmail.com>"]
 license = "GPLv3"
@@ -19,7 +19,6 @@ delimited-protobuf = "^1.0.0"
 pandas = "^2.2.2"
 click = "^8.0.3"
 betterproto = "^1.2.5"
-plume-toolbox-plume-protos-v1-protocolbuffers-python = {version = "29.3.0.1.20250130141520+9b5975e8990f", source = "buf"}
 typing-extensions = "^4.12.2"
 
 [tool.poetry.group.dev]
@@ -28,11 +27,6 @@ optional = true
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
 pre-commit = "^3.7.1"
-
-[[tool.poetry.source]]
-name = "buf"
-url = "https://buf.build/gen/python"
-priority = "supplemental"
 
 [tool.setuptools.packages.find]
 exclude = ["tests"]
