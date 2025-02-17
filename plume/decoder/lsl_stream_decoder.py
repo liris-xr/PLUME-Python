@@ -60,7 +60,6 @@ class LslStreamDecoder(Iterator[LslStreamSample]):
         version_str = root.findtext("version")
         created_at_str = root.findtext("created_at")
         uid_str = root.findtext("uid")
-        session_id_str = root.findtext("session_id")
         hostname_str = root.findtext("hostname")
         v4address_str = root.findtext("v4address")
         v4data_port_str = root.findtext("v4data_port")

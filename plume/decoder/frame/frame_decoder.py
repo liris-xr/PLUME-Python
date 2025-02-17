@@ -79,7 +79,7 @@ def decode_frame(frame: Frame, frame_sample: FrameSample, time_ns: int):
 
         try:
             frame_data_decoder = get_frame_data_decoder(type(parsed_payload))
-        except:
+        except KeyError:
             warn(
                 f"Failed to get decoder for {parsed_payload.DESCRIPTOR.full_name}. Skipping."
             )

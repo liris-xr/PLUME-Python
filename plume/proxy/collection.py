@@ -49,12 +49,6 @@ class Collection(ABC, Generic[T], Iterable[T]):
 
     def __contains__(self, item: T) -> bool:
         return item in self._items
-
-    def __str__(self) -> str:
-        return str(self._items)
-
-    def __repr__(self) -> str:
-        return repr(self._items)
     
     def where(self: C, predicate: Callable[[T], bool]) -> C:
         return type(self)([item for item in self._items if predicate(item)])

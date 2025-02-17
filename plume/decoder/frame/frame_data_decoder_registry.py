@@ -26,7 +26,7 @@ def register_frame_data_decoder(
 def get_frame_data_decoder(type: Type[T]):
     cls = _frame_data_decoder_registry.get(type)
     if cls is None:
-        raise ValueError(f"No decoder found for {type}")
+        raise KeyError(f"No decoder found for {type}")
     return cls
 
 
