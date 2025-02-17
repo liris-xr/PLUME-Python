@@ -4,14 +4,13 @@ import io
 from typing import Union, Type, TypeVar, Optional, Sequence, Tuple
 from delimited_protobuf import read as _read_delimited
 from plume.sample import packed_sample_pb2
-from plume.decoder.sample_registry import (
-    get_descriptor_from_type_name,
-    get_message_class_from_type_name,
-)
 from google.protobuf.message import Message
+from google.protobuf import symbol_database
 from warnings import warn
 
 import lz4.frame
+
+symbol_database = symbol_database.Default()
 
 LZ4_MAGIC_NUMBER = bytes.fromhex("184d2204")
 
@@ -68,37 +67,30 @@ class SampleStreamReader:
                 return None, None
 
             if type_filter is not None:
-                expected_descriptors = (
-                    [t.DESCRIPTOR for t in type_filter]
+                expected_type_names = (
+                    [t.DESCRIPTOR.full_name for t in type_filter]
                     if isinstance(type_filter, Sequence)
-                    else [type_filter.DESCRIPTOR]
+                    else [type_filter.DESCRIPTOR.full_name]
                 )
 
-                if (
-                    get_descriptor_from_type_name(
-                        packed_sample.payload.TypeName()
-                    )
-                    not in expected_descriptors
-                ):
+                if packed_sample.payload.TypeName() not in expected_type_names:
                     continue
 
-            cls = get_message_class_from_type_name(
-                packed_sample.payload.TypeName()
-            )
-
-            if cls is None:
+            try:
+                parsed_payload = symbol_database.GetSymbol(
+                    packed_sample.payload.TypeName()
+                )()
+            except KeyError:
                 warn(
-                    f"Failed to get class for payload with type name {packed_sample.payload.DESCRIPTOR.full_name}. Skipping."
+                    f"Failed to get proto class for type {packed_sample.payload.TypeName()}"
                 )
-                continue
-
-            parsed_payload = cls()
+                return None, None
 
             if not packed_sample.payload.Unpack(parsed_payload):
                 warn(
                     f"Failed to unpack payload with type name {packed_sample.payload.DESCRIPTOR.full_name}. Skipping."
                 )
-                return None
+                return None, None
 
             return parsed_payload, (
                 packed_sample.timestamp
