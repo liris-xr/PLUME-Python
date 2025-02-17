@@ -19,6 +19,6 @@ repos:
     hooks:
       - id: ruff
         args: [--fix]
-        exclude: (^plume/samples/|^tests/)
+        exclude: (^plume/sample/|^tests/)
       - id: ruff-format
-        exclude: (^plume/samples/|^tests/)
+        exclude: (^plume/sample/|^tests/)
