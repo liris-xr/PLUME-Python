@@ -34,5 +34,8 @@ class Matrix4x4:
             dtype=np.float32,
         )
 
+    def __array__(self) -> np.ndarray:
+        return self.numpy()
+
     def __repr__(self) -> str:
         return f"Matrix4x4([[{self.m00:.2f}, {self.m01:.2f}, {self.m02:.2f}, {self.m03:.2f}], [{self.m10:.2f}, {self.m11:.2f}, {self.m12:.2f}, {self.m13:.2f}], [{self.m20:.2f}, {self.m21:.2f}, {self.m22:.2f}, {self.m23:.2f}], [{self.m30:.2f}, {self.m31:.2f}, {self.m32:.2f}, {self.m33:.2f}])"

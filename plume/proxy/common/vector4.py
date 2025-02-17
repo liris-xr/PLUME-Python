@@ -13,3 +13,6 @@ class Vector4:
 
     def numpy(self) -> np.ndarray:
         return np.array([self.x, self.y, self.z, self.w], dtype=np.float32)
+
+    def __array__(self) -> np.ndarray:
+        return self.numpy()

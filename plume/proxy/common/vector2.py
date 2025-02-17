@@ -11,3 +11,6 @@ class Vector2:
 
     def numpy(self) -> np.ndarray:
         return np.array([self._x, self._y], dtype=np.float32)
+
+    def __array__(self) -> np.ndarray:
+        return self.numpy()
