@@ -6,7 +6,6 @@ from plume.sample.unity.identifiers_pb2 import (
     AssetIdentifier,
 )
 
-from plume.decoder.sample_registry import get_message_class_from_type_name
 from plume.decoder.frame.frame_data_decoder_registry import (
     get_frame_data_decoder,
 )
@@ -19,11 +18,14 @@ from plume.proxy.unity.game_object import GameObject
 from plume.proxy.unity.component import Component
 from plume.proxy.unity.component.transform import Transform
 
+from google.protobuf import symbol_database
+
 from uuid import UUID
-from google.protobuf.message import Message
 from warnings import warn
 
 from typing import TypeVar, Type, Iterator
+
+symbol_database = symbol_database.Default()
 
 NULL_GUID = UUID(int=0)
 TV = TypeVar("TV", bound=Component)
@@ -63,29 +65,25 @@ def decode_frame(frame: Frame, frame_sample: FrameSample, time_ns: int):
     frame._time_ns = time_ns
 
     for data in frame_sample.data:
-        cls = get_message_class_from_type_name(data.TypeName())
-
-        if cls is None:
-            warn(
-                f"Failed to get data payload class for type {data.TypeName()}"
-            )
-            continue
-
-        parsed_payload: Message = cls()
-        success = data.Unpack(parsed_payload)
-        if not success:
-            warn(f"Failed to unpack payload with type {data.TypeName()}")
-            continue
-
         try:
-            frame_data_decoder = get_frame_data_decoder(type(parsed_payload))
-        except KeyError:
+            data_type = symbol_database.GetSymbol(data.TypeName())
+            frame_data_decoder = get_frame_data_decoder(data_type)
+
+            parsed_data = data_type()
+            success = data.Unpack(parsed_data)
+
+            if not success:
+                raise ValueError(
+                    f"Error while unpacking data with type {data.TypeName()}"
+                )
+
+            frame_data_decoder.decode(frame, parsed_data)
+
+        except Exception:
             warn(
-                f"Failed to get decoder for {parsed_payload.DESCRIPTOR.full_name}. Skipping."
+                f"Unable to decode data with type {data.TypeName()}. Skipping."
             )
             continue
-
-        frame_data_decoder.decode(frame, parsed_payload)
 
 
 def get_or_create_scene(frame: Frame, scene_id: SceneIdentifier) -> Scene:
