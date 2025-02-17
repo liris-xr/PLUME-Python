@@ -4,40 +4,35 @@
 # source: plume/sample/unity/frame.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/unity/frame.proto",
+    '',
+    'plume/sample/unity/frame.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1eplume/sample/unity/frame.proto\x12\x12plume.sample.unity\x1a\x19google/protobuf/any.proto"T\n\x05\x46rame\x12!\n\x0c\x66rame_number\x18\x01 \x01(\x05R\x0b\x66rameNumber\x12(\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x14.google.protobuf.AnyR\x04\x64\x61taB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3'
-)
+from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1eplume/sample/unity/frame.proto\x12\x12plume.sample.unity\x1a\x19google/protobuf/any.proto\"T\n\x05\x46rame\x12!\n\x0c\x66rame_number\x18\x01 \x01(\x05R\x0b\x66rameNumber\x12(\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x14.google.protobuf.AnyR\x04\x64\x61taB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.unity.frame_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.frame_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
-    _globals["_FRAME"]._serialized_start = 81
-    _globals["_FRAME"]._serialized_end = 165
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
+  _globals['_FRAME']._serialized_start=81
+  _globals['_FRAME']._serialized_end=165
 # @@protoc_insertion_point(module_scope)

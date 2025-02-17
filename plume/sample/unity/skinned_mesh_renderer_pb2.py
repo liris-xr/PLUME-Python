@@ -4,58 +4,45 @@
 # source: plume/sample/unity/skinned_mesh_renderer.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/unity/skinned_mesh_renderer.proto",
+    '',
+    'plume/sample/unity/skinned_mesh_renderer.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b"\n.plume/sample/unity/skinned_mesh_renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\"b\n\x19SkinnedMeshRendererCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"c\n\x1aSkinnedMeshRendererDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xf2\x05\n\x19SkinnedMeshRendererUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12<\n\x04mesh\x18\x02 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x00R\x04mesh\x88\x01\x01\x12I\n\troot_bone\x18\x03 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierH\x01R\x08rootBone\x88\x01\x01\x12N\n\x05\x62ones\x18\x04 \x01(\x0b\x32\x33.plume.sample.unity.SkinnedMeshRendererUpdate.BonesH\x02R\x05\x62ones\x88\x01\x01\x12t\n\x13\x62lend_shape_weights\x18\x05 \x01(\x0b\x32?.plume.sample.unity.SkinnedMeshRendererUpdate.BlendShapeWeightsH\x03R\x11\x62lendShapeWeights\x88\x01\x01\x1a\x42\n\x05\x42ones\x12\x39\n\x03ids\x18\x01 \x03(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\x03ids\x1a\xc1\x01\n\x11\x42lendShapeWeights\x12j\n\x07weights\x18\x01 \x03(\x0b\x32P.plume.sample.unity.SkinnedMeshRendererUpdate.BlendShapeWeights.BlendShapeWeightR\x07weights\x1a@\n\x10\x42lendShapeWeight\x12\x14\n\x05index\x18\x01 \x01(\x05R\x05index\x12\x16\n\x06weight\x18\x02 \x01(\x02R\x06weightB\x07\n\x05_meshB\x0c\n\n_root_boneB\x08\n\x06_bonesB\x16\n\x14_blend_shape_weightsB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3"
-)
+from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n.plume/sample/unity/skinned_mesh_renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\"b\n\x19SkinnedMeshRendererCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"c\n\x1aSkinnedMeshRendererDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xf2\x05\n\x19SkinnedMeshRendererUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12<\n\x04mesh\x18\x02 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x00R\x04mesh\x88\x01\x01\x12I\n\troot_bone\x18\x03 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierH\x01R\x08rootBone\x88\x01\x01\x12N\n\x05\x62ones\x18\x04 \x01(\x0b\x32\x33.plume.sample.unity.SkinnedMeshRendererUpdate.BonesH\x02R\x05\x62ones\x88\x01\x01\x12t\n\x13\x62lend_shape_weights\x18\x05 \x01(\x0b\x32?.plume.sample.unity.SkinnedMeshRendererUpdate.BlendShapeWeightsH\x03R\x11\x62lendShapeWeights\x88\x01\x01\x1a\x42\n\x05\x42ones\x12\x39\n\x03ids\x18\x01 \x03(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\x03ids\x1a\xc1\x01\n\x11\x42lendShapeWeights\x12j\n\x07weights\x18\x01 \x03(\x0b\x32P.plume.sample.unity.SkinnedMeshRendererUpdate.BlendShapeWeights.BlendShapeWeightR\x07weights\x1a@\n\x10\x42lendShapeWeight\x12\x14\n\x05index\x18\x01 \x01(\x05R\x05index\x12\x16\n\x06weight\x18\x02 \x01(\x02R\x06weightB\x07\n\x05_meshB\x0c\n\n_root_boneB\x08\n\x06_bonesB\x16\n\x14_blend_shape_weightsB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.unity.skinned_mesh_renderer_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.skinned_mesh_renderer_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
-    _globals["_SKINNEDMESHRENDERERCREATE"]._serialized_start = 108
-    _globals["_SKINNEDMESHRENDERERCREATE"]._serialized_end = 206
-    _globals["_SKINNEDMESHRENDERERDESTROY"]._serialized_start = 208
-    _globals["_SKINNEDMESHRENDERERDESTROY"]._serialized_end = 307
-    _globals["_SKINNEDMESHRENDERERUPDATE"]._serialized_start = 310
-    _globals["_SKINNEDMESHRENDERERUPDATE"]._serialized_end = 1064
-    _globals["_SKINNEDMESHRENDERERUPDATE_BONES"]._serialized_start = 745
-    _globals["_SKINNEDMESHRENDERERUPDATE_BONES"]._serialized_end = 811
-    _globals[
-        "_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS"
-    ]._serialized_start = 814
-    _globals[
-        "_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS"
-    ]._serialized_end = 1007
-    _globals[
-        "_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS_BLENDSHAPEWEIGHT"
-    ]._serialized_start = 943
-    _globals[
-        "_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS_BLENDSHAPEWEIGHT"
-    ]._serialized_end = 1007
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
+  _globals['_SKINNEDMESHRENDERERCREATE']._serialized_start=108
+  _globals['_SKINNEDMESHRENDERERCREATE']._serialized_end=206
+  _globals['_SKINNEDMESHRENDERERDESTROY']._serialized_start=208
+  _globals['_SKINNEDMESHRENDERERDESTROY']._serialized_end=307
+  _globals['_SKINNEDMESHRENDERERUPDATE']._serialized_start=310
+  _globals['_SKINNEDMESHRENDERERUPDATE']._serialized_end=1064
+  _globals['_SKINNEDMESHRENDERERUPDATE_BONES']._serialized_start=745
+  _globals['_SKINNEDMESHRENDERERUPDATE_BONES']._serialized_end=811
+  _globals['_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS']._serialized_start=814
+  _globals['_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS']._serialized_end=1007
+  _globals['_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS_BLENDSHAPEWEIGHT']._serialized_start=943
+  _globals['_SKINNEDMESHRENDERERUPDATE_BLENDSHAPEWEIGHTS_BLENDSHAPEWEIGHT']._serialized_end=1007
 # @@protoc_insertion_point(module_scope)

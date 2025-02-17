@@ -4,44 +4,40 @@
 # source: plume/sample/unity/audio_source.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/unity/audio_source.proto",
+    '',
+    'plume/sample/unity/audio_source.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n%plume/sample/unity/audio_source.proto\x12\x12plume.sample.unity\x1a)plume/sample/common/animation_curve.proto\x1a$plume/sample/unity/identifiers.proto"Z\n\x11\x41udioSourceCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent"[\n\x12\x41udioSourceDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent"\xf3\t\n\x11\x41udioSourceUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12G\n\naudio_clip\x18\x02 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x00R\taudioClip\x88\x01\x01\x12T\n\x11\x61udio_mixer_group\x18\x03 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x01R\x0f\x61udioMixerGroup\x88\x01\x01\x12"\n\nis_playing\x18\x04 \x01(\x08H\x02R\tisPlaying\x88\x01\x01\x12&\n\x0ctime_samples\x18\x05 \x01(\x05H\x03R\x0btimeSamples\x88\x01\x01\x12\x17\n\x04mute\x18\x06 \x01(\x08H\x04R\x04mute\x88\x01\x01\x12*\n\x0e\x62ypass_effects\x18\x07 \x01(\x08H\x05R\rbypassEffects\x88\x01\x01\x12;\n\x17\x62ypass_listener_effects\x18\x08 \x01(\x08H\x06R\x15\x62ypassListenerEffects\x88\x01\x01\x12\x33\n\x13\x62ypass_reverb_zones\x18\t \x01(\x08H\x07R\x11\x62ypassReverbZones\x88\x01\x01\x12\x1f\n\x08priority\x18\n \x01(\x05H\x08R\x08priority\x88\x01\x01\x12\x1b\n\x06volume\x18\x0b \x01(\x02H\tR\x06volume\x88\x01\x01\x12\x19\n\x05pitch\x18\x0c \x01(\x02H\nR\x05pitch\x88\x01\x01\x12"\n\nstereo_pan\x18\r \x01(\x02H\x0bR\tstereoPan\x88\x01\x01\x12M\n\rspatial_blend\x18\x0e \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x0cR\x0cspatialBlend\x88\x01\x01\x12P\n\x0freverb_zone_mix\x18\x0f \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\rR\rreverbZoneMix\x88\x01\x01\x12(\n\rdoppler_level\x18\x10 \x01(\x02H\x0eR\x0c\x64opplerLevel\x88\x01\x01\x12@\n\x06spread\x18\x11 \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x0fR\x06spread\x88\x01\x01\x12O\n\x0evolume_rolloff\x18\x12 \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x10R\rvolumeRolloff\x88\x01\x01\x42\r\n\x0b_audio_clipB\x14\n\x12_audio_mixer_groupB\r\n\x0b_is_playingB\x0f\n\r_time_samplesB\x07\n\x05_muteB\x11\n\x0f_bypass_effectsB\x1a\n\x18_bypass_listener_effectsB\x16\n\x14_bypass_reverb_zonesB\x0b\n\t_priorityB\t\n\x07_volumeB\x08\n\x06_pitchB\r\n\x0b_stereo_panB\x10\n\x0e_spatial_blendB\x12\n\x10_reverb_zone_mixB\x10\n\x0e_doppler_levelB\t\n\x07_spreadB\x11\n\x0f_volume_rolloffB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3'
-)
+from plume.sample.common import animation_curve_pb2 as plume_dot_sample_dot_common_dot_animation__curve__pb2
+from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%plume/sample/unity/audio_source.proto\x12\x12plume.sample.unity\x1a)plume/sample/common/animation_curve.proto\x1a$plume/sample/unity/identifiers.proto\"Z\n\x11\x41udioSourceCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"[\n\x12\x41udioSourceDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xf3\t\n\x11\x41udioSourceUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12G\n\naudio_clip\x18\x02 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x00R\taudioClip\x88\x01\x01\x12T\n\x11\x61udio_mixer_group\x18\x03 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x01R\x0f\x61udioMixerGroup\x88\x01\x01\x12\"\n\nis_playing\x18\x04 \x01(\x08H\x02R\tisPlaying\x88\x01\x01\x12&\n\x0ctime_samples\x18\x05 \x01(\x05H\x03R\x0btimeSamples\x88\x01\x01\x12\x17\n\x04mute\x18\x06 \x01(\x08H\x04R\x04mute\x88\x01\x01\x12*\n\x0e\x62ypass_effects\x18\x07 \x01(\x08H\x05R\rbypassEffects\x88\x01\x01\x12;\n\x17\x62ypass_listener_effects\x18\x08 \x01(\x08H\x06R\x15\x62ypassListenerEffects\x88\x01\x01\x12\x33\n\x13\x62ypass_reverb_zones\x18\t \x01(\x08H\x07R\x11\x62ypassReverbZones\x88\x01\x01\x12\x1f\n\x08priority\x18\n \x01(\x05H\x08R\x08priority\x88\x01\x01\x12\x1b\n\x06volume\x18\x0b \x01(\x02H\tR\x06volume\x88\x01\x01\x12\x19\n\x05pitch\x18\x0c \x01(\x02H\nR\x05pitch\x88\x01\x01\x12\"\n\nstereo_pan\x18\r \x01(\x02H\x0bR\tstereoPan\x88\x01\x01\x12M\n\rspatial_blend\x18\x0e \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x0cR\x0cspatialBlend\x88\x01\x01\x12P\n\x0freverb_zone_mix\x18\x0f \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\rR\rreverbZoneMix\x88\x01\x01\x12(\n\rdoppler_level\x18\x10 \x01(\x02H\x0eR\x0c\x64opplerLevel\x88\x01\x01\x12@\n\x06spread\x18\x11 \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x0fR\x06spread\x88\x01\x01\x12O\n\x0evolume_rolloff\x18\x12 \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x10R\rvolumeRolloff\x88\x01\x01\x42\r\n\x0b_audio_clipB\x14\n\x12_audio_mixer_groupB\r\n\x0b_is_playingB\x0f\n\r_time_samplesB\x07\n\x05_muteB\x11\n\x0f_bypass_effectsB\x1a\n\x18_bypass_listener_effectsB\x16\n\x14_bypass_reverb_zonesB\x0b\n\t_priorityB\t\n\x07_volumeB\x08\n\x06_pitchB\r\n\x0b_stereo_panB\x10\n\x0e_spatial_blendB\x12\n\x10_reverb_zone_mixB\x10\n\x0e_doppler_levelB\t\n\x07_spreadB\x11\n\x0f_volume_rolloffB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.unity.audio_source_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.audio_source_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
-    _globals["_AUDIOSOURCECREATE"]._serialized_start = 142
-    _globals["_AUDIOSOURCECREATE"]._serialized_end = 232
-    _globals["_AUDIOSOURCEDESTROY"]._serialized_start = 234
-    _globals["_AUDIOSOURCEDESTROY"]._serialized_end = 325
-    _globals["_AUDIOSOURCEUPDATE"]._serialized_start = 328
-    _globals["_AUDIOSOURCEUPDATE"]._serialized_end = 1595
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
+  _globals['_AUDIOSOURCECREATE']._serialized_start=142
+  _globals['_AUDIOSOURCECREATE']._serialized_end=232
+  _globals['_AUDIOSOURCEDESTROY']._serialized_start=234
+  _globals['_AUDIOSOURCEDESTROY']._serialized_end=325
+  _globals['_AUDIOSOURCEUPDATE']._serialized_start=328
+  _globals['_AUDIOSOURCEUPDATE']._serialized_end=1595
 # @@protoc_insertion_point(module_scope)

@@ -4,50 +4,46 @@
 # source: plume/sample/unity/ui/canvas_scaler.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/unity/ui/canvas_scaler.proto",
+    '',
+    'plume/sample/unity/ui/canvas_scaler.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b"\n)plume/sample/unity/ui/canvas_scaler.proto\x12\x15plume.sample.unity.ui\x1a$plume/sample/unity/identifiers.proto\x1a!plume/sample/common/vector2.proto\"[\n\x12\x43\x61nvasScalerCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\\\n\x13\x43\x61nvasScalerDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xc7\x07\n\x12\x43\x61nvasScalerUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12I\n\rui_scale_mode\x18\x02 \x01(\x0e\x32 .plume.sample.unity.ui.ScaleModeH\x00R\x0buiScaleMode\x88\x01\x01\x12>\n\x19reference_pixels_per_unit\x18\x03 \x01(\x02H\x01R\x16referencePixelsPerUnit\x88\x01\x01\x12&\n\x0cscale_factor\x18\x04 \x01(\x02H\x02R\x0bscaleFactor\x88\x01\x01\x12T\n\x14reference_resolution\x18\x05 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x03R\x13referenceResolution\x88\x01\x01\x12W\n\x11screen_match_mode\x18\x06 \x01(\x0e\x32&.plume.sample.unity.ui.ScreenMatchModeH\x04R\x0fscreenMatchMode\x88\x01\x01\x12\x36\n\x15match_width_or_height\x18\x07 \x01(\x02H\x05R\x12matchWidthOrHeight\x88\x01\x01\x12\x45\n\rphysical_unit\x18\x08 \x01(\x0e\x32\x1b.plume.sample.unity.ui.UnitH\x06R\x0cphysicalUnit\x88\x01\x01\x12\x33\n\x13\x66\x61llback_screen_dpi\x18\t \x01(\x02H\x07R\x11\x66\x61llbackScreenDpi\x88\x01\x01\x12\x31\n\x12\x64\x65\x66\x61ult_sprite_dpi\x18\n \x01(\x02H\x08R\x10\x64\x65\x66\x61ultSpriteDpi\x88\x01\x01\x12:\n\x17\x64ynamic_pixels_per_unit\x18\x0b \x01(\x02H\tR\x14\x64ynamicPixelsPerUnit\x88\x01\x01\x42\x10\n\x0e_ui_scale_modeB\x1c\n\x1a_reference_pixels_per_unitB\x0f\n\r_scale_factorB\x17\n\x15_reference_resolutionB\x14\n\x12_screen_match_modeB\x18\n\x16_match_width_or_heightB\x10\n\x0e_physical_unitB\x16\n\x14_fallback_screen_dpiB\x15\n\x13_default_sprite_dpiB\x1a\n\x18_dynamic_pixels_per_unit*}\n\tScaleMode\x12\"\n\x1eSCALE_MODE_CONSTANT_PIXEL_SIZE\x10\x00\x12%\n!SCALE_MODE_SCALE_WITH_SCREEN_SIZE\x10\x01\x12%\n!SCALE_MODE_CONSTANT_PHYSICAL_SIZE\x10\x02*z\n\x0fScreenMatchMode\x12+\n'SCREEN_MATCH_MODE_MATCH_WIDTH_OR_HEIGHT\x10\x00\x12\x1c\n\x18SCREEN_MATCH_MODE_EXPAND\x10\x01\x12\x1c\n\x18SCREEN_MATCH_MODE_SHRINK\x10\x02*d\n\x04Unit\x12\x14\n\x10UNIT_CENTIMETERS\x10\x00\x12\x14\n\x10UNIT_MILLIMETERS\x10\x01\x12\x0f\n\x0bUNIT_INCHES\x10\x02\x12\x0f\n\x0bUNIT_POINTS\x10\x03\x12\x0e\n\nUNIT_PICAS\x10\x04\x42\x18\xaa\x02\x15PLUME.Sample.Unity.UIb\x06proto3"
-)
+from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
+from plume.sample.common import vector2_pb2 as plume_dot_sample_dot_common_dot_vector2__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)plume/sample/unity/ui/canvas_scaler.proto\x12\x15plume.sample.unity.ui\x1a$plume/sample/unity/identifiers.proto\x1a!plume/sample/common/vector2.proto\"[\n\x12\x43\x61nvasScalerCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\\\n\x13\x43\x61nvasScalerDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xc7\x07\n\x12\x43\x61nvasScalerUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12I\n\rui_scale_mode\x18\x02 \x01(\x0e\x32 .plume.sample.unity.ui.ScaleModeH\x00R\x0buiScaleMode\x88\x01\x01\x12>\n\x19reference_pixels_per_unit\x18\x03 \x01(\x02H\x01R\x16referencePixelsPerUnit\x88\x01\x01\x12&\n\x0cscale_factor\x18\x04 \x01(\x02H\x02R\x0bscaleFactor\x88\x01\x01\x12T\n\x14reference_resolution\x18\x05 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x03R\x13referenceResolution\x88\x01\x01\x12W\n\x11screen_match_mode\x18\x06 \x01(\x0e\x32&.plume.sample.unity.ui.ScreenMatchModeH\x04R\x0fscreenMatchMode\x88\x01\x01\x12\x36\n\x15match_width_or_height\x18\x07 \x01(\x02H\x05R\x12matchWidthOrHeight\x88\x01\x01\x12\x45\n\rphysical_unit\x18\x08 \x01(\x0e\x32\x1b.plume.sample.unity.ui.UnitH\x06R\x0cphysicalUnit\x88\x01\x01\x12\x33\n\x13\x66\x61llback_screen_dpi\x18\t \x01(\x02H\x07R\x11\x66\x61llbackScreenDpi\x88\x01\x01\x12\x31\n\x12\x64\x65\x66\x61ult_sprite_dpi\x18\n \x01(\x02H\x08R\x10\x64\x65\x66\x61ultSpriteDpi\x88\x01\x01\x12:\n\x17\x64ynamic_pixels_per_unit\x18\x0b \x01(\x02H\tR\x14\x64ynamicPixelsPerUnit\x88\x01\x01\x42\x10\n\x0e_ui_scale_modeB\x1c\n\x1a_reference_pixels_per_unitB\x0f\n\r_scale_factorB\x17\n\x15_reference_resolutionB\x14\n\x12_screen_match_modeB\x18\n\x16_match_width_or_heightB\x10\n\x0e_physical_unitB\x16\n\x14_fallback_screen_dpiB\x15\n\x13_default_sprite_dpiB\x1a\n\x18_dynamic_pixels_per_unit*}\n\tScaleMode\x12\"\n\x1eSCALE_MODE_CONSTANT_PIXEL_SIZE\x10\x00\x12%\n!SCALE_MODE_SCALE_WITH_SCREEN_SIZE\x10\x01\x12%\n!SCALE_MODE_CONSTANT_PHYSICAL_SIZE\x10\x02*z\n\x0fScreenMatchMode\x12+\n\'SCREEN_MATCH_MODE_MATCH_WIDTH_OR_HEIGHT\x10\x00\x12\x1c\n\x18SCREEN_MATCH_MODE_EXPAND\x10\x01\x12\x1c\n\x18SCREEN_MATCH_MODE_SHRINK\x10\x02*d\n\x04Unit\x12\x14\n\x10UNIT_CENTIMETERS\x10\x00\x12\x14\n\x10UNIT_MILLIMETERS\x10\x01\x12\x0f\n\x0bUNIT_INCHES\x10\x02\x12\x0f\n\x0bUNIT_POINTS\x10\x03\x12\x0e\n\nUNIT_PICAS\x10\x04\x42\x18\xaa\x02\x15PLUME.Sample.Unity.UIb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.unity.ui.canvas_scaler_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.ui.canvas_scaler_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\025PLUME.Sample.Unity.UI"
-    _globals["_SCALEMODE"]._serialized_start = 1298
-    _globals["_SCALEMODE"]._serialized_end = 1423
-    _globals["_SCREENMATCHMODE"]._serialized_start = 1425
-    _globals["_SCREENMATCHMODE"]._serialized_end = 1547
-    _globals["_UNIT"]._serialized_start = 1549
-    _globals["_UNIT"]._serialized_end = 1649
-    _globals["_CANVASSCALERCREATE"]._serialized_start = 141
-    _globals["_CANVASSCALERCREATE"]._serialized_end = 232
-    _globals["_CANVASSCALERDESTROY"]._serialized_start = 234
-    _globals["_CANVASSCALERDESTROY"]._serialized_end = 326
-    _globals["_CANVASSCALERUPDATE"]._serialized_start = 329
-    _globals["_CANVASSCALERUPDATE"]._serialized_end = 1296
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\025PLUME.Sample.Unity.UI'
+  _globals['_SCALEMODE']._serialized_start=1298
+  _globals['_SCALEMODE']._serialized_end=1423
+  _globals['_SCREENMATCHMODE']._serialized_start=1425
+  _globals['_SCREENMATCHMODE']._serialized_end=1547
+  _globals['_UNIT']._serialized_start=1549
+  _globals['_UNIT']._serialized_end=1649
+  _globals['_CANVASSCALERCREATE']._serialized_start=141
+  _globals['_CANVASSCALERCREATE']._serialized_end=232
+  _globals['_CANVASSCALERDESTROY']._serialized_start=234
+  _globals['_CANVASSCALERDESTROY']._serialized_end=326
+  _globals['_CANVASSCALERUPDATE']._serialized_start=329
+  _globals['_CANVASSCALERUPDATE']._serialized_end=1296
 # @@protoc_insertion_point(module_scope)

@@ -14,10 +14,4 @@ class Rect(_message.Message):
     y: float
     width: float
     height: float
-    def __init__(
-        self,
-        x: _Optional[float] = ...,
-        y: _Optional[float] = ...,
-        width: _Optional[float] = ...,
-        height: _Optional[float] = ...,
-    ) -> None: ...
+    def __init__(self, x: _Optional[float] = ..., y: _Optional[float] = ..., width: _Optional[float] = ..., height: _Optional[float] = ...) -> None: ...

@@ -4,50 +4,44 @@
 # source: plume/sample/common/color.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/common/color.proto",
+    '',
+    'plume/sample/common/color.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1fplume/sample/common/color.proto\x12\x13plume.sample.common"?\n\x05\x43olor\x12\x0c\n\x01r\x18\x01 \x01(\x02R\x01r\x12\x0c\n\x01g\x18\x02 \x01(\x02R\x01g\x12\x0c\n\x01\x62\x18\x03 \x01(\x02R\x01\x62\x12\x0c\n\x01\x61\x18\x04 \x01(\x02R\x01\x61"\x9c\x04\n\rColorGradient\x12@\n\x0b\x63olor_space\x18\x01 \x01(\x0e\x32\x1f.plume.sample.common.ColorSpaceR\ncolorSpace\x12\x43\n\x04mode\x18\x02 \x01(\x0e\x32/.plume.sample.common.ColorGradient.GradientModeR\x04mode\x12J\n\ncolor_keys\x18\x03 \x03(\x0b\x32+.plume.sample.common.ColorGradient.ColorKeyR\tcolorKeys\x12J\n\nalpha_keys\x18\x04 \x03(\x0b\x32+.plume.sample.common.ColorGradient.AlphaKeyR\talphaKeys\x1aP\n\x08\x43olorKey\x12\x30\n\x05\x63olor\x18\x01 \x01(\x0b\x32\x1a.plume.sample.common.ColorR\x05\x63olor\x12\x12\n\x04time\x18\x02 \x01(\x02R\x04time\x1a\x34\n\x08\x41lphaKey\x12\x14\n\x05\x61lpha\x18\x01 \x01(\x02R\x05\x61lpha\x12\x12\n\x04time\x18\x02 \x01(\x02R\x04time"d\n\x0cGradientMode\x12\x17\n\x13GRADIENT_MODE_BLEND\x10\x00\x12\x17\n\x13GRADIENT_MODE_FIXED\x10\x01\x12"\n\x1eGRADIENT_MODE_PERCEPTUAL_BLEND\x10\x02*Z\n\nColorSpace\x12\x1d\n\x19\x43OLOR_SPACE_UNINITIALIZED\x10\x00\x12\x15\n\x11\x43OLOR_SPACE_GAMMA\x10\x01\x12\x16\n\x12\x43OLOR_SPACE_LINEAR\x10\x02\x42\x16\xaa\x02\x13PLUME.Sample.Commonb\x06proto3'
-)
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1fplume/sample/common/color.proto\x12\x13plume.sample.common\"?\n\x05\x43olor\x12\x0c\n\x01r\x18\x01 \x01(\x02R\x01r\x12\x0c\n\x01g\x18\x02 \x01(\x02R\x01g\x12\x0c\n\x01\x62\x18\x03 \x01(\x02R\x01\x62\x12\x0c\n\x01\x61\x18\x04 \x01(\x02R\x01\x61\"\x9c\x04\n\rColorGradient\x12@\n\x0b\x63olor_space\x18\x01 \x01(\x0e\x32\x1f.plume.sample.common.ColorSpaceR\ncolorSpace\x12\x43\n\x04mode\x18\x02 \x01(\x0e\x32/.plume.sample.common.ColorGradient.GradientModeR\x04mode\x12J\n\ncolor_keys\x18\x03 \x03(\x0b\x32+.plume.sample.common.ColorGradient.ColorKeyR\tcolorKeys\x12J\n\nalpha_keys\x18\x04 \x03(\x0b\x32+.plume.sample.common.ColorGradient.AlphaKeyR\talphaKeys\x1aP\n\x08\x43olorKey\x12\x30\n\x05\x63olor\x18\x01 \x01(\x0b\x32\x1a.plume.sample.common.ColorR\x05\x63olor\x12\x12\n\x04time\x18\x02 \x01(\x02R\x04time\x1a\x34\n\x08\x41lphaKey\x12\x14\n\x05\x61lpha\x18\x01 \x01(\x02R\x05\x61lpha\x12\x12\n\x04time\x18\x02 \x01(\x02R\x04time\"d\n\x0cGradientMode\x12\x17\n\x13GRADIENT_MODE_BLEND\x10\x00\x12\x17\n\x13GRADIENT_MODE_FIXED\x10\x01\x12\"\n\x1eGRADIENT_MODE_PERCEPTUAL_BLEND\x10\x02*Z\n\nColorSpace\x12\x1d\n\x19\x43OLOR_SPACE_UNINITIALIZED\x10\x00\x12\x15\n\x11\x43OLOR_SPACE_GAMMA\x10\x01\x12\x16\n\x12\x43OLOR_SPACE_LINEAR\x10\x02\x42\x16\xaa\x02\x13PLUME.Sample.Commonb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.common.color_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.common.color_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\023PLUME.Sample.Common"
-    _globals["_COLORSPACE"]._serialized_start = 664
-    _globals["_COLORSPACE"]._serialized_end = 754
-    _globals["_COLOR"]._serialized_start = 56
-    _globals["_COLOR"]._serialized_end = 119
-    _globals["_COLORGRADIENT"]._serialized_start = 122
-    _globals["_COLORGRADIENT"]._serialized_end = 662
-    _globals["_COLORGRADIENT_COLORKEY"]._serialized_start = 426
-    _globals["_COLORGRADIENT_COLORKEY"]._serialized_end = 506
-    _globals["_COLORGRADIENT_ALPHAKEY"]._serialized_start = 508
-    _globals["_COLORGRADIENT_ALPHAKEY"]._serialized_end = 560
-    _globals["_COLORGRADIENT_GRADIENTMODE"]._serialized_start = 562
-    _globals["_COLORGRADIENT_GRADIENTMODE"]._serialized_end = 662
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\023PLUME.Sample.Common'
+  _globals['_COLORSPACE']._serialized_start=664
+  _globals['_COLORSPACE']._serialized_end=754
+  _globals['_COLOR']._serialized_start=56
+  _globals['_COLOR']._serialized_end=119
+  _globals['_COLORGRADIENT']._serialized_start=122
+  _globals['_COLORGRADIENT']._serialized_end=662
+  _globals['_COLORGRADIENT_COLORKEY']._serialized_start=426
+  _globals['_COLORGRADIENT_COLORKEY']._serialized_end=506
+  _globals['_COLORGRADIENT_ALPHAKEY']._serialized_start=508
+  _globals['_COLORGRADIENT_ALPHAKEY']._serialized_end=560
+  _globals['_COLORGRADIENT_GRADIENTMODE']._serialized_start=562
+  _globals['_COLORGRADIENT_GRADIENTMODE']._serialized_end=662
 # @@protoc_insertion_point(module_scope)

@@ -5,24 +5,7 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Matrix4x4(_message.Message):
-    __slots__ = (
-        "m00",
-        "m01",
-        "m02",
-        "m03",
-        "m10",
-        "m11",
-        "m12",
-        "m13",
-        "m20",
-        "m21",
-        "m22",
-        "m23",
-        "m30",
-        "m31",
-        "m32",
-        "m33",
-    )
+    __slots__ = ("m00", "m01", "m02", "m03", "m10", "m11", "m12", "m13", "m20", "m21", "m22", "m23", "m30", "m31", "m32", "m33")
     M00_FIELD_NUMBER: _ClassVar[int]
     M01_FIELD_NUMBER: _ClassVar[int]
     M02_FIELD_NUMBER: _ClassVar[int]
@@ -55,22 +38,4 @@ class Matrix4x4(_message.Message):
     m31: float
     m32: float
     m33: float
-    def __init__(
-        self,
-        m00: _Optional[float] = ...,
-        m01: _Optional[float] = ...,
-        m02: _Optional[float] = ...,
-        m03: _Optional[float] = ...,
-        m10: _Optional[float] = ...,
-        m11: _Optional[float] = ...,
-        m12: _Optional[float] = ...,
-        m13: _Optional[float] = ...,
-        m20: _Optional[float] = ...,
-        m21: _Optional[float] = ...,
-        m22: _Optional[float] = ...,
-        m23: _Optional[float] = ...,
-        m30: _Optional[float] = ...,
-        m31: _Optional[float] = ...,
-        m32: _Optional[float] = ...,
-        m33: _Optional[float] = ...,
-    ) -> None: ...
+    def __init__(self, m00: _Optional[float] = ..., m01: _Optional[float] = ..., m02: _Optional[float] = ..., m03: _Optional[float] = ..., m10: _Optional[float] = ..., m11: _Optional[float] = ..., m12: _Optional[float] = ..., m13: _Optional[float] = ..., m20: _Optional[float] = ..., m21: _Optional[float] = ..., m22: _Optional[float] = ..., m23: _Optional[float] = ..., m30: _Optional[float] = ..., m31: _Optional[float] = ..., m32: _Optional[float] = ..., m33: _Optional[float] = ...) -> None: ...

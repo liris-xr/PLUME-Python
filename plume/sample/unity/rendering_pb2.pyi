@@ -15,9 +15,7 @@ class ReflectionProbeUsage(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     REFLECTION_PROBE_USAGE_OFF: _ClassVar[ReflectionProbeUsage]
     REFLECTION_PROBE_USAGE_BLEND_PROBES: _ClassVar[ReflectionProbeUsage]
-    REFLECTION_PROBE_USAGE_BLEND_PROBES_AND_SKYBOX: _ClassVar[
-        ReflectionProbeUsage
-    ]
+    REFLECTION_PROBE_USAGE_BLEND_PROBES_AND_SKYBOX: _ClassVar[ReflectionProbeUsage]
     REFLECTION_PROBE_USAGE_SIMPLE: _ClassVar[ReflectionProbeUsage]
 
 class RenderingPath(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -40,7 +38,6 @@ class TransparencySortMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     TRANSPARENCY_SORT_MODE_PERSPECTIVE: _ClassVar[TransparencySortMode]
     TRANSPARENCY_SORT_MODE_ORTHOGRAPHIC: _ClassVar[TransparencySortMode]
     TRANSPARENCY_SORT_MODE_CUSTOM_AXIS: _ClassVar[TransparencySortMode]
-
 SHADOW_CASTING_MODE_OFF: ShadowCastingMode
 SHADOW_CASTING_MODE_ON: ShadowCastingMode
 SHADOW_CASTING_MODE_TWO_SIDED: ShadowCastingMode

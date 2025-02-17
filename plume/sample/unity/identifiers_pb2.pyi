@@ -1,11 +1,6 @@
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import (
-    ClassVar as _ClassVar,
-    Mapping as _Mapping,
-    Optional as _Optional,
-    Union as _Union,
-)
+from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -17,12 +12,7 @@ class GameObjectIdentifier(_message.Message):
     guid: str
     transform_guid: str
     scene: SceneIdentifier
-    def __init__(
-        self,
-        guid: _Optional[str] = ...,
-        transform_guid: _Optional[str] = ...,
-        scene: _Optional[_Union[SceneIdentifier, _Mapping]] = ...,
-    ) -> None: ...
+    def __init__(self, guid: _Optional[str] = ..., transform_guid: _Optional[str] = ..., scene: _Optional[_Union[SceneIdentifier, _Mapping]] = ...) -> None: ...
 
 class ComponentIdentifier(_message.Message):
     __slots__ = ("guid", "game_object")
@@ -30,11 +20,7 @@ class ComponentIdentifier(_message.Message):
     GAME_OBJECT_FIELD_NUMBER: _ClassVar[int]
     guid: str
     game_object: GameObjectIdentifier
-    def __init__(
-        self,
-        guid: _Optional[str] = ...,
-        game_object: _Optional[_Union[GameObjectIdentifier, _Mapping]] = ...,
-    ) -> None: ...
+    def __init__(self, guid: _Optional[str] = ..., game_object: _Optional[_Union[GameObjectIdentifier, _Mapping]] = ...) -> None: ...
 
 class AssetIdentifier(_message.Message):
     __slots__ = ("guid", "asset_bundle_path")
@@ -42,11 +28,7 @@ class AssetIdentifier(_message.Message):
     ASSET_BUNDLE_PATH_FIELD_NUMBER: _ClassVar[int]
     guid: str
     asset_bundle_path: str
-    def __init__(
-        self,
-        guid: _Optional[str] = ...,
-        asset_bundle_path: _Optional[str] = ...,
-    ) -> None: ...
+    def __init__(self, guid: _Optional[str] = ..., asset_bundle_path: _Optional[str] = ...) -> None: ...
 
 class SceneIdentifier(_message.Message):
     __slots__ = ("guid", "name", "asset_bundle_path")
@@ -56,9 +38,4 @@ class SceneIdentifier(_message.Message):
     guid: str
     name: str
     asset_bundle_path: str
-    def __init__(
-        self,
-        guid: _Optional[str] = ...,
-        name: _Optional[str] = ...,
-        asset_bundle_path: _Optional[str] = ...,
-    ) -> None: ...
+    def __init__(self, guid: _Optional[str] = ..., name: _Optional[str] = ..., asset_bundle_path: _Optional[str] = ...) -> None: ...

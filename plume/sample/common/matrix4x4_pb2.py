@@ -4,40 +4,34 @@
 # source: plume/sample/common/matrix4x4.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/common/matrix4x4.proto",
+    '',
+    'plume/sample/common/matrix4x4.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n#plume/sample/common/matrix4x4.proto\x12\x13plume.sample.common"\xab\x02\n\tMatrix4x4\x12\x10\n\x03m00\x18\x01 \x01(\x02R\x03m00\x12\x10\n\x03m01\x18\x02 \x01(\x02R\x03m01\x12\x10\n\x03m02\x18\x03 \x01(\x02R\x03m02\x12\x10\n\x03m03\x18\x04 \x01(\x02R\x03m03\x12\x10\n\x03m10\x18\x05 \x01(\x02R\x03m10\x12\x10\n\x03m11\x18\x06 \x01(\x02R\x03m11\x12\x10\n\x03m12\x18\x07 \x01(\x02R\x03m12\x12\x10\n\x03m13\x18\x08 \x01(\x02R\x03m13\x12\x10\n\x03m20\x18\t \x01(\x02R\x03m20\x12\x10\n\x03m21\x18\n \x01(\x02R\x03m21\x12\x10\n\x03m22\x18\x0b \x01(\x02R\x03m22\x12\x10\n\x03m23\x18\x0c \x01(\x02R\x03m23\x12\x10\n\x03m30\x18\r \x01(\x02R\x03m30\x12\x10\n\x03m31\x18\x0e \x01(\x02R\x03m31\x12\x10\n\x03m32\x18\x0f \x01(\x02R\x03m32\x12\x10\n\x03m33\x18\x10 \x01(\x02R\x03m33B\x16\xaa\x02\x13PLUME.Sample.Commonb\x06proto3'
-)
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#plume/sample/common/matrix4x4.proto\x12\x13plume.sample.common\"\xab\x02\n\tMatrix4x4\x12\x10\n\x03m00\x18\x01 \x01(\x02R\x03m00\x12\x10\n\x03m01\x18\x02 \x01(\x02R\x03m01\x12\x10\n\x03m02\x18\x03 \x01(\x02R\x03m02\x12\x10\n\x03m03\x18\x04 \x01(\x02R\x03m03\x12\x10\n\x03m10\x18\x05 \x01(\x02R\x03m10\x12\x10\n\x03m11\x18\x06 \x01(\x02R\x03m11\x12\x10\n\x03m12\x18\x07 \x01(\x02R\x03m12\x12\x10\n\x03m13\x18\x08 \x01(\x02R\x03m13\x12\x10\n\x03m20\x18\t \x01(\x02R\x03m20\x12\x10\n\x03m21\x18\n \x01(\x02R\x03m21\x12\x10\n\x03m22\x18\x0b \x01(\x02R\x03m22\x12\x10\n\x03m23\x18\x0c \x01(\x02R\x03m23\x12\x10\n\x03m30\x18\r \x01(\x02R\x03m30\x12\x10\n\x03m31\x18\x0e \x01(\x02R\x03m31\x12\x10\n\x03m32\x18\x0f \x01(\x02R\x03m32\x12\x10\n\x03m33\x18\x10 \x01(\x02R\x03m33B\x16\xaa\x02\x13PLUME.Sample.Commonb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.common.matrix4x4_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.common.matrix4x4_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\023PLUME.Sample.Common"
-    _globals["_MATRIX4X4"]._serialized_start = 61
-    _globals["_MATRIX4X4"]._serialized_end = 360
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\023PLUME.Sample.Common'
+  _globals['_MATRIX4X4']._serialized_start=61
+  _globals['_MATRIX4X4']._serialized_end=360
 # @@protoc_insertion_point(module_scope)

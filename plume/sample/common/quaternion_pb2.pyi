@@ -14,10 +14,4 @@ class Quaternion(_message.Message):
     y: float
     z: float
     w: float
-    def __init__(
-        self,
-        x: _Optional[float] = ...,
-        y: _Optional[float] = ...,
-        z: _Optional[float] = ...,
-        w: _Optional[float] = ...,
-    ) -> None: ...
+    def __init__(self, x: _Optional[float] = ..., y: _Optional[float] = ..., z: _Optional[float] = ..., w: _Optional[float] = ...) -> None: ...

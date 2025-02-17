@@ -1,12 +1,7 @@
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import (
-    ClassVar as _ClassVar,
-    Mapping as _Mapping,
-    Optional as _Optional,
-    Union as _Union,
-)
+from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -20,13 +15,7 @@ class RecorderVersion(_message.Message):
     major: str
     minor: str
     patch: str
-    def __init__(
-        self,
-        name: _Optional[str] = ...,
-        major: _Optional[str] = ...,
-        minor: _Optional[str] = ...,
-        patch: _Optional[str] = ...,
-    ) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., major: _Optional[str] = ..., minor: _Optional[str] = ..., patch: _Optional[str] = ...) -> None: ...
 
 class RecordMetadata(_message.Message):
     __slots__ = ("recorder_version", "start_time", "name", "extra_metadata")
@@ -38,15 +27,7 @@ class RecordMetadata(_message.Message):
     start_time: _timestamp_pb2.Timestamp
     name: str
     extra_metadata: str
-    def __init__(
-        self,
-        recorder_version: _Optional[_Union[RecorderVersion, _Mapping]] = ...,
-        start_time: _Optional[
-            _Union[_timestamp_pb2.Timestamp, _Mapping]
-        ] = ...,
-        name: _Optional[str] = ...,
-        extra_metadata: _Optional[str] = ...,
-    ) -> None: ...
+    def __init__(self, recorder_version: _Optional[_Union[RecorderVersion, _Mapping]] = ..., start_time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., extra_metadata: _Optional[str] = ...) -> None: ...
 
 class RecordMetrics(_message.Message):
     __slots__ = ("is_sequential", "duration", "n_samples")
@@ -56,9 +37,4 @@ class RecordMetrics(_message.Message):
     is_sequential: bool
     duration: int
     n_samples: int
-    def __init__(
-        self,
-        is_sequential: bool = ...,
-        duration: _Optional[int] = ...,
-        n_samples: _Optional[int] = ...,
-    ) -> None: ...
+    def __init__(self, is_sequential: bool = ..., duration: _Optional[int] = ..., n_samples: _Optional[int] = ...) -> None: ...

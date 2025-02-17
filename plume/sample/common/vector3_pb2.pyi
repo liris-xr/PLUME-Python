@@ -12,9 +12,4 @@ class Vector3(_message.Message):
     x: float
     y: float
     z: float
-    def __init__(
-        self,
-        x: _Optional[float] = ...,
-        y: _Optional[float] = ...,
-        z: _Optional[float] = ...,
-    ) -> None: ...
+    def __init__(self, x: _Optional[float] = ..., y: _Optional[float] = ..., z: _Optional[float] = ...) -> None: ...

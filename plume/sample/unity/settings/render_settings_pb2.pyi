@@ -1,17 +1,10 @@
 from plume.sample.unity import identifiers_pb2 as _identifiers_pb2
 from plume.sample.common import color_pb2 as _color_pb2
-from plume.sample.common import (
-    spherical_harmonics_l2_pb2 as _spherical_harmonics_l2_pb2,
-)
+from plume.sample.common import spherical_harmonics_l2_pb2 as _spherical_harmonics_l2_pb2
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import (
-    ClassVar as _ClassVar,
-    Mapping as _Mapping,
-    Optional as _Optional,
-    Union as _Union,
-)
+from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -35,7 +28,6 @@ class DefaultReflectionMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     DEFAULT_REFLECTION_MODE_UNSPECIFIED: _ClassVar[DefaultReflectionMode]
     DEFAULT_REFLECTION_MODE_SKYBOX: _ClassVar[DefaultReflectionMode]
     DEFAULT_REFLECTION_MODE_CUSTOM: _ClassVar[DefaultReflectionMode]
-
 FOG_MODE_UNSPECIFIED: FogMode
 FOG_MODE_LINEAR: FogMode
 FOG_MODE_EXPONENTIAL: FogMode
@@ -50,32 +42,7 @@ DEFAULT_REFLECTION_MODE_SKYBOX: DefaultReflectionMode
 DEFAULT_REFLECTION_MODE_CUSTOM: DefaultReflectionMode
 
 class RenderSettingsUpdate(_message.Message):
-    __slots__ = (
-        "skybox",
-        "sun",
-        "fog",
-        "fog_mode",
-        "fog_color",
-        "fog_density",
-        "fog_start_distance",
-        "fog_end_distance",
-        "ambient_light_color",
-        "ambient_equator_color",
-        "ambient_ground_color",
-        "ambient_sky_color",
-        "ambient_intensity",
-        "ambient_mode",
-        "ambient_probe",
-        "custom_reflection_texture",
-        "default_reflection_mode",
-        "default_reflection_resolution",
-        "reflection_bounces",
-        "reflection_intensity",
-        "halo_strength",
-        "flare_strength",
-        "flare_fade_speed",
-        "subtractive_shadow_color",
-    )
+    __slots__ = ("skybox", "sun", "fog", "fog_mode", "fog_color", "fog_density", "fog_start_distance", "fog_end_distance", "ambient_light_color", "ambient_equator_color", "ambient_ground_color", "ambient_sky_color", "ambient_intensity", "ambient_mode", "ambient_probe", "custom_reflection_texture", "default_reflection_mode", "default_reflection_resolution", "reflection_bounces", "reflection_intensity", "halo_strength", "flare_strength", "flare_fade_speed", "subtractive_shadow_color")
     SKYBOX_FIELD_NUMBER: _ClassVar[int]
     SUN_FIELD_NUMBER: _ClassVar[int]
     FOG_FIELD_NUMBER: _ClassVar[int]
@@ -124,48 +91,4 @@ class RenderSettingsUpdate(_message.Message):
     flare_strength: float
     flare_fade_speed: float
     subtractive_shadow_color: _color_pb2.Color
-    def __init__(
-        self,
-        skybox: _Optional[
-            _Union[_identifiers_pb2.AssetIdentifier, _Mapping]
-        ] = ...,
-        sun: _Optional[
-            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
-        ] = ...,
-        fog: bool = ...,
-        fog_mode: _Optional[_Union[FogMode, str]] = ...,
-        fog_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ...,
-        fog_density: _Optional[float] = ...,
-        fog_start_distance: _Optional[float] = ...,
-        fog_end_distance: _Optional[float] = ...,
-        ambient_light_color: _Optional[
-            _Union[_color_pb2.Color, _Mapping]
-        ] = ...,
-        ambient_equator_color: _Optional[
-            _Union[_color_pb2.Color, _Mapping]
-        ] = ...,
-        ambient_ground_color: _Optional[
-            _Union[_color_pb2.Color, _Mapping]
-        ] = ...,
-        ambient_sky_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ...,
-        ambient_intensity: _Optional[float] = ...,
-        ambient_mode: _Optional[_Union[AmbientMode, str]] = ...,
-        ambient_probe: _Optional[
-            _Union[_spherical_harmonics_l2_pb2.SphericalHarmonicsL2, _Mapping]
-        ] = ...,
-        custom_reflection_texture: _Optional[
-            _Union[_identifiers_pb2.AssetIdentifier, _Mapping]
-        ] = ...,
-        default_reflection_mode: _Optional[
-            _Union[DefaultReflectionMode, str]
-        ] = ...,
-        default_reflection_resolution: _Optional[int] = ...,
-        reflection_bounces: _Optional[int] = ...,
-        reflection_intensity: _Optional[float] = ...,
-        halo_strength: _Optional[float] = ...,
-        flare_strength: _Optional[float] = ...,
-        flare_fade_speed: _Optional[float] = ...,
-        subtractive_shadow_color: _Optional[
-            _Union[_color_pb2.Color, _Mapping]
-        ] = ...,
-    ) -> None: ...
+    def __init__(self, skybox: _Optional[_Union[_identifiers_pb2.AssetIdentifier, _Mapping]] = ..., sun: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ..., fog: bool = ..., fog_mode: _Optional[_Union[FogMode, str]] = ..., fog_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ..., fog_density: _Optional[float] = ..., fog_start_distance: _Optional[float] = ..., fog_end_distance: _Optional[float] = ..., ambient_light_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ..., ambient_equator_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ..., ambient_ground_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ..., ambient_sky_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ..., ambient_intensity: _Optional[float] = ..., ambient_mode: _Optional[_Union[AmbientMode, str]] = ..., ambient_probe: _Optional[_Union[_spherical_harmonics_l2_pb2.SphericalHarmonicsL2, _Mapping]] = ..., custom_reflection_texture: _Optional[_Union[_identifiers_pb2.AssetIdentifier, _Mapping]] = ..., default_reflection_mode: _Optional[_Union[DefaultReflectionMode, str]] = ..., default_reflection_resolution: _Optional[int] = ..., reflection_bounces: _Optional[int] = ..., reflection_intensity: _Optional[float] = ..., halo_strength: _Optional[float] = ..., flare_strength: _Optional[float] = ..., flare_fade_speed: _Optional[float] = ..., subtractive_shadow_color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ...) -> None: ...

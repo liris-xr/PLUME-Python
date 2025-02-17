@@ -4,44 +4,41 @@
 # source: plume/sample/unity/input_action.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/unity/input_action.proto",
+    '',
+    'plume/sample/unity/input_action.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n%plume/sample/unity/input_action.proto\x12\x12plume.sample.unity\x1a!plume/sample/common/vector2.proto\x1a!plume/sample/common/vector3.proto\x1a$plume/sample/common/quaternion.proto"\xe4\x03\n\x0bInputAction\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12#\n\rbinding_paths\x18\x02 \x03(\tR\x0c\x62indingPaths\x12\x37\n\x04type\x18\x03 \x01(\x0e\x32#.plume.sample.unity.InputActionTypeR\x04type\x12\x1a\n\x07\x62oolean\x18\x04 \x01(\x08H\x00R\x07\x62oolean\x12\x1a\n\x07integer\x18\x05 \x01(\x05H\x00R\x07integer\x12\x16\n\x05\x66loat\x18\x06 \x01(\x02H\x00R\x05\x66loat\x12\x18\n\x06\x64ouble\x18\x07 \x01(\x01H\x00R\x06\x64ouble\x12\x38\n\x07vector2\x18\x08 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x00R\x07vector2\x12\x38\n\x07vector3\x18\t \x01(\x0b\x32\x1c.plume.sample.common.Vector3H\x00R\x07vector3\x12\x41\n\nquaternion\x18\n \x01(\x0b\x32\x1f.plume.sample.common.QuaternionH\x00R\nquaternion\x12\x39\n\x06\x62utton\x18\x0b \x01(\x0b\x32\x1f.plume.sample.unity.ButtonValueH\x00R\x06\x62uttonB\x07\n\x05value"[\n\x0b\x42uttonValue\x12\x18\n\x07\x62oolean\x18\x01 \x01(\x08R\x07\x62oolean\x12\x14\n\x05\x66loat\x18\x02 \x01(\x02R\x05\x66loat\x12\x1c\n\tthreshold\x18\x03 \x01(\x02R\tthreshold*o\n\x0fInputActionType\x12\x1b\n\x17INPUT_ACTION_TYPE_VALUE\x10\x00\x12\x1c\n\x18INPUT_ACTION_TYPE_BUTTON\x10\x01\x12!\n\x1dINPUT_ACTION_TYPE_PASSTHROUGH\x10\x02\x42\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3'
-)
+from plume.sample.common import vector2_pb2 as plume_dot_sample_dot_common_dot_vector2__pb2
+from plume.sample.common import vector3_pb2 as plume_dot_sample_dot_common_dot_vector3__pb2
+from plume.sample.common import quaternion_pb2 as plume_dot_sample_dot_common_dot_quaternion__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%plume/sample/unity/input_action.proto\x12\x12plume.sample.unity\x1a!plume/sample/common/vector2.proto\x1a!plume/sample/common/vector3.proto\x1a$plume/sample/common/quaternion.proto\"\xe4\x03\n\x0bInputAction\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12#\n\rbinding_paths\x18\x02 \x03(\tR\x0c\x62indingPaths\x12\x37\n\x04type\x18\x03 \x01(\x0e\x32#.plume.sample.unity.InputActionTypeR\x04type\x12\x1a\n\x07\x62oolean\x18\x04 \x01(\x08H\x00R\x07\x62oolean\x12\x1a\n\x07integer\x18\x05 \x01(\x05H\x00R\x07integer\x12\x16\n\x05\x66loat\x18\x06 \x01(\x02H\x00R\x05\x66loat\x12\x18\n\x06\x64ouble\x18\x07 \x01(\x01H\x00R\x06\x64ouble\x12\x38\n\x07vector2\x18\x08 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x00R\x07vector2\x12\x38\n\x07vector3\x18\t \x01(\x0b\x32\x1c.plume.sample.common.Vector3H\x00R\x07vector3\x12\x41\n\nquaternion\x18\n \x01(\x0b\x32\x1f.plume.sample.common.QuaternionH\x00R\nquaternion\x12\x39\n\x06\x62utton\x18\x0b \x01(\x0b\x32\x1f.plume.sample.unity.ButtonValueH\x00R\x06\x62uttonB\x07\n\x05value\"[\n\x0b\x42uttonValue\x12\x18\n\x07\x62oolean\x18\x01 \x01(\x08R\x07\x62oolean\x12\x14\n\x05\x66loat\x18\x02 \x01(\x02R\x05\x66loat\x12\x1c\n\tthreshold\x18\x03 \x01(\x02R\tthreshold*o\n\x0fInputActionType\x12\x1b\n\x17INPUT_ACTION_TYPE_VALUE\x10\x00\x12\x1c\n\x18INPUT_ACTION_TYPE_BUTTON\x10\x01\x12!\n\x1dINPUT_ACTION_TYPE_PASSTHROUGH\x10\x02\x42\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.unity.input_action_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.input_action_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
-    _globals["_INPUTACTIONTYPE"]._serialized_start = 749
-    _globals["_INPUTACTIONTYPE"]._serialized_end = 860
-    _globals["_INPUTACTION"]._serialized_start = 170
-    _globals["_INPUTACTION"]._serialized_end = 654
-    _globals["_BUTTONVALUE"]._serialized_start = 656
-    _globals["_BUTTONVALUE"]._serialized_end = 747
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
+  _globals['_INPUTACTIONTYPE']._serialized_start=749
+  _globals['_INPUTACTIONTYPE']._serialized_end=860
+  _globals['_INPUTACTION']._serialized_start=170
+  _globals['_INPUTACTION']._serialized_end=654
+  _globals['_BUTTONVALUE']._serialized_start=656
+  _globals['_BUTTONVALUE']._serialized_end=747
 # @@protoc_insertion_point(module_scope)

@@ -4,56 +4,54 @@
 # source: plume/sample/unity/light.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
-
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    "",
-    "plume/sample/unity/light.proto",
+    '',
+    'plume/sample/unity/light.proto'
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1eplume/sample/unity/light.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\x1a#plume/sample/common/matrix4x4.proto\x1a!plume/sample/common/vector4.proto\x1a\x1fplume/sample/common/color.proto"T\n\x0bLightCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent"U\n\x0cLightDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent"\xc3\x13\n\x0bLightUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x1d\n\x07\x65nabled\x18\x02 \x01(\x08H\x00R\x07\x65nabled\x88\x01\x01\x12\x36\n\x04type\x18\x03 \x01(\x0e\x32\x1d.plume.sample.unity.LightTypeH\x01R\x04type\x88\x01\x01\x12\x39\n\x05shape\x18\x04 \x01(\x0e\x32\x1e.plume.sample.unity.LightShapeH\x02R\x05shape\x88\x01\x01\x12!\n\tintensity\x18\x05 \x01(\x02H\x03R\tintensity\x88\x01\x01\x12.\n\x10\x62ounce_intensity\x18\x06 \x01(\x02H\x04R\x0f\x62ounceIntensity\x88\x01\x01\x12\x19\n\x05range\x18\x07 \x01(\x02H\x05R\x05range\x88\x01\x01\x12\x35\n\x05\x63olor\x18\x08 \x01(\x0b\x32\x1a.plume.sample.common.ColorH\x06R\x05\x63olor\x88\x01\x01\x12\x30\n\x11\x63olor_temperature\x18\t \x01(\x02H\x07R\x10\x63olorTemperature\x88\x01\x01\x12\x37\n\x15use_color_temperature\x18\n \x01(\x08H\x08R\x13useColorTemperature\x88\x01\x01\x12"\n\nspot_angle\x18\x0b \x01(\x02H\tR\tspotAngle\x88\x01\x01\x12-\n\x10inner_spot_angle\x18\x0c \x01(\x02H\nR\x0einnerSpotAngle\x88\x01\x01\x12?\n\x07shadows\x18\r \x01(\x0e\x32 .plume.sample.unity.LightShadowsH\x0bR\x07shadows\x88\x01\x01\x12,\n\x0fshadow_strength\x18\x0e \x01(\x02H\x0cR\x0eshadowStrength\x88\x01\x01\x12[\n\x11shadow_resolution\x18\x0f \x01(\x0e\x32).plume.sample.unity.LightShadowResolutionH\rR\x10shadowResolution\x88\x01\x01\x12Y\n\x16shadow_matrix_override\x18\x10 \x01(\x0b\x32\x1e.plume.sample.common.Matrix4x4H\x0eR\x14shadowMatrixOverride\x88\x01\x01\x12@\n\x1ause_shadow_matrix_override\x18\x11 \x01(\x08H\x0fR\x17useShadowMatrixOverride\x88\x01\x01\x12$\n\x0bshadow_bias\x18\x12 \x01(\x02H\x10R\nshadowBias\x88\x01\x01\x12\x31\n\x12shadow_normal_bias\x18\x13 \x01(\x02H\x11R\x10shadowNormalBias\x88\x01\x01\x12/\n\x11shadow_near_plane\x18\x14 \x01(\x02H\x12R\x0fshadowNearPlane\x88\x01\x01\x12W\n\'use_view_frustum_for_shadow_caster_cull\x18\x15 \x01(\x08H\x13R!useViewFrustumForShadowCasterCull\x88\x01\x01\x12p\n\x1blayer_shadow_cull_distances\x18\x16 \x01(\x0b\x32,.plume.sample.unity.LayerShadowCullDistancesH\x14R\x18layerShadowCullDistances\x88\x01\x01\x12=\n\x18shadow_custom_resolution\x18\x17 \x01(\x05H\x15R\x16shadowCustomResolution\x88\x01\x01\x12g\n\x18light_shadow_caster_mode\x18\x18 \x01(\x0e\x32).plume.sample.unity.LightShadowCasterModeH\x16R\x15lightShadowCasterMode\x88\x01\x01\x12\x35\n\x14rendering_layer_mask\x18\x19 \x01(\x05H\x17R\x12renderingLayerMask\x88\x01\x01\x12&\n\x0c\x63ulling_mask\x18\x1a \x01(\x05H\x18R\x0b\x63ullingMask\x88\x01\x01\x12[\n\x18\x62ounding_sphere_override\x18\x1b \x01(\x0b\x32\x1c.plume.sample.common.Vector4H\x19R\x16\x62oundingSphereOverride\x88\x01\x01\x12\x44\n\x1cuse_bounding_sphere_override\x18\x1c \x01(\x08H\x1aR\x19useBoundingSphereOverride\x88\x01\x01\x12@\n\x06\x63ookie\x18\x1d \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x1bR\x06\x63ookie\x88\x01\x01\x12$\n\x0b\x63ookie_size\x18\x1e \x01(\x02H\x1cR\ncookieSize\x88\x01\x01\x12>\n\x05\x66lare\x18\x1f \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x1dR\x05\x66lare\x88\x01\x01\x42\n\n\x08_enabledB\x07\n\x05_typeB\x08\n\x06_shapeB\x0c\n\n_intensityB\x13\n\x11_bounce_intensityB\x08\n\x06_rangeB\x08\n\x06_colorB\x14\n\x12_color_temperatureB\x18\n\x16_use_color_temperatureB\r\n\x0b_spot_angleB\x13\n\x11_inner_spot_angleB\n\n\x08_shadowsB\x12\n\x10_shadow_strengthB\x14\n\x12_shadow_resolutionB\x19\n\x17_shadow_matrix_overrideB\x1d\n\x1b_use_shadow_matrix_overrideB\x0e\n\x0c_shadow_biasB\x15\n\x13_shadow_normal_biasB\x14\n\x12_shadow_near_planeB*\n(_use_view_frustum_for_shadow_caster_cullB\x1e\n\x1c_layer_shadow_cull_distancesB\x1b\n\x19_shadow_custom_resolutionB\x1b\n\x19_light_shadow_caster_modeB\x17\n\x15_rendering_layer_maskB\x0f\n\r_culling_maskB\x1b\n\x19_bounding_sphere_overrideB\x1f\n\x1d_use_bounding_sphere_overrideB\t\n\x07_cookieB\x0e\n\x0c_cookie_sizeB\x08\n\x06_flare"8\n\x18LayerShadowCullDistances\x12\x1c\n\tdistances\x18\x01 \x03(\x02R\tdistances*\x96\x01\n\tLightType\x12\x13\n\x0fLIGHT_TYPE_SPOT\x10\x00\x12\x1a\n\x16LIGHT_TYPE_DIRECTIONAL\x10\x01\x12\x14\n\x10LIGHT_TYPE_POINT\x10\x02\x12\x13\n\x0fLIGHT_TYPE_AREA\x10\x03\x12\x18\n\x14LIGHT_TYPE_RECTANGLE\x10\x04\x12\x13\n\x0fLIGHT_TYPE_DISC\x10\x05*P\n\nLightShape\x12\x14\n\x10LIGHT_SHAPE_CONE\x10\x00\x12\x17\n\x13LIGHT_SHAPE_PYRAMID\x10\x01\x12\x13\n\x0fLIGHT_SHAPE_BOX\x10\x02*\x99\x01\n\x15LightShadowCasterMode\x12$\n LIGHT_SHADOW_CASTER_MODE_DEFAULT\x10\x00\x12\x31\n-LIGHT_SHADOW_CASTER_MODE_NON_LIGHTMAPPED_ONLY\x10\x01\x12\'\n#LIGHT_SHADOW_CASTER_MODE_EVERYTHING\x10\x02*\xd8\x01\n\x15LightShadowResolution\x12\x31\n-LIGHT_SHADOW_RESOLUTION_FROM_QUALITY_SETTINGS\x10\x00\x12\x1f\n\x1bLIGHT_SHADOW_RESOLUTION_LOW\x10\x01\x12"\n\x1eLIGHT_SHADOW_RESOLUTION_MEDIUM\x10\x02\x12 \n\x1cLIGHT_SHADOW_RESOLUTION_HIGH\x10\x03\x12%\n!LIGHT_SHADOW_RESOLUTION_VERY_HIGH\x10\x04*V\n\x0cLightShadows\x12\x16\n\x12LIGHT_SHADOWS_NONE\x10\x00\x12\x16\n\x12LIGHT_SHADOWS_HARD\x10\x01\x12\x16\n\x12LIGHT_SHADOWS_SOFT\x10\x02\x42\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3'
-)
+from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
+from plume.sample.common import matrix4x4_pb2 as plume_dot_sample_dot_common_dot_matrix4x4__pb2
+from plume.sample.common import vector4_pb2 as plume_dot_sample_dot_common_dot_vector4__pb2
+from plume.sample.common import color_pb2 as plume_dot_sample_dot_common_dot_color__pb2
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1eplume/sample/unity/light.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\x1a#plume/sample/common/matrix4x4.proto\x1a!plume/sample/common/vector4.proto\x1a\x1fplume/sample/common/color.proto\"T\n\x0bLightCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"U\n\x0cLightDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xc3\x13\n\x0bLightUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x1d\n\x07\x65nabled\x18\x02 \x01(\x08H\x00R\x07\x65nabled\x88\x01\x01\x12\x36\n\x04type\x18\x03 \x01(\x0e\x32\x1d.plume.sample.unity.LightTypeH\x01R\x04type\x88\x01\x01\x12\x39\n\x05shape\x18\x04 \x01(\x0e\x32\x1e.plume.sample.unity.LightShapeH\x02R\x05shape\x88\x01\x01\x12!\n\tintensity\x18\x05 \x01(\x02H\x03R\tintensity\x88\x01\x01\x12.\n\x10\x62ounce_intensity\x18\x06 \x01(\x02H\x04R\x0f\x62ounceIntensity\x88\x01\x01\x12\x19\n\x05range\x18\x07 \x01(\x02H\x05R\x05range\x88\x01\x01\x12\x35\n\x05\x63olor\x18\x08 \x01(\x0b\x32\x1a.plume.sample.common.ColorH\x06R\x05\x63olor\x88\x01\x01\x12\x30\n\x11\x63olor_temperature\x18\t \x01(\x02H\x07R\x10\x63olorTemperature\x88\x01\x01\x12\x37\n\x15use_color_temperature\x18\n \x01(\x08H\x08R\x13useColorTemperature\x88\x01\x01\x12\"\n\nspot_angle\x18\x0b \x01(\x02H\tR\tspotAngle\x88\x01\x01\x12-\n\x10inner_spot_angle\x18\x0c \x01(\x02H\nR\x0einnerSpotAngle\x88\x01\x01\x12?\n\x07shadows\x18\r \x01(\x0e\x32 .plume.sample.unity.LightShadowsH\x0bR\x07shadows\x88\x01\x01\x12,\n\x0fshadow_strength\x18\x0e \x01(\x02H\x0cR\x0eshadowStrength\x88\x01\x01\x12[\n\x11shadow_resolution\x18\x0f \x01(\x0e\x32).plume.sample.unity.LightShadowResolutionH\rR\x10shadowResolution\x88\x01\x01\x12Y\n\x16shadow_matrix_override\x18\x10 \x01(\x0b\x32\x1e.plume.sample.common.Matrix4x4H\x0eR\x14shadowMatrixOverride\x88\x01\x01\x12@\n\x1ause_shadow_matrix_override\x18\x11 \x01(\x08H\x0fR\x17useShadowMatrixOverride\x88\x01\x01\x12$\n\x0bshadow_bias\x18\x12 \x01(\x02H\x10R\nshadowBias\x88\x01\x01\x12\x31\n\x12shadow_normal_bias\x18\x13 \x01(\x02H\x11R\x10shadowNormalBias\x88\x01\x01\x12/\n\x11shadow_near_plane\x18\x14 \x01(\x02H\x12R\x0fshadowNearPlane\x88\x01\x01\x12W\n\'use_view_frustum_for_shadow_caster_cull\x18\x15 \x01(\x08H\x13R!useViewFrustumForShadowCasterCull\x88\x01\x01\x12p\n\x1blayer_shadow_cull_distances\x18\x16 \x01(\x0b\x32,.plume.sample.unity.LayerShadowCullDistancesH\x14R\x18layerShadowCullDistances\x88\x01\x01\x12=\n\x18shadow_custom_resolution\x18\x17 \x01(\x05H\x15R\x16shadowCustomResolution\x88\x01\x01\x12g\n\x18light_shadow_caster_mode\x18\x18 \x01(\x0e\x32).plume.sample.unity.LightShadowCasterModeH\x16R\x15lightShadowCasterMode\x88\x01\x01\x12\x35\n\x14rendering_layer_mask\x18\x19 \x01(\x05H\x17R\x12renderingLayerMask\x88\x01\x01\x12&\n\x0c\x63ulling_mask\x18\x1a \x01(\x05H\x18R\x0b\x63ullingMask\x88\x01\x01\x12[\n\x18\x62ounding_sphere_override\x18\x1b \x01(\x0b\x32\x1c.plume.sample.common.Vector4H\x19R\x16\x62oundingSphereOverride\x88\x01\x01\x12\x44\n\x1cuse_bounding_sphere_override\x18\x1c \x01(\x08H\x1aR\x19useBoundingSphereOverride\x88\x01\x01\x12@\n\x06\x63ookie\x18\x1d \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x1bR\x06\x63ookie\x88\x01\x01\x12$\n\x0b\x63ookie_size\x18\x1e \x01(\x02H\x1cR\ncookieSize\x88\x01\x01\x12>\n\x05\x66lare\x18\x1f \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x1dR\x05\x66lare\x88\x01\x01\x42\n\n\x08_enabledB\x07\n\x05_typeB\x08\n\x06_shapeB\x0c\n\n_intensityB\x13\n\x11_bounce_intensityB\x08\n\x06_rangeB\x08\n\x06_colorB\x14\n\x12_color_temperatureB\x18\n\x16_use_color_temperatureB\r\n\x0b_spot_angleB\x13\n\x11_inner_spot_angleB\n\n\x08_shadowsB\x12\n\x10_shadow_strengthB\x14\n\x12_shadow_resolutionB\x19\n\x17_shadow_matrix_overrideB\x1d\n\x1b_use_shadow_matrix_overrideB\x0e\n\x0c_shadow_biasB\x15\n\x13_shadow_normal_biasB\x14\n\x12_shadow_near_planeB*\n(_use_view_frustum_for_shadow_caster_cullB\x1e\n\x1c_layer_shadow_cull_distancesB\x1b\n\x19_shadow_custom_resolutionB\x1b\n\x19_light_shadow_caster_modeB\x17\n\x15_rendering_layer_maskB\x0f\n\r_culling_maskB\x1b\n\x19_bounding_sphere_overrideB\x1f\n\x1d_use_bounding_sphere_overrideB\t\n\x07_cookieB\x0e\n\x0c_cookie_sizeB\x08\n\x06_flare\"8\n\x18LayerShadowCullDistances\x12\x1c\n\tdistances\x18\x01 \x03(\x02R\tdistances*\x96\x01\n\tLightType\x12\x13\n\x0fLIGHT_TYPE_SPOT\x10\x00\x12\x1a\n\x16LIGHT_TYPE_DIRECTIONAL\x10\x01\x12\x14\n\x10LIGHT_TYPE_POINT\x10\x02\x12\x13\n\x0fLIGHT_TYPE_AREA\x10\x03\x12\x18\n\x14LIGHT_TYPE_RECTANGLE\x10\x04\x12\x13\n\x0fLIGHT_TYPE_DISC\x10\x05*P\n\nLightShape\x12\x14\n\x10LIGHT_SHAPE_CONE\x10\x00\x12\x17\n\x13LIGHT_SHAPE_PYRAMID\x10\x01\x12\x13\n\x0fLIGHT_SHAPE_BOX\x10\x02*\x99\x01\n\x15LightShadowCasterMode\x12$\n LIGHT_SHADOW_CASTER_MODE_DEFAULT\x10\x00\x12\x31\n-LIGHT_SHADOW_CASTER_MODE_NON_LIGHTMAPPED_ONLY\x10\x01\x12\'\n#LIGHT_SHADOW_CASTER_MODE_EVERYTHING\x10\x02*\xd8\x01\n\x15LightShadowResolution\x12\x31\n-LIGHT_SHADOW_RESOLUTION_FROM_QUALITY_SETTINGS\x10\x00\x12\x1f\n\x1bLIGHT_SHADOW_RESOLUTION_LOW\x10\x01\x12\"\n\x1eLIGHT_SHADOW_RESOLUTION_MEDIUM\x10\x02\x12 \n\x1cLIGHT_SHADOW_RESOLUTION_HIGH\x10\x03\x12%\n!LIGHT_SHADOW_RESOLUTION_VERY_HIGH\x10\x04*V\n\x0cLightShadows\x12\x16\n\x12LIGHT_SHADOWS_NONE\x10\x00\x12\x16\n\x12LIGHT_SHADOWS_HARD\x10\x01\x12\x16\n\x12LIGHT_SHADOWS_SOFT\x10\x02\x42\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(
-    DESCRIPTOR, "plume.sample.unity.light_pb2", _globals
-)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.light_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-    _globals["DESCRIPTOR"]._loaded_options = None
-    _globals[
-        "DESCRIPTOR"
-    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
-    _globals["_LIGHTTYPE"]._serialized_start = 2931
-    _globals["_LIGHTTYPE"]._serialized_end = 3081
-    _globals["_LIGHTSHAPE"]._serialized_start = 3083
-    _globals["_LIGHTSHAPE"]._serialized_end = 3163
-    _globals["_LIGHTSHADOWCASTERMODE"]._serialized_start = 3166
-    _globals["_LIGHTSHADOWCASTERMODE"]._serialized_end = 3319
-    _globals["_LIGHTSHADOWRESOLUTION"]._serialized_start = 3322
-    _globals["_LIGHTSHADOWRESOLUTION"]._serialized_end = 3538
-    _globals["_LIGHTSHADOWS"]._serialized_start = 3540
-    _globals["_LIGHTSHADOWS"]._serialized_end = 3626
-    _globals["_LIGHTCREATE"]._serialized_start = 197
-    _globals["_LIGHTCREATE"]._serialized_end = 281
-    _globals["_LIGHTDESTROY"]._serialized_start = 283
-    _globals["_LIGHTDESTROY"]._serialized_end = 368
-    _globals["_LIGHTUPDATE"]._serialized_start = 371
-    _globals["_LIGHTUPDATE"]._serialized_end = 2870
-    _globals["_LAYERSHADOWCULLDISTANCES"]._serialized_start = 2872
-    _globals["_LAYERSHADOWCULLDISTANCES"]._serialized_end = 2928
+  _globals['DESCRIPTOR']._loaded_options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
+  _globals['_LIGHTTYPE']._serialized_start=2931
+  _globals['_LIGHTTYPE']._serialized_end=3081
+  _globals['_LIGHTSHAPE']._serialized_start=3083
+  _globals['_LIGHTSHAPE']._serialized_end=3163
+  _globals['_LIGHTSHADOWCASTERMODE']._serialized_start=3166
+  _globals['_LIGHTSHADOWCASTERMODE']._serialized_end=3319
+  _globals['_LIGHTSHADOWRESOLUTION']._serialized_start=3322
+  _globals['_LIGHTSHADOWRESOLUTION']._serialized_end=3538
+  _globals['_LIGHTSHADOWS']._serialized_start=3540
+  _globals['_LIGHTSHADOWS']._serialized_end=3626
+  _globals['_LIGHTCREATE']._serialized_start=197
+  _globals['_LIGHTCREATE']._serialized_end=281
+  _globals['_LIGHTDESTROY']._serialized_start=283
+  _globals['_LIGHTDESTROY']._serialized_end=368
+  _globals['_LIGHTUPDATE']._serialized_start=371
+  _globals['_LIGHTUPDATE']._serialized_end=2870
+  _globals['_LAYERSHADOWCULLDISTANCES']._serialized_start=2872
+  _globals['_LAYERSHADOWCULLDISTANCES']._serialized_end=2928
 # @@protoc_insertion_point(module_scope)
