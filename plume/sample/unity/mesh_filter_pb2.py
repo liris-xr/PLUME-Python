@@ -4,39 +4,44 @@
 # source: plume/sample/unity/mesh_filter.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/mesh_filter.proto'
+    "",
+    "plume/sample/unity/mesh_filter.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n$plume/sample/unity/mesh_filter.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\"Y\n\x10MeshFilterCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"Z\n\x11MeshFilterDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xa0\x01\n\x10MeshFilterUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12<\n\x04mesh\x18\x02 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x00R\x04mesh\x88\x01\x01\x42\x07\n\x05_meshB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n$plume/sample/unity/mesh_filter.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\"Y\n\x10MeshFilterCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"Z\n\x11MeshFilterDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xa0\x01\n\x10MeshFilterUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12<\n\x04mesh\x18\x02 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x00R\x04mesh\x88\x01\x01\x42\x07\n\x05_meshB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.mesh_filter_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.mesh_filter_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
-  _globals['_MESHFILTERCREATE']._serialized_start=98
-  _globals['_MESHFILTERCREATE']._serialized_end=187
-  _globals['_MESHFILTERDESTROY']._serialized_start=189
-  _globals['_MESHFILTERDESTROY']._serialized_end=279
-  _globals['_MESHFILTERUPDATE']._serialized_start=282
-  _globals['_MESHFILTERUPDATE']._serialized_end=442
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
+    _globals["_MESHFILTERCREATE"]._serialized_start = 98
+    _globals["_MESHFILTERCREATE"]._serialized_end = 187
+    _globals["_MESHFILTERDESTROY"]._serialized_start = 189
+    _globals["_MESHFILTERDESTROY"]._serialized_end = 279
+    _globals["_MESHFILTERUPDATE"]._serialized_start = 282
+    _globals["_MESHFILTERUPDATE"]._serialized_end = 442
 # @@protoc_insertion_point(module_scope)

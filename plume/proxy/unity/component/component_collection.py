@@ -20,6 +20,7 @@ if TYPE_CHECKING:
 TU = TypeVar("TU", bound="Component")
 TV = TypeVar("TV", bound="Component")
 
+
 class ComponentCollection(Collection[TU], Generic[TU]):
     _guid_to_component: dict[UUID, Component]
     _type_to_components: dict[Type, List[Component]]
@@ -31,7 +32,9 @@ class ComponentCollection(Collection[TU], Generic[TU]):
 
         self._type_to_components = {}
         for component in self:
-            self._type_to_components.setdefault(type(component), []).append(component)
+            self._type_to_components.setdefault(type(component), []).append(
+                component
+            )
 
     def _remove_by_guid(self, guid: Union[str, UUID]) -> bool:
         try:
@@ -53,7 +56,9 @@ class ComponentCollection(Collection[TU], Generic[TU]):
         if not super()._add(component):
             return False
         self._guid_to_component[component.guid] = component
-        self._type_to_components.setdefault(type(component), []).append(component)
+        self._type_to_components.setdefault(type(component), []).append(
+            component
+        )
         return True
 
     def with_guid(self, guid: Union[str, UUID]) -> TU:
@@ -62,7 +67,7 @@ class ComponentCollection(Collection[TU], Generic[TU]):
         except ValueError:
             return None
         return self._guid_to_component.get(guid, None)
-    
+
     def first_with_type(self, component_type: Type[TV]) -> Optional[TV]:
         components = self._type_to_components.get(component_type, [])
         if len(components) == 0:
@@ -73,8 +78,10 @@ class ComponentCollection(Collection[TU], Generic[TU]):
         return ComponentCollection[TV](
             self._type_to_components.get(component_type, [])
         )
-    
-    def with_game_object(self, game_object: GameObject) -> ComponentCollection[TU]:
+
+    def with_game_object(
+        self, game_object: GameObject
+    ) -> ComponentCollection[TU]:
         game_object_guid = game_object.guid
         return ComponentCollection(
             [

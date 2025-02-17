@@ -4,48 +4,52 @@
 # source: plume/sample/unity/ui/text.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/ui/text.proto'
+    "",
+    "plume/sample/unity/ui/text.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
-from plume.sample.common import color_pb2 as plume_dot_sample_dot_common_dot_color__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n plume/sample/unity/ui/text.proto\x12\x15plume.sample.unity.ui\x1a$plume/sample/unity/identifiers.proto\x1a\x1fplume/sample/common/color.proto\"S\n\nTextCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"T\n\x0bTextDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xff\x08\n\nTextUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x17\n\x04text\x18\x02 \x01(\tH\x00R\x04text\x88\x01\x01\x12<\n\x04\x66ont\x18\x03 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x01R\x04\x66ont\x88\x01\x01\x12\x44\n\nfont_style\x18\x04 \x01(\x0e\x32 .plume.sample.unity.ui.FontStyleH\x02R\tfontStyle\x88\x01\x01\x12 \n\tfont_size\x18\x05 \x01(\x05H\x03R\x08\x66ontSize\x88\x01\x01\x12\x35\n\x05\x63olor\x18\x06 \x01(\x0b\x32\x1a.plume.sample.common.ColorH\x04R\x05\x63olor\x88\x01\x01\x12&\n\x0cline_spacing\x18\x07 \x01(\x02H\x05R\x0blineSpacing\x88\x01\x01\x12/\n\x11support_rich_text\x18\x08 \x01(\x08H\x06R\x0fsupportRichText\x88\x01\x01\x12\x44\n\talignment\x18\t \x01(\x0e\x32!.plume.sample.unity.ui.TextAnchorH\x07R\talignment\x88\x01\x01\x12/\n\x11\x61lign_by_geometry\x18\n \x01(\x08H\x08R\x0f\x61lignByGeometry\x88\x01\x01\x12_\n\x13horizontal_overflow\x18\x0b \x01(\x0e\x32).plume.sample.unity.ui.HorizontalWrapModeH\tR\x12horizontalOverflow\x88\x01\x01\x12Y\n\x11vertical_overflow\x18\x0c \x01(\x0e\x32\'.plume.sample.unity.ui.VerticalWrapModeH\nR\x10verticalOverflow\x88\x01\x01\x12;\n\x18resize_text_for_best_fit\x18\r \x01(\x08H\x0bR\x14resizeTextForBestFit\x88\x01\x01\x12\x34\n\x14resize_text_min_size\x18\x0e \x01(\x05H\x0cR\x11resizeTextMinSize\x88\x01\x01\x12\x34\n\x14resize_text_max_size\x18\x0f \x01(\x05H\rR\x11resizeTextMaxSize\x88\x01\x01\x42\x07\n\x05_textB\x07\n\x05_fontB\r\n\x0b_font_styleB\x0c\n\n_font_sizeB\x08\n\x06_colorB\x0f\n\r_line_spacingB\x14\n\x12_support_rich_textB\x0c\n\n_alignmentB\x14\n\x12_align_by_geometryB\x16\n\x14_horizontal_overflowB\x14\n\x12_vertical_overflowB\x1b\n\x19_resize_text_for_best_fitB\x17\n\x15_resize_text_min_sizeB\x17\n\x15_resize_text_max_size*V\n\x12HorizontalWrapMode\x12\x1d\n\x19HORIZONTAL_WRAP_MODE_WRAP\x10\x00\x12!\n\x1dHORIZONTAL_WRAP_MODE_OVERFLOW\x10\x01*T\n\x10VerticalWrapMode\x12\x1f\n\x1bVERTICAL_WRAP_MODE_TRUNCATE\x10\x00\x12\x1f\n\x1bVERTICAL_WRAP_MODE_OVERFLOW\x10\x01*\x94\x02\n\nTextAnchor\x12\x1a\n\x16TEXT_ANCHOR_UPPER_LEFT\x10\x00\x12\x1c\n\x18TEXT_ANCHOR_UPPER_CENTER\x10\x01\x12\x1b\n\x17TEXT_ANCHOR_UPPER_RIGHT\x10\x02\x12\x1b\n\x17TEXT_ANCHOR_MIDDLE_LEFT\x10\x03\x12\x1d\n\x19TEXT_ANCHOR_MIDDLE_CENTER\x10\x04\x12\x1c\n\x18TEXT_ANCHOR_MIDDLE_RIGHT\x10\x05\x12\x1a\n\x16TEXT_ANCHOR_LOWER_LEFT\x10\x06\x12\x1c\n\x18TEXT_ANCHOR_LOWER_CENTER\x10\x07\x12\x1b\n\x17TEXT_ANCHOR_LOWER_RIGHT\x10\x08*n\n\tFontStyle\x12\x15\n\x11\x46ONT_STYLE_NORMAL\x10\x00\x12\x13\n\x0f\x46ONT_STYLE_BOLD\x10\x01\x12\x15\n\x11\x46ONT_STYLE_ITALIC\x10\x02\x12\x1e\n\x1a\x46ONT_STYLE_BOLD_AND_ITALIC\x10\x03\x42\x18\xaa\x02\x15PLUME.Sample.Unity.UIb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n plume/sample/unity/ui/text.proto\x12\x15plume.sample.unity.ui\x1a$plume/sample/unity/identifiers.proto\x1a\x1fplume/sample/common/color.proto\"S\n\nTextCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"T\n\x0bTextDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xff\x08\n\nTextUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x17\n\x04text\x18\x02 \x01(\tH\x00R\x04text\x88\x01\x01\x12<\n\x04\x66ont\x18\x03 \x01(\x0b\x32#.plume.sample.unity.AssetIdentifierH\x01R\x04\x66ont\x88\x01\x01\x12\x44\n\nfont_style\x18\x04 \x01(\x0e\x32 .plume.sample.unity.ui.FontStyleH\x02R\tfontStyle\x88\x01\x01\x12 \n\tfont_size\x18\x05 \x01(\x05H\x03R\x08\x66ontSize\x88\x01\x01\x12\x35\n\x05\x63olor\x18\x06 \x01(\x0b\x32\x1a.plume.sample.common.ColorH\x04R\x05\x63olor\x88\x01\x01\x12&\n\x0cline_spacing\x18\x07 \x01(\x02H\x05R\x0blineSpacing\x88\x01\x01\x12/\n\x11support_rich_text\x18\x08 \x01(\x08H\x06R\x0fsupportRichText\x88\x01\x01\x12\x44\n\talignment\x18\t \x01(\x0e\x32!.plume.sample.unity.ui.TextAnchorH\x07R\talignment\x88\x01\x01\x12/\n\x11\x61lign_by_geometry\x18\n \x01(\x08H\x08R\x0f\x61lignByGeometry\x88\x01\x01\x12_\n\x13horizontal_overflow\x18\x0b \x01(\x0e\x32).plume.sample.unity.ui.HorizontalWrapModeH\tR\x12horizontalOverflow\x88\x01\x01\x12Y\n\x11vertical_overflow\x18\x0c \x01(\x0e\x32'.plume.sample.unity.ui.VerticalWrapModeH\nR\x10verticalOverflow\x88\x01\x01\x12;\n\x18resize_text_for_best_fit\x18\r \x01(\x08H\x0bR\x14resizeTextForBestFit\x88\x01\x01\x12\x34\n\x14resize_text_min_size\x18\x0e \x01(\x05H\x0cR\x11resizeTextMinSize\x88\x01\x01\x12\x34\n\x14resize_text_max_size\x18\x0f \x01(\x05H\rR\x11resizeTextMaxSize\x88\x01\x01\x42\x07\n\x05_textB\x07\n\x05_fontB\r\n\x0b_font_styleB\x0c\n\n_font_sizeB\x08\n\x06_colorB\x0f\n\r_line_spacingB\x14\n\x12_support_rich_textB\x0c\n\n_alignmentB\x14\n\x12_align_by_geometryB\x16\n\x14_horizontal_overflowB\x14\n\x12_vertical_overflowB\x1b\n\x19_resize_text_for_best_fitB\x17\n\x15_resize_text_min_sizeB\x17\n\x15_resize_text_max_size*V\n\x12HorizontalWrapMode\x12\x1d\n\x19HORIZONTAL_WRAP_MODE_WRAP\x10\x00\x12!\n\x1dHORIZONTAL_WRAP_MODE_OVERFLOW\x10\x01*T\n\x10VerticalWrapMode\x12\x1f\n\x1bVERTICAL_WRAP_MODE_TRUNCATE\x10\x00\x12\x1f\n\x1bVERTICAL_WRAP_MODE_OVERFLOW\x10\x01*\x94\x02\n\nTextAnchor\x12\x1a\n\x16TEXT_ANCHOR_UPPER_LEFT\x10\x00\x12\x1c\n\x18TEXT_ANCHOR_UPPER_CENTER\x10\x01\x12\x1b\n\x17TEXT_ANCHOR_UPPER_RIGHT\x10\x02\x12\x1b\n\x17TEXT_ANCHOR_MIDDLE_LEFT\x10\x03\x12\x1d\n\x19TEXT_ANCHOR_MIDDLE_CENTER\x10\x04\x12\x1c\n\x18TEXT_ANCHOR_MIDDLE_RIGHT\x10\x05\x12\x1a\n\x16TEXT_ANCHOR_LOWER_LEFT\x10\x06\x12\x1c\n\x18TEXT_ANCHOR_LOWER_CENTER\x10\x07\x12\x1b\n\x17TEXT_ANCHOR_LOWER_RIGHT\x10\x08*n\n\tFontStyle\x12\x15\n\x11\x46ONT_STYLE_NORMAL\x10\x00\x12\x13\n\x0f\x46ONT_STYLE_BOLD\x10\x01\x12\x15\n\x11\x46ONT_STYLE_ITALIC\x10\x02\x12\x1e\n\x1a\x46ONT_STYLE_BOLD_AND_ITALIC\x10\x03\x42\x18\xaa\x02\x15PLUME.Sample.Unity.UIb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.ui.text_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.ui.text_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\025PLUME.Sample.Unity.UI'
-  _globals['_HORIZONTALWRAPMODE']._serialized_start=1455
-  _globals['_HORIZONTALWRAPMODE']._serialized_end=1541
-  _globals['_VERTICALWRAPMODE']._serialized_start=1543
-  _globals['_VERTICALWRAPMODE']._serialized_end=1627
-  _globals['_TEXTANCHOR']._serialized_start=1630
-  _globals['_TEXTANCHOR']._serialized_end=1906
-  _globals['_FONTSTYLE']._serialized_start=1908
-  _globals['_FONTSTYLE']._serialized_end=2018
-  _globals['_TEXTCREATE']._serialized_start=130
-  _globals['_TEXTCREATE']._serialized_end=213
-  _globals['_TEXTDESTROY']._serialized_start=215
-  _globals['_TEXTDESTROY']._serialized_end=299
-  _globals['_TEXTUPDATE']._serialized_start=302
-  _globals['_TEXTUPDATE']._serialized_end=1453
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\025PLUME.Sample.Unity.UI"
+    _globals["_HORIZONTALWRAPMODE"]._serialized_start = 1455
+    _globals["_HORIZONTALWRAPMODE"]._serialized_end = 1541
+    _globals["_VERTICALWRAPMODE"]._serialized_start = 1543
+    _globals["_VERTICALWRAPMODE"]._serialized_end = 1627
+    _globals["_TEXTANCHOR"]._serialized_start = 1630
+    _globals["_TEXTANCHOR"]._serialized_end = 1906
+    _globals["_FONTSTYLE"]._serialized_start = 1908
+    _globals["_FONTSTYLE"]._serialized_end = 2018
+    _globals["_TEXTCREATE"]._serialized_start = 130
+    _globals["_TEXTCREATE"]._serialized_end = 213
+    _globals["_TEXTDESTROY"]._serialized_start = 215
+    _globals["_TEXTDESTROY"]._serialized_end = 299
+    _globals["_TEXTUPDATE"]._serialized_start = 302
+    _globals["_TEXTUPDATE"]._serialized_end = 1453
 # @@protoc_insertion_point(module_scope)

@@ -4,39 +4,42 @@
 # source: plume/sample/unity/renderer.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/renderer.proto'
+    "",
+    "plume/sample/unity/renderer.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
-from plume.sample.common import bounds_pb2 as plume_dot_sample_dot_common_dot_bounds__pb2
-from plume.sample.common import vector4_pb2 as plume_dot_sample_dot_common_dot_vector4__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!plume/sample/unity/renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\x1a plume/sample/common/bounds.proto\x1a!plume/sample/common/vector4.proto\"\x8f\x06\n\x0eRendererUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x1d\n\x07\x65nabled\x18\x02 \x01(\x08H\x00R\x07\x65nabled\x88\x01\x01\x12O\n\tmaterials\x18\x03 \x01(\x0b\x32,.plume.sample.unity.RendererUpdate.MaterialsH\x01R\tmaterials\x88\x01\x01\x12\x43\n\x0clocal_bounds\x18\x04 \x01(\x0b\x32\x1b.plume.sample.common.BoundsH\x02R\x0blocalBounds\x88\x01\x01\x12*\n\x0elightmap_index\x18\x05 \x01(\x05H\x03R\rlightmapIndex\x88\x01\x01\x12U\n\x15lightmap_scale_offset\x18\x06 \x01(\x0b\x32\x1c.plume.sample.common.Vector4H\x04R\x13lightmapScaleOffset\x88\x01\x01\x12;\n\x17realtime_lightmap_index\x18\x07 \x01(\x05H\x05R\x15realtimeLightmapIndex\x88\x01\x01\x12\x66\n\x1erealtime_lightmap_scale_offset\x18\x08 \x01(\x0b\x32\x1c.plume.sample.common.Vector4H\x06R\x1brealtimeLightmapScaleOffset\x88\x01\x01\x1a\x42\n\tMaterials\x12\x35\n\x03ids\x18\x01 \x03(\x0b\x32#.plume.sample.unity.AssetIdentifierR\x03idsB\n\n\x08_enabledB\x0c\n\n_materialsB\x0f\n\r_local_boundsB\x11\n\x0f_lightmap_indexB\x18\n\x16_lightmap_scale_offsetB\x1a\n\x18_realtime_lightmap_indexB!\n\x1f_realtime_lightmap_scale_offsetB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n!plume/sample/unity/renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\x1a plume/sample/common/bounds.proto\x1a!plume/sample/common/vector4.proto\"\x8f\x06\n\x0eRendererUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x1d\n\x07\x65nabled\x18\x02 \x01(\x08H\x00R\x07\x65nabled\x88\x01\x01\x12O\n\tmaterials\x18\x03 \x01(\x0b\x32,.plume.sample.unity.RendererUpdate.MaterialsH\x01R\tmaterials\x88\x01\x01\x12\x43\n\x0clocal_bounds\x18\x04 \x01(\x0b\x32\x1b.plume.sample.common.BoundsH\x02R\x0blocalBounds\x88\x01\x01\x12*\n\x0elightmap_index\x18\x05 \x01(\x05H\x03R\rlightmapIndex\x88\x01\x01\x12U\n\x15lightmap_scale_offset\x18\x06 \x01(\x0b\x32\x1c.plume.sample.common.Vector4H\x04R\x13lightmapScaleOffset\x88\x01\x01\x12;\n\x17realtime_lightmap_index\x18\x07 \x01(\x05H\x05R\x15realtimeLightmapIndex\x88\x01\x01\x12\x66\n\x1erealtime_lightmap_scale_offset\x18\x08 \x01(\x0b\x32\x1c.plume.sample.common.Vector4H\x06R\x1brealtimeLightmapScaleOffset\x88\x01\x01\x1a\x42\n\tMaterials\x12\x35\n\x03ids\x18\x01 \x03(\x0b\x32#.plume.sample.unity.AssetIdentifierR\x03idsB\n\n\x08_enabledB\x0c\n\n_materialsB\x0f\n\r_local_boundsB\x11\n\x0f_lightmap_indexB\x18\n\x16_lightmap_scale_offsetB\x1a\n\x18_realtime_lightmap_indexB!\n\x1f_realtime_lightmap_scale_offsetB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.renderer_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.renderer_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
-  _globals['_RENDERERUPDATE']._serialized_start=165
-  _globals['_RENDERERUPDATE']._serialized_end=948
-  _globals['_RENDERERUPDATE_MATERIALS']._serialized_start=731
-  _globals['_RENDERERUPDATE_MATERIALS']._serialized_end=797
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
+    _globals["_RENDERERUPDATE"]._serialized_start = 165
+    _globals["_RENDERERUPDATE"]._serialized_end = 948
+    _globals["_RENDERERUPDATE_MATERIALS"]._serialized_start = 731
+    _globals["_RENDERERUPDATE_MATERIALS"]._serialized_end = 797
 # @@protoc_insertion_point(module_scope)

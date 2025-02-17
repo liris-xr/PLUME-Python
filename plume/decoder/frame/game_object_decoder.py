@@ -30,9 +30,13 @@ class GameObjectUpdateDecoder(FrameDataDecoder[GameObjectUpdate]):
         if data.HasField("name"):
             scene = game_object.scene
             prev_name = game_object._name
-            scene.game_objects._name_to_game_objects.get(prev_name, []).remove(game_object)
+            scene.game_objects._name_to_game_objects.get(prev_name, []).remove(
+                game_object
+            )
             game_object._name = data.name
-            scene.game_objects._name_to_game_objects.setdefault(data.name, []).append(game_object)
+            scene.game_objects._name_to_game_objects.setdefault(
+                data.name, []
+            ).append(game_object)
 
         if data.HasField("tag"):
             game_object._tag = data.tag

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Union, Iterator, Optional, Type, Dict, Sequence
+from typing import List, Union, Optional, Type, Dict, Sequence
 from plume.proxy.unity.game_object import GameObject
 from plume.proxy.unity.component import Component
 from plume.proxy.collection import Collection
@@ -55,8 +55,9 @@ class GameObjectCollection(Collection[GameObject]):
             }
         )
 
-    def with_guids(self, guids: Sequence[Union[str, UUID]]) -> GameObjectCollection:
-
+    def with_guids(
+        self, guids: Sequence[Union[str, UUID]]
+    ) -> GameObjectCollection:
         # Ensure unique guids
         if not isinstance(guids, set):
             guids = set(guids)
@@ -79,7 +80,6 @@ class GameObjectCollection(Collection[GameObject]):
         return gameobjects[0]
 
     def with_names(self, names: Sequence[str]) -> GameObjectCollection:
-
         # Ensure unique names
         if not isinstance(names, set):
             names = set(names)

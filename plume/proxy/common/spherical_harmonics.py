@@ -4,12 +4,14 @@ from dataclasses import dataclass
 
 from plume.proxy.common.vector4 import Vector4
 
+
 @dataclass(frozen=True)
 class SphericalHarmonicsL1:
     sh_ar: Vector4 = Vector4()
     sh_ag: Vector4 = Vector4()
     sh_ab: Vector4 = Vector4()
-    
+
+
 @dataclass(frozen=True)
 class SphericalHarmonicsL2:
     shr0: float = 0.0

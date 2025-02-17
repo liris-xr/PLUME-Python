@@ -4,36 +4,42 @@
 # source: plume/sample/unity/settings/audio_settings.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/settings/audio_settings.proto'
+    "",
+    "plume/sample/unity/settings/audio_settings.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0plume/sample/unity/settings/audio_settings.proto\x12\x1bplume.sample.unity.settings\"\xd1\x01\n\x13\x41udioSettingsUpdate\x12P\n\x0cspeaker_mode\x18\x01 \x01(\x0e\x32(.plume.sample.unity.settings.SpeakerModeH\x00R\x0bspeakerMode\x88\x01\x01\x12;\n\x17spatializer_plugin_name\x18\x02 \x01(\tH\x01R\x15spatializerPluginName\x88\x01\x01\x42\x0f\n\r_speaker_modeB\x1a\n\x18_spatializer_plugin_name*\xd0\x01\n\x0bSpeakerMode\x12\x15\n\x11SPEAKER_MODE_MONO\x10\x00\x12\x17\n\x13SPEAKER_MODE_STEREO\x10\x01\x12\x15\n\x11SPEAKER_MODE_QUAD\x10\x02\x12\x19\n\x15SPEAKER_MODE_SURROUND\x10\x03\x12!\n\x1dSPEAKER_MODE_SURROUND_5POINT1\x10\x04\x12!\n\x1dSPEAKER_MODE_SURROUND_7POINT1\x10\x05\x12\x19\n\x15SPEAKER_MODE_PROLOGIC\x10\x06\x42\x1e\xaa\x02\x1bPLUME.Sample.Unity.Settingsb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n0plume/sample/unity/settings/audio_settings.proto\x12\x1bplume.sample.unity.settings"\xd1\x01\n\x13\x41udioSettingsUpdate\x12P\n\x0cspeaker_mode\x18\x01 \x01(\x0e\x32(.plume.sample.unity.settings.SpeakerModeH\x00R\x0bspeakerMode\x88\x01\x01\x12;\n\x17spatializer_plugin_name\x18\x02 \x01(\tH\x01R\x15spatializerPluginName\x88\x01\x01\x42\x0f\n\r_speaker_modeB\x1a\n\x18_spatializer_plugin_name*\xd0\x01\n\x0bSpeakerMode\x12\x15\n\x11SPEAKER_MODE_MONO\x10\x00\x12\x17\n\x13SPEAKER_MODE_STEREO\x10\x01\x12\x15\n\x11SPEAKER_MODE_QUAD\x10\x02\x12\x19\n\x15SPEAKER_MODE_SURROUND\x10\x03\x12!\n\x1dSPEAKER_MODE_SURROUND_5POINT1\x10\x04\x12!\n\x1dSPEAKER_MODE_SURROUND_7POINT1\x10\x05\x12\x19\n\x15SPEAKER_MODE_PROLOGIC\x10\x06\x42\x1e\xaa\x02\x1bPLUME.Sample.Unity.Settingsb\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.settings.audio_settings_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.settings.audio_settings_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\033PLUME.Sample.Unity.Settings'
-  _globals['_SPEAKERMODE']._serialized_start=294
-  _globals['_SPEAKERMODE']._serialized_end=502
-  _globals['_AUDIOSETTINGSUPDATE']._serialized_start=82
-  _globals['_AUDIOSETTINGSUPDATE']._serialized_end=291
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\033PLUME.Sample.Unity.Settings"
+    _globals["_SPEAKERMODE"]._serialized_start = 294
+    _globals["_SPEAKERMODE"]._serialized_end = 502
+    _globals["_AUDIOSETTINGSUPDATE"]._serialized_start = 82
+    _globals["_AUDIOSETTINGSUPDATE"]._serialized_end = 291
 # @@protoc_insertion_point(module_scope)

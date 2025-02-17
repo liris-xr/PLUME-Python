@@ -4,8 +4,8 @@ from plume.proxy.common.marker import Marker
 
 from typing import Iterator
 
-class MarkerDecoder(Iterator[Marker]):
 
+class MarkerDecoder(Iterator[Marker]):
     _stream_reader: SampleStreamReader
 
     def __init__(self, filepath: str):
@@ -21,4 +21,3 @@ class MarkerDecoder(Iterator[Marker]):
             raise StopIteration
 
         return Marker(label=marker_sample.label, time_ns=time_ns)
-    

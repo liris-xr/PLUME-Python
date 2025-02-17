@@ -30,7 +30,6 @@ TV = TypeVar("TV", bound=Component)
 
 
 class FrameDecoder(Iterator[Frame]):
-
     _stream_reader: SampleStreamReader
     _decoded_frame: Frame
 
@@ -60,7 +59,6 @@ class FrameDecoder(Iterator[Frame]):
 
 
 def decode_frame(frame: Frame, frame_sample: FrameSample, time_ns: int):
-
     frame._frame_number = frame_sample.frame_number
     frame._time_ns = time_ns
 
@@ -68,7 +66,9 @@ def decode_frame(frame: Frame, frame_sample: FrameSample, time_ns: int):
         cls = get_message_class_from_type_name(data.TypeName())
 
         if cls is None:
-            warn(f"Failed to get data payload class for type {data.TypeName()}")
+            warn(
+                f"Failed to get data payload class for type {data.TypeName()}"
+            )
             continue
 
         parsed_payload: Message = cls()
@@ -92,7 +92,6 @@ def get_or_create_scene(frame: Frame, scene_id: SceneIdentifier) -> Scene:
     scene = frame.scenes.with_guid(scene_id.guid)
 
     if scene is None:
-
         scene_guid = UUID(scene_id.guid)
 
         if scene_guid == NULL_GUID:
@@ -119,7 +118,6 @@ def get_or_create_game_object(
     game_object = scene.game_objects.with_guid(game_object_id.guid)
 
     if game_object is None:
-
         game_object_guid = UUID(game_object_id.guid)
 
         if game_object_guid == NULL_GUID:
@@ -155,7 +153,9 @@ def get_or_create_component(
 
     component = game_object.components.with_guid(component_id.guid)
 
-    if component is not None and not isinstance(component, component_proxy_type):
+    if component is not None and not isinstance(
+        component, component_proxy_type
+    ):
         warn(
             f"Found component with guid {component_id.guid} but it is not of the expected type {component_proxy_type.__name__}"
         )
@@ -203,7 +203,9 @@ def destroy_scene(frame: Frame, scene_id: SceneIdentifier) -> bool:
     return True
 
 
-def destroy_game_object(frame: Frame, game_object_id: GameObjectIdentifier) -> bool:
+def destroy_game_object(
+    frame: Frame, game_object_id: GameObjectIdentifier
+) -> bool:
     scene = frame.scenes.with_guid(game_object_id.scene.guid)
 
     if scene is None:

@@ -25,13 +25,17 @@ class XRBaseInteractorCreateDecoder(FrameDataDecoder[XRBaseInteractorCreate]):
 @register_frame_data_decoder(XRBaseInteractorUpdate)
 class XRBaseInteractorUpdateDecoder(FrameDataDecoder[XRBaseInteractorUpdate]):
     def decode(self, frame: Frame, data: XRBaseInteractorUpdate):
-        interactor = get_or_create_component(frame, data.component, XRBaseInteractor)
+        interactor = get_or_create_component(
+            frame, data.component, XRBaseInteractor
+        )
 
         if data.HasField("enabled"):
             interactor._enabled = data.enabled
 
 
 @register_frame_data_decoder(XRBaseInteractorDestroy)
-class XRBaseInteractorDestroyDecoder(FrameDataDecoder[XRBaseInteractorDestroy]):
+class XRBaseInteractorDestroyDecoder(
+    FrameDataDecoder[XRBaseInteractorDestroy]
+):
     def decode(self, frame: Frame, data: XRBaseInteractorDestroy):
         destroy_component(frame, data.component)

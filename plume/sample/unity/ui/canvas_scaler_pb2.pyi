@@ -3,7 +3,12 @@ from plume.sample.common import vector2_pb2 as _vector2_pb2
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import (
+    ClassVar as _ClassVar,
+    Mapping as _Mapping,
+    Optional as _Optional,
+    Union as _Union,
+)
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -26,6 +31,7 @@ class Unit(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     UNIT_INCHES: _ClassVar[Unit]
     UNIT_POINTS: _ClassVar[Unit]
     UNIT_PICAS: _ClassVar[Unit]
+
 SCALE_MODE_CONSTANT_PIXEL_SIZE: ScaleMode
 SCALE_MODE_SCALE_WITH_SCREEN_SIZE: ScaleMode
 SCALE_MODE_CONSTANT_PHYSICAL_SIZE: ScaleMode
@@ -42,16 +48,38 @@ class CanvasScalerCreate(_message.Message):
     __slots__ = ("component",)
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     component: _identifiers_pb2.ComponentIdentifier
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+    ) -> None: ...
 
 class CanvasScalerDestroy(_message.Message):
     __slots__ = ("component",)
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     component: _identifiers_pb2.ComponentIdentifier
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+    ) -> None: ...
 
 class CanvasScalerUpdate(_message.Message):
-    __slots__ = ("component", "ui_scale_mode", "reference_pixels_per_unit", "scale_factor", "reference_resolution", "screen_match_mode", "match_width_or_height", "physical_unit", "fallback_screen_dpi", "default_sprite_dpi", "dynamic_pixels_per_unit")
+    __slots__ = (
+        "component",
+        "ui_scale_mode",
+        "reference_pixels_per_unit",
+        "scale_factor",
+        "reference_resolution",
+        "screen_match_mode",
+        "match_width_or_height",
+        "physical_unit",
+        "fallback_screen_dpi",
+        "default_sprite_dpi",
+        "dynamic_pixels_per_unit",
+    )
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     UI_SCALE_MODE_FIELD_NUMBER: _ClassVar[int]
     REFERENCE_PIXELS_PER_UNIT_FIELD_NUMBER: _ClassVar[int]
@@ -74,4 +102,21 @@ class CanvasScalerUpdate(_message.Message):
     fallback_screen_dpi: float
     default_sprite_dpi: float
     dynamic_pixels_per_unit: float
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ..., ui_scale_mode: _Optional[_Union[ScaleMode, str]] = ..., reference_pixels_per_unit: _Optional[float] = ..., scale_factor: _Optional[float] = ..., reference_resolution: _Optional[_Union[_vector2_pb2.Vector2, _Mapping]] = ..., screen_match_mode: _Optional[_Union[ScreenMatchMode, str]] = ..., match_width_or_height: _Optional[float] = ..., physical_unit: _Optional[_Union[Unit, str]] = ..., fallback_screen_dpi: _Optional[float] = ..., default_sprite_dpi: _Optional[float] = ..., dynamic_pixels_per_unit: _Optional[float] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+        ui_scale_mode: _Optional[_Union[ScaleMode, str]] = ...,
+        reference_pixels_per_unit: _Optional[float] = ...,
+        scale_factor: _Optional[float] = ...,
+        reference_resolution: _Optional[
+            _Union[_vector2_pb2.Vector2, _Mapping]
+        ] = ...,
+        screen_match_mode: _Optional[_Union[ScreenMatchMode, str]] = ...,
+        match_width_or_height: _Optional[float] = ...,
+        physical_unit: _Optional[_Union[Unit, str]] = ...,
+        fallback_screen_dpi: _Optional[float] = ...,
+        default_sprite_dpi: _Optional[float] = ...,
+        dynamic_pixels_per_unit: _Optional[float] = ...,
+    ) -> None: ...

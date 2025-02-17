@@ -87,4 +87,4 @@ class GameObject:
         return f"\"{self._name}\" (guid={self._guid}, scene=\"{self._scene.name}\", components={', '.join([str(self._components)])})"
 
     def __repr__(self):
-        return f"GameObject(guid={self._guid}, scene={self._scene}, name=\"{self._name}\", active={self._active}, tag=\"{self._tag}\", layer={self._layer}, components={self._components})"
+        return f'GameObject(guid={self._guid}, scene={self._scene}, name="{self._name}", active={self._active}, tag="{self._tag}", layer={self._layer}, components={self._components})'

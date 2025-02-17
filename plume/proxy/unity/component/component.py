@@ -26,7 +26,7 @@ class Component(ABC):
 
     def __hash__(self) -> int:
         return hash(self.guid)
-    
+
     def __str__(self) -> str:
         return f"{type(self).__name__} (guid={self.guid})"
 

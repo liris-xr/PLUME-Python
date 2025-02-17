@@ -4,6 +4,7 @@ from uuid import UUID
 
 from typing import Union, List
 
+
 class StreamChannelFormat(Enum):
     UNDEFINED = 0
     DOUBLE64 = 1
@@ -32,7 +33,7 @@ class StreamChannelFormat(Enum):
             return StreamChannelFormat.STRING
         else:
             return StreamChannelFormat.UNDEFINED
-        
+
     def to_string(self):
         if self == StreamChannelFormat.DOUBLE64:
             return "double64"
@@ -50,6 +51,7 @@ class StreamChannelFormat(Enum):
             return "string"
         else:
             return "undefined"
+
 
 @dataclass(frozen=True)
 class LslStreamInfo:
@@ -78,6 +80,7 @@ class LslStreamInfo:
 
     def __repr__(self):
         return f"LslStreamInfo(name={self.name}, type={self.type}, channel_count={self.channel_count}, nominal_sample_rate={self.nominal_sample_rate:.2f}, channel_format={self.channel_format}, source_id={self.source_id}, created_at={self.created_at}, uid={self.uid}, version={self.version}, hostname={self.hostname}, v4address={self.v4address}, v4data_port={self.v4data_port}, v4service_port={self.v4service_port}, v6address={self.v6address}, v6data_port={self.v6data_port}, v6service_port={self.v6service_port}, desc={self.desc})"
+
 
 @dataclass(frozen=True)
 class LslStreamSample:

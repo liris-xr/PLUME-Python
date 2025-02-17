@@ -46,7 +46,9 @@ class TransformUpdateDecoder(FrameDataDecoder[TransformUpdate]):
 
         if data.HasField("local_position"):
             t._local_position = Vector3(
-                data.local_position.x, data.local_position.y, data.local_position.z
+                data.local_position.x,
+                data.local_position.y,
+                data.local_position.z,
             )
             t._invalidate_cached_world_matrix()
 

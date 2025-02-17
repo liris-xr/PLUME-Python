@@ -31,11 +31,12 @@ def get_frame_data_decoder(type: Type[T]):
 
 
 def _register_all_frame_data_decoders():
-
     path = Path(__file__).parent
 
     modules_path = [
-        p for p in glob(f"{path}/**/*.py", recursive=True) if p != str(Path(__file__))
+        p
+        for p in glob(f"{path}/**/*.py", recursive=True)
+        if p != str(Path(__file__))
     ]
 
     for module_path in modules_path:

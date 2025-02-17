@@ -9,7 +9,8 @@ from plume.proxy.common.vector4 import Vector4
 from typing import Union, Optional, List
 from uuid import UUID
 
-from abc import ABC, abstractmethod
+from abc import ABC
+
 
 class Renderer(Component, ABC):
     _enabled: bool
@@ -39,12 +40,14 @@ class Renderer(Component, ABC):
         self._lightmap_index = lightmap_index
         self._lightmap_scale_offset = lightmap_scale_offset or Vector4()
         self._realtime_lightmap_index = realtime_lightmap_index
-        self._realtime_lightmap_scale_offset = realtime_lightmap_scale_offset or Vector4()
+        self._realtime_lightmap_scale_offset = (
+            realtime_lightmap_scale_offset or Vector4()
+        )
 
     @property
     def enabled(self) -> bool:
         return self._enabled
-    
+
     @property
     def materials(self) -> List[Asset]:
         return self._materials.copy()
@@ -68,6 +71,6 @@ class Renderer(Component, ABC):
     @property
     def realtime_lightmap_scale_offset(self) -> Vector4:
         return self._realtime_lightmap_scale_offset
-    
+
     def __repr__(self) -> str:
         return f"{type(self).__name__}(guid={self.guid}, game_object={self.game_object.name}, enabled={self.enabled}, materials={self.materials}, local_bounds={self.local_bounds}, lightmap_index={self.lightmap_index}, lightmap_scale_offset={self.lightmap_scale_offset}, realtime_lightmap_index={self.realtime_lightmap_index}, realtime_lightmap_scale_offset={self.realtime_lightmap_scale_offset})"

@@ -1,10 +1,11 @@
 from __future__ import annotations
-from typing import Union, Optional, Iterator
+from typing import Union, Optional
 
 from plume.proxy.collection import Collection
 from plume.proxy.unity.asset import Asset
 
 from uuid import UUID
+
 
 class AssetCollection(Collection[Asset]):
     _guid_to_asset: dict[UUID, Asset]

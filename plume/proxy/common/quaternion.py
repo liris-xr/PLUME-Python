@@ -68,13 +68,19 @@ class Quaternion:
 
     def normalize(self) -> Quaternion:
         norm = sqrt(self.x**2 + self.y**2 + self.z**2 + self.w**2)
-        return Quaternion(self.x / norm, self.y / norm, self.z / norm, self.w / norm)
+        return Quaternion(
+            self.x / norm, self.y / norm, self.z / norm, self.w / norm
+        )
 
     def to_euler(self) -> Vector3:
         q0, q1, q2, q3 = self.w, self.x, self.y, self.z
-        roll = np.arctan2(2 * (q0 * q1 + q2 * q3), q0**2 - q1**2 - q2**2 + q3**2)
+        roll = np.arctan2(
+            2 * (q0 * q1 + q2 * q3), q0**2 - q1**2 - q2**2 + q3**2
+        )
         pitch = np.arcsin(2 * (q0 * q2 - q3 * q1))
-        yaw = np.arctan2(2 * (q0 * q3 + q1 * q2), q0**2 + q1**2 - q2**2 - q3**2)
+        yaw = np.arctan2(
+            2 * (q0 * q3 + q1 * q2), q0**2 + q1**2 - q2**2 - q3**2
+        )
         return Vector3(roll, pitch, yaw)
 
     def as_matrix(self) -> np.ndarray:
@@ -93,5 +99,6 @@ class Quaternion:
         m22 = r**2 - i**2 - j**2 + k**2
 
         return np.array(
-            [[m00, m01, m02], [m10, m11, m12], [m20, m21, m22]], dtype=np.float32
+            [[m00, m01, m02], [m10, m11, m12], [m20, m21, m22]],
+            dtype=np.float32,
         )

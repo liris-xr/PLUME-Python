@@ -51,6 +51,7 @@ def _format_timestamp(timestamp: datetime.datetime) -> str:
     datetime_str = "{0}:{1}".format(datetime_str[:-2], datetime_str[-2:])
     return datetime_str
 
+
 def _write(output, val: DataType | bytes):
     if isinstance(val, str):
         output.write(bytes(val, encoding=STR_ENCODING))
@@ -60,6 +61,7 @@ def _write(output, val: DataType | bytes):
         output.write(val.tobytes())
     else:
         raise Exception("Unsupported data type " + str(type(val)))
+
 
 def _write_variable_length_integer(output, val: np.uint64):
     if not isinstance(val, np.uint64):
@@ -75,7 +77,10 @@ def _write_variable_length_integer(output, val: np.uint64):
         _write(output, np.uint8(8))
         _write(output, np.uint64(val))
 
-def _write_fixed_length_integer(output, val: (
+
+def _write_fixed_length_integer(
+    output,
+    val: (
         np.int8
         | np.int16
         | np.int32
@@ -84,7 +89,8 @@ def _write_fixed_length_integer(output, val: (
         | np.uint16
         | np.uint32
         | np.uint64
-    )):
+    ),
+):
     if not isinstance(
         val,
         np.int8
@@ -101,12 +107,14 @@ def _write_fixed_length_integer(output, val: (
     _write(output, np.uint8(np.dtype(val).itemsize))
     _write(output, val.tobytes())
 
+
 def _write_timestamp(output, timestamp: Optional[float] = None):
     if timestamp is None:
         _write(output, np.uint8(0))
     else:
         _write(output, np.uint8(np.dtype(np.float64).itemsize))
         _write(output, np.float64(timestamp))
+
 
 class XDFStreamInfo:
     xml_header: str
@@ -127,7 +135,7 @@ class XDFStreamInfo:
         name_str = root.findtext("name")
         channel_format_str = root.findtext("channel_format")
         source_id_str = root.findtext("source_id")
-        
+
         if name_str is None:
             raise Exception("Stream name is required.")
         if channel_format_str is None:
@@ -139,7 +147,7 @@ class XDFStreamInfo:
 
     def __hash__(self):
         return hash((self._source_id, self._name, self._channel_format))
-    
+
     def __eq__(self, other):
         if not isinstance(other, XDFStreamInfo):
             return False
@@ -149,18 +157,18 @@ class XDFStreamInfo:
             and self._channel_format == other._channel_format
         )
 
+
 class XDFWriter:
-    
     def __init__(self, filepath: str, start_time: datetime.datetime):
         self.output = open(filepath, "wb")
-        self.next_stream_id = 1 # LSL stream id always starts from 1
+        self.next_stream_id = 1  # LSL stream id always starts from 1
         self.stream_info_to_id: Dict[XDFStreamInfo, int] = {}
         self.id_to_stream_info: Dict[int, XDFStreamInfo] = {}
         self._write_file_header("1.0", start_time)
 
     def __enter__(self):
         return self
-    
+
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
@@ -169,9 +177,8 @@ class XDFWriter:
         self.output.close()
 
     def get_or_create_stream(self, stream_xml_header: str) -> int:
-
         stream_info = XDFStreamInfo(stream_xml_header)
-        
+
         if stream_info in self.stream_info_to_id:
             return self.stream_info_to_id[stream_info]
 
@@ -179,13 +186,12 @@ class XDFWriter:
         self.stream_info_to_id[stream_info] = stream_id
         self.id_to_stream_info[stream_id] = stream_info
         self.next_stream_id += 1
-        
+
         self._write_stream_xml_header(
             stream_xml_header,
             stream_id=stream_id,
         )
         return stream_id
-
 
     def write_stream_sample(
         self,
@@ -203,8 +209,16 @@ class XDFWriter:
             stream_info._channel_format,
             np.uint32(stream_id),
         )
-        stream_info._min_timestamp_s = min(stream_info._min_timestamp_s, timestamp_s) if stream_info._min_timestamp_s else timestamp_s
-        stream_info._max_timestamp_s = max(stream_info._max_timestamp_s, timestamp_s) if stream_info._max_timestamp_s else timestamp_s
+        stream_info._min_timestamp_s = (
+            min(stream_info._min_timestamp_s, timestamp_s)
+            if stream_info._min_timestamp_s
+            else timestamp_s
+        )
+        stream_info._max_timestamp_s = (
+            max(stream_info._max_timestamp_s, timestamp_s)
+            if stream_info._max_timestamp_s
+            else timestamp_s
+        )
         stream_info._sample_count += 1
 
     def _write_file_header(self, version: str, start_time: datetime.datetime):
@@ -215,7 +229,9 @@ class XDFWriter:
         datetime_element = ET.SubElement(info_element, "datetime")
         version_element.text = version
         datetime_element.text = datetime_str
-        xml_str = ET.tostring(info_element, xml_declaration=True, encoding=STR_ENCODING)
+        xml_str = ET.tostring(
+            info_element, xml_declaration=True, encoding=STR_ENCODING
+        )
         self._write_chunk(ChunkTag.FILE_HEADER, xml_str)
 
     def _write_chunk(
@@ -272,14 +288,18 @@ class XDFWriter:
         last_timestamp = np.float64(last_timestamp)
         sample_count = np.uint64(sample_count)
         info_element = ET.Element("info")
-        first_timestamp_element = ET.SubElement(info_element, "first_timestamp")
+        first_timestamp_element = ET.SubElement(
+            info_element, "first_timestamp"
+        )
         last_timestamp_element = ET.SubElement(info_element, "last_timestamp")
         sample_count_element = ET.SubElement(info_element, "sample_count")
         first_timestamp_element.text = str(first_timestamp)
         last_timestamp_element.text = str(last_timestamp)
         sample_count_element.text = str(sample_count)
 
-        xml_str = ET.tostring(info_element, xml_declaration=True, encoding=STR_ENCODING)
+        xml_str = ET.tostring(
+            info_element, xml_declaration=True, encoding=STR_ENCODING
+        )
         self._write_chunk(
             ChunkTag.STREAM_FOOTER,
             xml_str,
@@ -294,7 +314,9 @@ class XDFWriter:
         stream_id: np.uint32 = None,
     ):
         if channel_format not in formats:
-            raise Exception("Unsupported channel format '{}'".format(channel_format))
+            raise Exception(
+                "Unsupported channel format '{}'".format(channel_format)
+            )
 
         fmt = formats[channel_format]
         chunk = np.array(chunk, dtype=fmt)
@@ -318,7 +340,9 @@ class XDFWriter:
                 elif isinstance(sample, DataType):
                     _write(tmp_output, sample)
                 else:
-                    raise Exception("Unsupported data type " + str(type(sample)))
+                    raise Exception(
+                        "Unsupported data type " + str(type(sample))
+                    )
             else:
                 for channel in sample:
                     if isinstance(channel, str):
@@ -330,7 +354,9 @@ class XDFWriter:
                     elif isinstance(channel, DataType):
                         _write(tmp_output, channel)
                     else:
-                        raise Exception("Unsupported data type " + str(type(channel)))
+                        raise Exception(
+                            "Unsupported data type " + str(type(channel))
+                        )
 
         self._write_chunk(
             ChunkTag.SAMPLES,

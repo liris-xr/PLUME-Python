@@ -131,7 +131,9 @@ class CameraUpdateDecoder(FrameDataDecoder[CameraUpdate]):
                 height=data.pixel_rect.height,
             )
         if data.HasField("target_texture"):
-            camera._target_texture = get_or_create_asset(frame, data.target_texture)
+            camera._target_texture = get_or_create_asset(
+                frame, data.target_texture
+            )
         if data.HasField("target_display"):
             camera._target_display = data.target_display
         if data.HasField("world_to_camera_matrix"):
@@ -139,11 +141,13 @@ class CameraUpdateDecoder(FrameDataDecoder[CameraUpdate]):
         if data.HasField("projection_matrix"):
             camera._projection_matrix = data.projection_matrix
         if data.HasField("non_jittered_projection_matrix"):
-            camera._non_jittered_projection_matrix = data.non_jittered_projection_matrix
-        if data.HasField("use_jittered_projection_matrix_for_transparent_rendering"):
-            camera._use_jittered_projection_matrix_for_transparent_rendering = (
-                data.use_jittered_projection_matrix_for_transparent_rendering
+            camera._non_jittered_projection_matrix = (
+                data.non_jittered_projection_matrix
             )
+        if data.HasField(
+            "use_jittered_projection_matrix_for_transparent_rendering"
+        ):
+            camera._use_jittered_projection_matrix_for_transparent_rendering = data.use_jittered_projection_matrix_for_transparent_rendering
         if data.HasField("stereo_separation"):
             camera._stereo_separation = data.stereo_separation
         if data.HasField("stereo_convergence"):

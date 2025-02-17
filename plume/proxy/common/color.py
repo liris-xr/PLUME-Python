@@ -6,6 +6,7 @@ from typing import List
 
 from enum import Enum
 
+
 @dataclass(frozen=True)
 class Color:
     r: float = 0.0
@@ -15,20 +16,23 @@ class Color:
 
     def to_numpy(self) -> np.ndarray:
         return np.array([self.r, self.g, self.b, self.a], dtype=np.float32)
-    
+
     def to_hex(self) -> str:
         return f"#{int(self.r * 255):02x}{int(self.g * 255):02x}{int(self.b * 255):02x}{int(self.a * 255):02x}"
+
 
 class ColorSpace(Enum):
     UNSPECIFIED = 0
     GAMMA = 1
     LINEAR = 2
 
+
 class GradientMode(Enum):
     UNSPECIFIED = 0
     BLEND = 1
     FIXED = 2
     PERCEPTUAL_BLEND = 3
+
 
 @dataclass(frozen=True)
 class ColorGradient:
@@ -39,4 +43,6 @@ class ColorGradient:
 
     def __post_init__(self):
         if len(self.color_keys) != len(self.alpha_keys):
-            raise ValueError("Color keys and alpha keys must have the same length")
+            raise ValueError(
+                "Color keys and alpha keys must have the same length"
+            )

@@ -4,7 +4,9 @@ from dataclasses import dataclass
 from typing import List, Union
 from enum import Enum
 
-from plume.sample.unity.input_action_pb2 import InputActionType as InputActionTypeSample
+from plume.sample.unity.input_action_pb2 import (
+    InputActionType as InputActionTypeSample,
+)
 
 from plume.proxy.common.vector2 import Vector2
 from plume.proxy.common.vector3 import Vector3
@@ -18,16 +20,23 @@ class InputActionType(Enum):
     PASSTHROUGH = 3
 
     @staticmethod
-    def from_message(input_action_type: InputActionTypeSample) -> InputActionType:
+    def from_message(
+        input_action_type: InputActionTypeSample,
+    ) -> InputActionType:
         if input_action_type == InputActionTypeSample.INPUT_ACTION_TYPE_VALUE:
             return InputActionType.VALUE
-        elif input_action_type == InputActionTypeSample.INPUT_ACTION_TYPE_BUTTON:
+        elif (
+            input_action_type == InputActionTypeSample.INPUT_ACTION_TYPE_BUTTON
+        ):
             return InputActionType.BUTTON
-        elif input_action_type == InputActionTypeSample.INPUT_ACTION_TYPE_PASSTHROUGH:
+        elif (
+            input_action_type
+            == InputActionTypeSample.INPUT_ACTION_TYPE_PASSTHROUGH
+        ):
             return InputActionType.PASSTHROUGH
         else:
             return InputActionType.UNDEFINED
-        
+
     def __repr__(self):
         return self.name
 

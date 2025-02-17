@@ -5,6 +5,7 @@ from plume.proxy.unity.scene import Scene
 from typing import Union, Optional
 from uuid import UUID
 
+
 class SceneCollection(Collection[Scene]):
     _guid_to_scene: dict[UUID, Scene]
 
@@ -32,7 +33,7 @@ class SceneCollection(Collection[Scene]):
 
         if not super()._remove(scene):
             return False
-        
+
         del self._guid_to_scene[scene.guid]
         return True
 
@@ -50,6 +51,4 @@ class SceneCollection(Collection[Scene]):
         return None
 
     def with_name(self, name: str) -> SceneCollection:
-        return SceneCollection(
-            [scene for scene in self if scene.name == name]
-        )
+        return SceneCollection([scene for scene in self if scene.name == name])

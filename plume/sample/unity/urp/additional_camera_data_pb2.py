@@ -4,44 +4,48 @@
 # source: plume/sample/unity/urp/additional_camera_data.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/urp/additional_camera_data.proto'
+    "",
+    "plume/sample/unity/urp/additional_camera_data.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
-from plume.sample.unity.urp import rendering_pb2 as plume_dot_sample_dot_unity_dot_urp_dot_rendering__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3plume/sample/unity/urp/additional_camera_data.proto\x12\x16plume.sample.unity.urp\x1a$plume/sample/unity/identifiers.proto\x1a&plume/sample/unity/urp/rendering.proto\"c\n\x1a\x41\x64\x64itionalCameraDataCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"d\n\x1b\x41\x64\x64itionalCameraDataDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xea\n\n\x1a\x41\x64\x64itionalCameraDataUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x1d\n\x07version\x18\x02 \x01(\x02H\x00R\x07version\x88\x01\x01\x12*\n\x0erender_shadows\x18\x03 \x01(\x08H\x01R\rrenderShadows\x88\x01\x01\x12\x65\n\x15requires_depth_option\x18\x04 \x01(\x0e\x32,.plume.sample.unity.urp.CameraOverrideOptionH\x02R\x13requiresDepthOption\x88\x01\x01\x12\x65\n\x15requires_color_option\x18\x05 \x01(\x0e\x32,.plume.sample.unity.urp.CameraOverrideOptionH\x03R\x13requiresColorOption\x88\x01\x01\x12N\n\x0brender_type\x18\x06 \x01(\x0e\x32(.plume.sample.unity.urp.CameraRenderTypeH\x04R\nrenderType\x88\x01\x01\x12\x39\n\x16requires_depth_texture\x18\x07 \x01(\x08H\x05R\x14requiresDepthTexture\x88\x01\x01\x12\x39\n\x16requires_color_texture\x18\x08 \x01(\x08H\x06R\x14requiresColorTexture\x88\x01\x01\x12/\n\x11volume_layer_mask\x18\t \x01(\x05H\x07R\x0fvolumeLayerMask\x88\x01\x01\x12S\n\x0evolume_trigger\x18\n \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierH\x08R\rvolumeTrigger\x88\x01\x01\x12\x39\n\x16render_post_processing\x18\x0b \x01(\x08H\tR\x14renderPostProcessing\x88\x01\x01\x12Q\n\x0c\x61ntialiasing\x18\x0c \x01(\x0e\x32(.plume.sample.unity.urp.AntialiasingModeH\nR\x0c\x61ntialiasing\x88\x01\x01\x12\x63\n\x14\x61ntialiasing_quality\x18\r \x01(\x0e\x32+.plume.sample.unity.urp.AntialiasingQualityH\x0bR\x13\x61ntialiasingQuality\x88\x01\x01\x12\x1e\n\x08stop_nan\x18\x0e \x01(\x08H\x0cR\x07stopNan\x88\x01\x01\x12!\n\tdithering\x18\x0f \x01(\x08H\rR\tdithering\x88\x01\x01\x12\x31\n\x12\x61llow_xr_rendering\x18\x10 \x01(\x08H\x0eR\x10\x61llowXrRendering\x88\x01\x01\x42\n\n\x08_versionB\x11\n\x0f_render_shadowsB\x18\n\x16_requires_depth_optionB\x18\n\x16_requires_color_optionB\x0e\n\x0c_render_typeB\x19\n\x17_requires_depth_textureB\x19\n\x17_requires_color_textureB\x14\n\x12_volume_layer_maskB\x11\n\x0f_volume_triggerB\x19\n\x17_render_post_processingB\x0f\n\r_antialiasingB\x17\n\x15_antialiasing_qualityB\x0b\n\t_stop_nanB\x0c\n\n_ditheringB\x15\n\x13_allow_xr_rendering*\x87\x01\n\x14\x43\x61meraOverrideOption\x12\x1e\n\x1a\x43\x41MERA_OVERRIDE_OPTION_OFF\x10\x00\x12\x1d\n\x19\x43\x41MERA_OVERRIDE_OPTION_ON\x10\x01\x12\x30\n,CAMERA_OVERRIDE_OPTION_USE_PIPELINE_SETTINGS\x10\x02*O\n\x10\x43\x61meraRenderType\x12\x1b\n\x17\x43\x41MERA_RENDER_TYPE_BASE\x10\x00\x12\x1e\n\x1a\x43\x41MERA_RENDER_TYPE_OVERLAY\x10\x01\x42\x19\xaa\x02\x16PLUME.Sample.Unity.URPb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n3plume/sample/unity/urp/additional_camera_data.proto\x12\x16plume.sample.unity.urp\x1a$plume/sample/unity/identifiers.proto\x1a&plume/sample/unity/urp/rendering.proto\"c\n\x1a\x41\x64\x64itionalCameraDataCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"d\n\x1b\x41\x64\x64itionalCameraDataDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xea\n\n\x1a\x41\x64\x64itionalCameraDataUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x1d\n\x07version\x18\x02 \x01(\x02H\x00R\x07version\x88\x01\x01\x12*\n\x0erender_shadows\x18\x03 \x01(\x08H\x01R\rrenderShadows\x88\x01\x01\x12\x65\n\x15requires_depth_option\x18\x04 \x01(\x0e\x32,.plume.sample.unity.urp.CameraOverrideOptionH\x02R\x13requiresDepthOption\x88\x01\x01\x12\x65\n\x15requires_color_option\x18\x05 \x01(\x0e\x32,.plume.sample.unity.urp.CameraOverrideOptionH\x03R\x13requiresColorOption\x88\x01\x01\x12N\n\x0brender_type\x18\x06 \x01(\x0e\x32(.plume.sample.unity.urp.CameraRenderTypeH\x04R\nrenderType\x88\x01\x01\x12\x39\n\x16requires_depth_texture\x18\x07 \x01(\x08H\x05R\x14requiresDepthTexture\x88\x01\x01\x12\x39\n\x16requires_color_texture\x18\x08 \x01(\x08H\x06R\x14requiresColorTexture\x88\x01\x01\x12/\n\x11volume_layer_mask\x18\t \x01(\x05H\x07R\x0fvolumeLayerMask\x88\x01\x01\x12S\n\x0evolume_trigger\x18\n \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierH\x08R\rvolumeTrigger\x88\x01\x01\x12\x39\n\x16render_post_processing\x18\x0b \x01(\x08H\tR\x14renderPostProcessing\x88\x01\x01\x12Q\n\x0c\x61ntialiasing\x18\x0c \x01(\x0e\x32(.plume.sample.unity.urp.AntialiasingModeH\nR\x0c\x61ntialiasing\x88\x01\x01\x12\x63\n\x14\x61ntialiasing_quality\x18\r \x01(\x0e\x32+.plume.sample.unity.urp.AntialiasingQualityH\x0bR\x13\x61ntialiasingQuality\x88\x01\x01\x12\x1e\n\x08stop_nan\x18\x0e \x01(\x08H\x0cR\x07stopNan\x88\x01\x01\x12!\n\tdithering\x18\x0f \x01(\x08H\rR\tdithering\x88\x01\x01\x12\x31\n\x12\x61llow_xr_rendering\x18\x10 \x01(\x08H\x0eR\x10\x61llowXrRendering\x88\x01\x01\x42\n\n\x08_versionB\x11\n\x0f_render_shadowsB\x18\n\x16_requires_depth_optionB\x18\n\x16_requires_color_optionB\x0e\n\x0c_render_typeB\x19\n\x17_requires_depth_textureB\x19\n\x17_requires_color_textureB\x14\n\x12_volume_layer_maskB\x11\n\x0f_volume_triggerB\x19\n\x17_render_post_processingB\x0f\n\r_antialiasingB\x17\n\x15_antialiasing_qualityB\x0b\n\t_stop_nanB\x0c\n\n_ditheringB\x15\n\x13_allow_xr_rendering*\x87\x01\n\x14\x43\x61meraOverrideOption\x12\x1e\n\x1a\x43\x41MERA_OVERRIDE_OPTION_OFF\x10\x00\x12\x1d\n\x19\x43\x41MERA_OVERRIDE_OPTION_ON\x10\x01\x12\x30\n,CAMERA_OVERRIDE_OPTION_USE_PIPELINE_SETTINGS\x10\x02*O\n\x10\x43\x61meraRenderType\x12\x1b\n\x17\x43\x41MERA_RENDER_TYPE_BASE\x10\x00\x12\x1e\n\x1a\x43\x41MERA_RENDER_TYPE_OVERLAY\x10\x01\x42\x19\xaa\x02\x16PLUME.Sample.Unity.URPb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.urp.additional_camera_data_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.urp.additional_camera_data_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\026PLUME.Sample.Unity.URP'
-  _globals['_CAMERAOVERRIDEOPTION']._serialized_start=1750
-  _globals['_CAMERAOVERRIDEOPTION']._serialized_end=1885
-  _globals['_CAMERARENDERTYPE']._serialized_start=1887
-  _globals['_CAMERARENDERTYPE']._serialized_end=1966
-  _globals['_ADDITIONALCAMERADATACREATE']._serialized_start=157
-  _globals['_ADDITIONALCAMERADATACREATE']._serialized_end=256
-  _globals['_ADDITIONALCAMERADATADESTROY']._serialized_start=258
-  _globals['_ADDITIONALCAMERADATADESTROY']._serialized_end=358
-  _globals['_ADDITIONALCAMERADATAUPDATE']._serialized_start=361
-  _globals['_ADDITIONALCAMERADATAUPDATE']._serialized_end=1747
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\026PLUME.Sample.Unity.URP"
+    _globals["_CAMERAOVERRIDEOPTION"]._serialized_start = 1750
+    _globals["_CAMERAOVERRIDEOPTION"]._serialized_end = 1885
+    _globals["_CAMERARENDERTYPE"]._serialized_start = 1887
+    _globals["_CAMERARENDERTYPE"]._serialized_end = 1966
+    _globals["_ADDITIONALCAMERADATACREATE"]._serialized_start = 157
+    _globals["_ADDITIONALCAMERADATACREATE"]._serialized_end = 256
+    _globals["_ADDITIONALCAMERADATADESTROY"]._serialized_start = 258
+    _globals["_ADDITIONALCAMERADATADESTROY"]._serialized_end = 358
+    _globals["_ADDITIONALCAMERADATAUPDATE"]._serialized_start = 361
+    _globals["_ADDITIONALCAMERADATAUPDATE"]._serialized_end = 1747
 # @@protoc_insertion_point(module_scope)

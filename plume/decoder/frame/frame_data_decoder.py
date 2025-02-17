@@ -9,7 +9,6 @@ TU = TypeVar("TU", bound=Message)
 
 
 class FrameDataDecoder(ABC, Generic[TU]):
-
     @abstractmethod
     def decode(self, frame: Frame, data: TU) -> Frame:
         raise NotImplementedError

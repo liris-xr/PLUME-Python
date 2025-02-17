@@ -1,8 +1,10 @@
 from __future__ import annotations
 from plume.proxy.unity.scene_collection import SceneCollection
 from plume.proxy.unity.asset_collection import AssetCollection
-from plume.proxy.unity.xritk_interaction_collection import XRITKInteractionCollection
-from typing import Optional, List
+from plume.proxy.unity.xritk_interaction_collection import (
+    XRITKInteractionCollection,
+)
+from typing import Optional
 
 
 class Frame:
@@ -24,7 +26,11 @@ class Frame:
         self._frame_number = frame_number
         self._scenes = scenes if scenes else SceneCollection()
         self._assets = assets if assets else AssetCollection()
-        self._xritk_interactions = xritk_interactions if xritk_interactions else XRITKInteractionCollection()
+        self._xritk_interactions = (
+            xritk_interactions
+            if xritk_interactions
+            else XRITKInteractionCollection()
+        )
 
     @property
     def frame_number(self) -> int:
@@ -33,11 +39,11 @@ class Frame:
     @property
     def scenes(self) -> SceneCollection:
         return self._scenes
-    
+
     @property
     def assets(self) -> AssetCollection:
         return self._assets
-    
+
     @property
     def xritk_interactions(self) -> XRITKInteractionCollection:
         return self._xritk_interactions

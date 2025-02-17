@@ -34,7 +34,9 @@ class CameraGateFitMode(Enum):
             return CameraGateFitMode.NONE
         elif gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_VERTICAL:
             return CameraGateFitMode.VERTICAL
-        elif gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_HORIZONTAL:
+        elif (
+            gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_HORIZONTAL
+        ):
             return CameraGateFitMode.HORIZONTAL
         elif gate_fit == CameraGateFitModeSample.CAMERA_GATE_FIT_MODE_FILL:
             return CameraGateFitMode.FILL
@@ -42,6 +44,7 @@ class CameraGateFitMode(Enum):
             return CameraGateFitMode.OVERSCAN
         else:
             return CameraGateFitMode.UNSPECIFIED
+
 
 class CameraStereoTargetEyeMask(Enum):
     UNSPECIFIED = 0
@@ -199,7 +202,9 @@ class Camera(Component):
         )
         self._clear_flags = clear_flags
         self._depth_texture_mode = depth_texture_mode
-        self._clear_stencil_after_lighting_pass = clear_stencil_after_lighting_pass
+        self._clear_stencil_after_lighting_pass = (
+            clear_stencil_after_lighting_pass
+        )
         self._use_physical_properties = use_physical_properties
         self._sensor_size = sensor_size
         self._lens_shift = lens_shift

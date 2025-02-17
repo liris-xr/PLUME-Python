@@ -3,7 +3,12 @@ from plume.sample.common import vector4_pb2 as _vector4_pb2
 from plume.sample.common import color_pb2 as _color_pb2
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import (
+    ClassVar as _ClassVar,
+    Mapping as _Mapping,
+    Optional as _Optional,
+    Union as _Union,
+)
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -11,16 +16,46 @@ class TMPTextCreate(_message.Message):
     __slots__ = ("component",)
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     component: _identifiers_pb2.ComponentIdentifier
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+    ) -> None: ...
 
 class TMPTextDestroy(_message.Message):
     __slots__ = ("component",)
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     component: _identifiers_pb2.ComponentIdentifier
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+    ) -> None: ...
 
 class TMPTextUpdate(_message.Message):
-    __slots__ = ("component", "text", "font", "font_style", "font_size", "auto_size", "font_size_min", "font_size_max", "color", "character_spacing", "word_spacing", "line_spacing", "paragraph_spacing", "wrapping_enabled", "alignment", "overflow", "horizontal_mapping", "vertical_mapping", "margin")
+    __slots__ = (
+        "component",
+        "text",
+        "font",
+        "font_style",
+        "font_size",
+        "auto_size",
+        "font_size_min",
+        "font_size_max",
+        "color",
+        "character_spacing",
+        "word_spacing",
+        "line_spacing",
+        "paragraph_spacing",
+        "wrapping_enabled",
+        "alignment",
+        "overflow",
+        "horizontal_mapping",
+        "vertical_mapping",
+        "margin",
+    )
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     TEXT_FIELD_NUMBER: _ClassVar[int]
     FONT_FIELD_NUMBER: _ClassVar[int]
@@ -59,4 +94,29 @@ class TMPTextUpdate(_message.Message):
     horizontal_mapping: int
     vertical_mapping: int
     margin: _vector4_pb2.Vector4
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ..., text: _Optional[str] = ..., font: _Optional[_Union[_identifiers_pb2.AssetIdentifier, _Mapping]] = ..., font_style: _Optional[int] = ..., font_size: _Optional[float] = ..., auto_size: bool = ..., font_size_min: _Optional[float] = ..., font_size_max: _Optional[float] = ..., color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ..., character_spacing: _Optional[float] = ..., word_spacing: _Optional[float] = ..., line_spacing: _Optional[float] = ..., paragraph_spacing: _Optional[float] = ..., wrapping_enabled: bool = ..., alignment: _Optional[int] = ..., overflow: _Optional[int] = ..., horizontal_mapping: _Optional[int] = ..., vertical_mapping: _Optional[int] = ..., margin: _Optional[_Union[_vector4_pb2.Vector4, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+        text: _Optional[str] = ...,
+        font: _Optional[
+            _Union[_identifiers_pb2.AssetIdentifier, _Mapping]
+        ] = ...,
+        font_style: _Optional[int] = ...,
+        font_size: _Optional[float] = ...,
+        auto_size: bool = ...,
+        font_size_min: _Optional[float] = ...,
+        font_size_max: _Optional[float] = ...,
+        color: _Optional[_Union[_color_pb2.Color, _Mapping]] = ...,
+        character_spacing: _Optional[float] = ...,
+        word_spacing: _Optional[float] = ...,
+        line_spacing: _Optional[float] = ...,
+        paragraph_spacing: _Optional[float] = ...,
+        wrapping_enabled: bool = ...,
+        alignment: _Optional[int] = ...,
+        overflow: _Optional[int] = ...,
+        horizontal_mapping: _Optional[int] = ...,
+        vertical_mapping: _Optional[int] = ...,
+        margin: _Optional[_Union[_vector4_pb2.Vector4, _Mapping]] = ...,
+    ) -> None: ...

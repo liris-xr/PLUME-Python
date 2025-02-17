@@ -25,7 +25,9 @@ def _register_pb2_modules_from_module(module):
     else:
         package_path = module.__file__
 
-    pb2_files = glob.glob(os.path.join(package_path, "**/*_pb2.py"), recursive=True)
+    pb2_files = glob.glob(
+        os.path.join(package_path, "**/*_pb2.py"), recursive=True
+    )
 
     for pb2_file in pb2_files:
         try:

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+
 @dataclass(frozen=True)
 class RecorderVersion:
     name: str
@@ -10,6 +11,7 @@ class RecorderVersion:
 
     def __str__(self):
         return f"{self.name} {self.major}.{self.minor}.{self.patch}"
+
 
 @dataclass(frozen=True)
 class RecordMetadata:

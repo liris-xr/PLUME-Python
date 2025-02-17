@@ -4,7 +4,7 @@ from plume.proxy.unity.component import Component
 from plume.proxy.unity.game_object import GameObject
 from plume.proxy.unity.asset import Asset
 
-from typing import Union, Optional, List
+from typing import Union, Optional
 from uuid import UUID
 
 
@@ -23,6 +23,6 @@ class MeshFilter(Component):
     @property
     def mesh(self) -> Optional[Asset]:
         return self._mesh
-    
+
     def __repr__(self):
         return f"MeshFilter(guid={self.guid}, mesh={self._mesh})"

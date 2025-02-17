@@ -4,17 +4,40 @@ from plume.sample.common import vector4_pb2 as _vector4_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import (
+    ClassVar as _ClassVar,
+    Iterable as _Iterable,
+    Mapping as _Mapping,
+    Optional as _Optional,
+    Union as _Union,
+)
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class RendererUpdate(_message.Message):
-    __slots__ = ("component", "enabled", "materials", "local_bounds", "lightmap_index", "lightmap_scale_offset", "realtime_lightmap_index", "realtime_lightmap_scale_offset")
+    __slots__ = (
+        "component",
+        "enabled",
+        "materials",
+        "local_bounds",
+        "lightmap_index",
+        "lightmap_scale_offset",
+        "realtime_lightmap_index",
+        "realtime_lightmap_scale_offset",
+    )
     class Materials(_message.Message):
         __slots__ = ("ids",)
         IDS_FIELD_NUMBER: _ClassVar[int]
-        ids: _containers.RepeatedCompositeFieldContainer[_identifiers_pb2.AssetIdentifier]
-        def __init__(self, ids: _Optional[_Iterable[_Union[_identifiers_pb2.AssetIdentifier, _Mapping]]] = ...) -> None: ...
+        ids: _containers.RepeatedCompositeFieldContainer[
+            _identifiers_pb2.AssetIdentifier
+        ]
+        def __init__(
+            self,
+            ids: _Optional[
+                _Iterable[_Union[_identifiers_pb2.AssetIdentifier, _Mapping]]
+            ] = ...,
+        ) -> None: ...
+
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     MATERIALS_FIELD_NUMBER: _ClassVar[int]
@@ -31,4 +54,20 @@ class RendererUpdate(_message.Message):
     lightmap_scale_offset: _vector4_pb2.Vector4
     realtime_lightmap_index: int
     realtime_lightmap_scale_offset: _vector4_pb2.Vector4
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ..., enabled: bool = ..., materials: _Optional[_Union[RendererUpdate.Materials, _Mapping]] = ..., local_bounds: _Optional[_Union[_bounds_pb2.Bounds, _Mapping]] = ..., lightmap_index: _Optional[int] = ..., lightmap_scale_offset: _Optional[_Union[_vector4_pb2.Vector4, _Mapping]] = ..., realtime_lightmap_index: _Optional[int] = ..., realtime_lightmap_scale_offset: _Optional[_Union[_vector4_pb2.Vector4, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+        enabled: bool = ...,
+        materials: _Optional[_Union[RendererUpdate.Materials, _Mapping]] = ...,
+        local_bounds: _Optional[_Union[_bounds_pb2.Bounds, _Mapping]] = ...,
+        lightmap_index: _Optional[int] = ...,
+        lightmap_scale_offset: _Optional[
+            _Union[_vector4_pb2.Vector4, _Mapping]
+        ] = ...,
+        realtime_lightmap_index: _Optional[int] = ...,
+        realtime_lightmap_scale_offset: _Optional[
+            _Union[_vector4_pb2.Vector4, _Mapping]
+        ] = ...,
+    ) -> None: ...

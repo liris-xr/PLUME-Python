@@ -7,7 +7,6 @@ import datetime
 
 
 def decode_record_metadata(filepath: str) -> RecordMetadata:
-
     with open(filepath, "rb") as f:
         with SampleStreamReader(f) as reader:
             metadata_sample, _ = reader.parse_next(RecordMetadataSample)

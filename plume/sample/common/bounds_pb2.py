@@ -4,35 +4,40 @@
 # source: plume/sample/common/bounds.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/common/bounds.proto'
+    "",
+    "plume/sample/common/bounds.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.common import vector3_pb2 as plume_dot_sample_dot_common_dot_vector3__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n plume/sample/common/bounds.proto\x12\x13plume.sample.common\x1a!plume/sample/common/vector3.proto\"p\n\x06\x42ounds\x12\x34\n\x06\x63\x65nter\x18\x01 \x01(\x0b\x32\x1c.plume.sample.common.Vector3R\x06\x63\x65nter\x12\x30\n\x04size\x18\x02 \x01(\x0b\x32\x1c.plume.sample.common.Vector3R\x04sizeB\x16\xaa\x02\x13PLUME.Sample.Commonb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n plume/sample/common/bounds.proto\x12\x13plume.sample.common\x1a!plume/sample/common/vector3.proto"p\n\x06\x42ounds\x12\x34\n\x06\x63\x65nter\x18\x01 \x01(\x0b\x32\x1c.plume.sample.common.Vector3R\x06\x63\x65nter\x12\x30\n\x04size\x18\x02 \x01(\x0b\x32\x1c.plume.sample.common.Vector3R\x04sizeB\x16\xaa\x02\x13PLUME.Sample.Commonb\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.common.bounds_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.common.bounds_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\023PLUME.Sample.Common'
-  _globals['_BOUNDS']._serialized_start=92
-  _globals['_BOUNDS']._serialized_end=204
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\023PLUME.Sample.Common"
+    _globals["_BOUNDS"]._serialized_start = 92
+    _globals["_BOUNDS"]._serialized_end = 204
 # @@protoc_insertion_point(module_scope)

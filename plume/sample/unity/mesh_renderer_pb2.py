@@ -4,37 +4,42 @@
 # source: plume/sample/unity/mesh_renderer.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/mesh_renderer.proto'
+    "",
+    "plume/sample/unity/mesh_renderer.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&plume/sample/unity/mesh_renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\"[\n\x12MeshRendererCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\\\n\x13MeshRendererDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponentB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n&plume/sample/unity/mesh_renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\"[\n\x12MeshRendererCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\\\n\x13MeshRendererDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponentB\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.mesh_renderer_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.mesh_renderer_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
-  _globals['_MESHRENDERERCREATE']._serialized_start=100
-  _globals['_MESHRENDERERCREATE']._serialized_end=191
-  _globals['_MESHRENDERERDESTROY']._serialized_start=193
-  _globals['_MESHRENDERERDESTROY']._serialized_end=285
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
+    _globals["_MESHRENDERERCREATE"]._serialized_start = 100
+    _globals["_MESHRENDERERCREATE"]._serialized_end = 191
+    _globals["_MESHRENDERERDESTROY"]._serialized_start = 193
+    _globals["_MESHRENDERERDESTROY"]._serialized_end = 285
 # @@protoc_insertion_point(module_scope)

@@ -7,7 +7,13 @@ from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import (
+    ClassVar as _ClassVar,
+    Iterable as _Iterable,
+    Mapping as _Mapping,
+    Optional as _Optional,
+    Union as _Union,
+)
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -29,6 +35,7 @@ class MaskInteraction(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     MASK_INTERACTION_NONE: _ClassVar[MaskInteraction]
     MASK_INTERACTION_VISIBLE_INSIDE: _ClassVar[MaskInteraction]
     MASK_INTERACTION_VISIBLE_OUTSIDE: _ClassVar[MaskInteraction]
+
 ALIGNMENT_VIEW: Alignment
 ALIGNMENT_TRANSFORM_Z: Alignment
 TEXTURE_MODE_STRETCH: TextureMode
@@ -44,21 +51,55 @@ class LineRendererCreate(_message.Message):
     __slots__ = ("component",)
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     component: _identifiers_pb2.ComponentIdentifier
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+    ) -> None: ...
 
 class LineRendererDestroy(_message.Message):
     __slots__ = ("component",)
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     component: _identifiers_pb2.ComponentIdentifier
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+    ) -> None: ...
 
 class LineRendererUpdate(_message.Message):
-    __slots__ = ("component", "loop", "width_curve", "width_multiplier", "positions", "color", "corner_vertices", "end_cap_vertices", "alignment", "texture_mode", "texture_scale", "shadow_bias", "generate_lighting_data", "use_world_space", "mask_interaction")
+    __slots__ = (
+        "component",
+        "loop",
+        "width_curve",
+        "width_multiplier",
+        "positions",
+        "color",
+        "corner_vertices",
+        "end_cap_vertices",
+        "alignment",
+        "texture_mode",
+        "texture_scale",
+        "shadow_bias",
+        "generate_lighting_data",
+        "use_world_space",
+        "mask_interaction",
+    )
     class Positions(_message.Message):
         __slots__ = ("positions",)
         POSITIONS_FIELD_NUMBER: _ClassVar[int]
-        positions: _containers.RepeatedCompositeFieldContainer[_vector3_pb2.Vector3]
-        def __init__(self, positions: _Optional[_Iterable[_Union[_vector3_pb2.Vector3, _Mapping]]] = ...) -> None: ...
+        positions: _containers.RepeatedCompositeFieldContainer[
+            _vector3_pb2.Vector3
+        ]
+        def __init__(
+            self,
+            positions: _Optional[
+                _Iterable[_Union[_vector3_pb2.Vector3, _Mapping]]
+            ] = ...,
+        ) -> None: ...
+
     COMPONENT_FIELD_NUMBER: _ClassVar[int]
     LOOP_FIELD_NUMBER: _ClassVar[int]
     WIDTH_CURVE_FIELD_NUMBER: _ClassVar[int]
@@ -89,4 +130,27 @@ class LineRendererUpdate(_message.Message):
     generate_lighting_data: bool
     use_world_space: bool
     mask_interaction: MaskInteraction
-    def __init__(self, component: _Optional[_Union[_identifiers_pb2.ComponentIdentifier, _Mapping]] = ..., loop: bool = ..., width_curve: _Optional[_Union[_animation_curve_pb2.AnimationCurve, _Mapping]] = ..., width_multiplier: _Optional[float] = ..., positions: _Optional[_Union[LineRendererUpdate.Positions, _Mapping]] = ..., color: _Optional[_Union[_color_pb2.ColorGradient, _Mapping]] = ..., corner_vertices: _Optional[int] = ..., end_cap_vertices: _Optional[int] = ..., alignment: _Optional[_Union[Alignment, str]] = ..., texture_mode: _Optional[_Union[TextureMode, str]] = ..., texture_scale: _Optional[_Union[_vector2_pb2.Vector2, _Mapping]] = ..., shadow_bias: _Optional[float] = ..., generate_lighting_data: bool = ..., use_world_space: bool = ..., mask_interaction: _Optional[_Union[MaskInteraction, str]] = ...) -> None: ...
+    def __init__(
+        self,
+        component: _Optional[
+            _Union[_identifiers_pb2.ComponentIdentifier, _Mapping]
+        ] = ...,
+        loop: bool = ...,
+        width_curve: _Optional[
+            _Union[_animation_curve_pb2.AnimationCurve, _Mapping]
+        ] = ...,
+        width_multiplier: _Optional[float] = ...,
+        positions: _Optional[
+            _Union[LineRendererUpdate.Positions, _Mapping]
+        ] = ...,
+        color: _Optional[_Union[_color_pb2.ColorGradient, _Mapping]] = ...,
+        corner_vertices: _Optional[int] = ...,
+        end_cap_vertices: _Optional[int] = ...,
+        alignment: _Optional[_Union[Alignment, str]] = ...,
+        texture_mode: _Optional[_Union[TextureMode, str]] = ...,
+        texture_scale: _Optional[_Union[_vector2_pb2.Vector2, _Mapping]] = ...,
+        shadow_bias: _Optional[float] = ...,
+        generate_lighting_data: bool = ...,
+        use_world_space: bool = ...,
+        mask_interaction: _Optional[_Union[MaskInteraction, str]] = ...,
+    ) -> None: ...

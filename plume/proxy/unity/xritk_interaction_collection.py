@@ -13,8 +13,9 @@ from typing import List
 
 
 class XRITKInteractionCollection(Collection[XRITKInteraction]):
-
-    def with_type(self, type: XRITKInteractionType) -> XRITKInteractionCollection:
+    def with_type(
+        self, type: XRITKInteractionType
+    ) -> XRITKInteractionCollection:
         return XRITKInteractionCollection(
             [interaction for interaction in self if interaction.type == type]
         )
@@ -56,7 +57,9 @@ class XRITKInteractionCollection(Collection[XRITKInteraction]):
     def with_interactables(
         self, interactables: List[XRBaseInteractable]
     ) -> XRITKInteractionCollection:
-        interactables_guids = [interactable.guid for interactable in interactables]
+        interactables_guids = [
+            interactable.guid for interactable in interactables
+        ]
         return XRITKInteractionCollection(
             [
                 interaction

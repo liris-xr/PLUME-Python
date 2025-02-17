@@ -19,7 +19,6 @@ T = TypeVar("T", bound=Message)
 
 
 class SampleStreamReader:
-
     def __init__(self, stream: Union[io.RawIOBase, io.BufferedIOBase]):
         assert isinstance(
             stream, (io.RawIOBase, io.BufferedIOBase)
@@ -76,12 +75,16 @@ class SampleStreamReader:
                 )
 
                 if (
-                    get_descriptor_from_type_name(packed_sample.payload.TypeName())
+                    get_descriptor_from_type_name(
+                        packed_sample.payload.TypeName()
+                    )
                     not in expected_descriptors
                 ):
                     continue
 
-            cls = get_message_class_from_type_name(packed_sample.payload.TypeName())
+            cls = get_message_class_from_type_name(
+                packed_sample.payload.TypeName()
+            )
 
             if cls is None:
                 warn(
@@ -98,7 +101,9 @@ class SampleStreamReader:
                 return None
 
             return parsed_payload, (
-                packed_sample.timestamp if packed_sample.HasField("timestamp") else None
+                packed_sample.timestamp
+                if packed_sample.HasField("timestamp")
+                else None
             )
 
     @staticmethod

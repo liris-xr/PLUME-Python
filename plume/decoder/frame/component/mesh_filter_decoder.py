@@ -10,7 +10,11 @@ from plume.sample.unity.mesh_filter_pb2 import (
 
 from plume.proxy.unity.frame import Frame
 from plume.proxy.unity.component.mesh_filter import MeshFilter
-from plume.decoder.frame.frame_decoder import get_or_create_component, get_or_create_asset, destroy_component
+from plume.decoder.frame.frame_decoder import (
+    get_or_create_component,
+    get_or_create_asset,
+    destroy_component,
+)
 
 
 @register_frame_data_decoder(MeshFilterCreate)

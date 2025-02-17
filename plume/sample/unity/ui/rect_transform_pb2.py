@@ -4,42 +4,44 @@
 # source: plume/sample/unity/ui/rect_transform.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/ui/rect_transform.proto'
+    "",
+    "plume/sample/unity/ui/rect_transform.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.common import vector3_pb2 as plume_dot_sample_dot_common_dot_vector3__pb2
-from plume.sample.common import quaternion_pb2 as plume_dot_sample_dot_common_dot_quaternion__pb2
-from plume.sample.common import vector2_pb2 as plume_dot_sample_dot_common_dot_vector2__pb2
-from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n*plume/sample/unity/ui/rect_transform.proto\x12\x15plume.sample.unity.ui\x1a!plume/sample/common/vector3.proto\x1a$plume/sample/common/quaternion.proto\x1a!plume/sample/common/vector2.proto\x1a$plume/sample/unity/identifiers.proto\"\\\n\x13RectTransformCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"]\n\x14RectTransformDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xad\x07\n\x13RectTransformUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12W\n\x10parent_transform\x18\x02 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierH\x00R\x0fparentTransform\x88\x01\x01\x12$\n\x0bsibling_idx\x18\x03 \x01(\x05H\x01R\nsiblingIdx\x88\x01\x01\x12H\n\x0elocal_position\x18\x04 \x01(\x0b\x32\x1c.plume.sample.common.Vector3H\x02R\rlocalPosition\x88\x01\x01\x12K\n\x0elocal_rotation\x18\x05 \x01(\x0b\x32\x1f.plume.sample.common.QuaternionH\x03R\rlocalRotation\x88\x01\x01\x12\x42\n\x0blocal_scale\x18\x06 \x01(\x0b\x32\x1c.plume.sample.common.Vector3H\x04R\nlocalScale\x88\x01\x01\x12@\n\nanchor_min\x18\x07 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x05R\tanchorMin\x88\x01\x01\x12@\n\nanchor_max\x18\x08 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x06R\tanchorMax\x88\x01\x01\x12N\n\x11\x61nchored_position\x18\t \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x07R\x10\x61nchoredPosition\x88\x01\x01\x12@\n\nsize_delta\x18\n \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x08R\tsizeDelta\x88\x01\x01\x12\x37\n\x05pivot\x18\x0b \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\tR\x05pivot\x88\x01\x01\x42\x13\n\x11_parent_transformB\x0e\n\x0c_sibling_idxB\x11\n\x0f_local_positionB\x11\n\x0f_local_rotationB\x0e\n\x0c_local_scaleB\r\n\x0b_anchor_minB\r\n\x0b_anchor_maxB\x14\n\x12_anchored_positionB\r\n\x0b_size_deltaB\x08\n\x06_pivotB\x18\xaa\x02\x15PLUME.Sample.Unity.UIb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n*plume/sample/unity/ui/rect_transform.proto\x12\x15plume.sample.unity.ui\x1a!plume/sample/common/vector3.proto\x1a$plume/sample/common/quaternion.proto\x1a!plume/sample/common/vector2.proto\x1a$plume/sample/unity/identifiers.proto\"\\\n\x13RectTransformCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"]\n\x14RectTransformDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xad\x07\n\x13RectTransformUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12W\n\x10parent_transform\x18\x02 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierH\x00R\x0fparentTransform\x88\x01\x01\x12$\n\x0bsibling_idx\x18\x03 \x01(\x05H\x01R\nsiblingIdx\x88\x01\x01\x12H\n\x0elocal_position\x18\x04 \x01(\x0b\x32\x1c.plume.sample.common.Vector3H\x02R\rlocalPosition\x88\x01\x01\x12K\n\x0elocal_rotation\x18\x05 \x01(\x0b\x32\x1f.plume.sample.common.QuaternionH\x03R\rlocalRotation\x88\x01\x01\x12\x42\n\x0blocal_scale\x18\x06 \x01(\x0b\x32\x1c.plume.sample.common.Vector3H\x04R\nlocalScale\x88\x01\x01\x12@\n\nanchor_min\x18\x07 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x05R\tanchorMin\x88\x01\x01\x12@\n\nanchor_max\x18\x08 \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x06R\tanchorMax\x88\x01\x01\x12N\n\x11\x61nchored_position\x18\t \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x07R\x10\x61nchoredPosition\x88\x01\x01\x12@\n\nsize_delta\x18\n \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\x08R\tsizeDelta\x88\x01\x01\x12\x37\n\x05pivot\x18\x0b \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\tR\x05pivot\x88\x01\x01\x42\x13\n\x11_parent_transformB\x0e\n\x0c_sibling_idxB\x11\n\x0f_local_positionB\x11\n\x0f_local_rotationB\x0e\n\x0c_local_scaleB\r\n\x0b_anchor_minB\r\n\x0b_anchor_maxB\x14\n\x12_anchored_positionB\r\n\x0b_size_deltaB\x08\n\x06_pivotB\x18\xaa\x02\x15PLUME.Sample.Unity.UIb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.ui.rect_transform_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.ui.rect_transform_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\025PLUME.Sample.Unity.UI'
-  _globals['_RECTTRANSFORMCREATE']._serialized_start=215
-  _globals['_RECTTRANSFORMCREATE']._serialized_end=307
-  _globals['_RECTTRANSFORMDESTROY']._serialized_start=309
-  _globals['_RECTTRANSFORMDESTROY']._serialized_end=402
-  _globals['_RECTTRANSFORMUPDATE']._serialized_start=405
-  _globals['_RECTTRANSFORMUPDATE']._serialized_end=1346
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\025PLUME.Sample.Unity.UI"
+    _globals["_RECTTRANSFORMCREATE"]._serialized_start = 215
+    _globals["_RECTTRANSFORMCREATE"]._serialized_end = 307
+    _globals["_RECTTRANSFORMDESTROY"]._serialized_start = 309
+    _globals["_RECTTRANSFORMDESTROY"]._serialized_end = 402
+    _globals["_RECTTRANSFORMUPDATE"]._serialized_start = 405
+    _globals["_RECTTRANSFORMUPDATE"]._serialized_end = 1346
 # @@protoc_insertion_point(module_scope)

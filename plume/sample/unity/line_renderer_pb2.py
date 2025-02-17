@@ -4,51 +4,52 @@
 # source: plume/sample/unity/line_renderer.proto
 # Protobuf Python Version: 5.29.3
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
     _runtime_version.Domain.PUBLIC,
     5,
     29,
     3,
-    '',
-    'plume/sample/unity/line_renderer.proto'
+    "",
+    "plume/sample/unity/line_renderer.proto",
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-from plume.sample.unity import identifiers_pb2 as plume_dot_sample_dot_unity_dot_identifiers__pb2
-from plume.sample.common import color_pb2 as plume_dot_sample_dot_common_dot_color__pb2
-from plume.sample.common import vector2_pb2 as plume_dot_sample_dot_common_dot_vector2__pb2
-from plume.sample.common import vector3_pb2 as plume_dot_sample_dot_common_dot_vector3__pb2
-from plume.sample.common import animation_curve_pb2 as plume_dot_sample_dot_common_dot_animation__curve__pb2
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&plume/sample/unity/line_renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\x1a\x1fplume/sample/common/color.proto\x1a!plume/sample/common/vector2.proto\x1a!plume/sample/common/vector3.proto\x1a)plume/sample/common/animation_curve.proto\"[\n\x12LineRendererCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\\\n\x13LineRendererDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xd3\t\n\x12LineRendererUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32\'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x17\n\x04loop\x18\x02 \x01(\x08H\x00R\x04loop\x88\x01\x01\x12I\n\x0bwidth_curve\x18\x03 \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x01R\nwidthCurve\x88\x01\x01\x12.\n\x10width_multiplier\x18\x04 \x01(\x02H\x02R\x0fwidthMultiplier\x88\x01\x01\x12S\n\tpositions\x18\x05 \x01(\x0b\x32\x30.plume.sample.unity.LineRendererUpdate.PositionsH\x03R\tpositions\x88\x01\x01\x12=\n\x05\x63olor\x18\x06 \x01(\x0b\x32\".plume.sample.common.ColorGradientH\x04R\x05\x63olor\x88\x01\x01\x12,\n\x0f\x63orner_vertices\x18\x07 \x01(\x05H\x05R\x0e\x63ornerVertices\x88\x01\x01\x12-\n\x10\x65nd_cap_vertices\x18\x08 \x01(\x05H\x06R\x0e\x65ndCapVertices\x88\x01\x01\x12@\n\talignment\x18\t \x01(\x0e\x32\x1d.plume.sample.unity.AlignmentH\x07R\talignment\x88\x01\x01\x12G\n\x0ctexture_mode\x18\n \x01(\x0e\x32\x1f.plume.sample.unity.TextureModeH\x08R\x0btextureMode\x88\x01\x01\x12\x46\n\rtexture_scale\x18\x0b \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\tR\x0ctextureScale\x88\x01\x01\x12$\n\x0bshadow_bias\x18\x0c \x01(\x02H\nR\nshadowBias\x88\x01\x01\x12\x39\n\x16generate_lighting_data\x18\r \x01(\x08H\x0bR\x14generateLightingData\x88\x01\x01\x12+\n\x0fuse_world_space\x18\x0e \x01(\x08H\x0cR\ruseWorldSpace\x88\x01\x01\x12S\n\x10mask_interaction\x18\x0f \x01(\x0e\x32#.plume.sample.unity.MaskInteractionH\rR\x0fmaskInteraction\x88\x01\x01\x1aG\n\tPositions\x12:\n\tpositions\x18\x01 \x03(\x0b\x32\x1c.plume.sample.common.Vector3R\tpositionsB\x07\n\x05_loopB\x0e\n\x0c_width_curveB\x13\n\x11_width_multiplierB\x0c\n\n_positionsB\x08\n\x06_colorB\x12\n\x10_corner_verticesB\x13\n\x11_end_cap_verticesB\x0c\n\n_alignmentB\x0f\n\r_texture_modeB\x10\n\x0e_texture_scaleB\x0e\n\x0c_shadow_biasB\x19\n\x17_generate_lighting_dataB\x12\n\x10_use_world_spaceB\x13\n\x11_mask_interaction*:\n\tAlignment\x12\x12\n\x0e\x41LIGNMENT_VIEW\x10\x00\x12\x19\n\x15\x41LIGNMENT_TRANSFORM_Z\x10\x01*\xa5\x01\n\x0bTextureMode\x12\x18\n\x14TEXTURE_MODE_STRETCH\x10\x00\x12\x15\n\x11TEXTURE_MODE_TILE\x10\x01\x12\'\n#TEXTURE_MODE_DISTRIBUTE_PER_SEGMENT\x10\x02\x12#\n\x1fTEXTURE_MODE_REPEAT_PER_SEGMENT\x10\x03\x12\x17\n\x13TEXTURE_MODE_STATIC\x10\x04*w\n\x0fMaskInteraction\x12\x19\n\x15MASK_INTERACTION_NONE\x10\x00\x12#\n\x1fMASK_INTERACTION_VISIBLE_INSIDE\x10\x01\x12$\n MASK_INTERACTION_VISIBLE_OUTSIDE\x10\x02\x42\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b"\n&plume/sample/unity/line_renderer.proto\x12\x12plume.sample.unity\x1a$plume/sample/unity/identifiers.proto\x1a\x1fplume/sample/common/color.proto\x1a!plume/sample/common/vector2.proto\x1a!plume/sample/common/vector3.proto\x1a)plume/sample/common/animation_curve.proto\"[\n\x12LineRendererCreate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\\\n\x13LineRendererDestroy\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\"\xd3\t\n\x12LineRendererUpdate\x12\x45\n\tcomponent\x18\x01 \x01(\x0b\x32'.plume.sample.unity.ComponentIdentifierR\tcomponent\x12\x17\n\x04loop\x18\x02 \x01(\x08H\x00R\x04loop\x88\x01\x01\x12I\n\x0bwidth_curve\x18\x03 \x01(\x0b\x32#.plume.sample.common.AnimationCurveH\x01R\nwidthCurve\x88\x01\x01\x12.\n\x10width_multiplier\x18\x04 \x01(\x02H\x02R\x0fwidthMultiplier\x88\x01\x01\x12S\n\tpositions\x18\x05 \x01(\x0b\x32\x30.plume.sample.unity.LineRendererUpdate.PositionsH\x03R\tpositions\x88\x01\x01\x12=\n\x05\x63olor\x18\x06 \x01(\x0b\x32\".plume.sample.common.ColorGradientH\x04R\x05\x63olor\x88\x01\x01\x12,\n\x0f\x63orner_vertices\x18\x07 \x01(\x05H\x05R\x0e\x63ornerVertices\x88\x01\x01\x12-\n\x10\x65nd_cap_vertices\x18\x08 \x01(\x05H\x06R\x0e\x65ndCapVertices\x88\x01\x01\x12@\n\talignment\x18\t \x01(\x0e\x32\x1d.plume.sample.unity.AlignmentH\x07R\talignment\x88\x01\x01\x12G\n\x0ctexture_mode\x18\n \x01(\x0e\x32\x1f.plume.sample.unity.TextureModeH\x08R\x0btextureMode\x88\x01\x01\x12\x46\n\rtexture_scale\x18\x0b \x01(\x0b\x32\x1c.plume.sample.common.Vector2H\tR\x0ctextureScale\x88\x01\x01\x12$\n\x0bshadow_bias\x18\x0c \x01(\x02H\nR\nshadowBias\x88\x01\x01\x12\x39\n\x16generate_lighting_data\x18\r \x01(\x08H\x0bR\x14generateLightingData\x88\x01\x01\x12+\n\x0fuse_world_space\x18\x0e \x01(\x08H\x0cR\ruseWorldSpace\x88\x01\x01\x12S\n\x10mask_interaction\x18\x0f \x01(\x0e\x32#.plume.sample.unity.MaskInteractionH\rR\x0fmaskInteraction\x88\x01\x01\x1aG\n\tPositions\x12:\n\tpositions\x18\x01 \x03(\x0b\x32\x1c.plume.sample.common.Vector3R\tpositionsB\x07\n\x05_loopB\x0e\n\x0c_width_curveB\x13\n\x11_width_multiplierB\x0c\n\n_positionsB\x08\n\x06_colorB\x12\n\x10_corner_verticesB\x13\n\x11_end_cap_verticesB\x0c\n\n_alignmentB\x0f\n\r_texture_modeB\x10\n\x0e_texture_scaleB\x0e\n\x0c_shadow_biasB\x19\n\x17_generate_lighting_dataB\x12\n\x10_use_world_spaceB\x13\n\x11_mask_interaction*:\n\tAlignment\x12\x12\n\x0e\x41LIGNMENT_VIEW\x10\x00\x12\x19\n\x15\x41LIGNMENT_TRANSFORM_Z\x10\x01*\xa5\x01\n\x0bTextureMode\x12\x18\n\x14TEXTURE_MODE_STRETCH\x10\x00\x12\x15\n\x11TEXTURE_MODE_TILE\x10\x01\x12'\n#TEXTURE_MODE_DISTRIBUTE_PER_SEGMENT\x10\x02\x12#\n\x1fTEXTURE_MODE_REPEAT_PER_SEGMENT\x10\x03\x12\x17\n\x13TEXTURE_MODE_STATIC\x10\x04*w\n\x0fMaskInteraction\x12\x19\n\x15MASK_INTERACTION_NONE\x10\x00\x12#\n\x1fMASK_INTERACTION_VISIBLE_INSIDE\x10\x01\x12$\n MASK_INTERACTION_VISIBLE_OUTSIDE\x10\x02\x42\x15\xaa\x02\x12PLUME.Sample.Unityb\x06proto3"
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'plume.sample.unity.line_renderer_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(
+    DESCRIPTOR, "plume.sample.unity.line_renderer_pb2", _globals
+)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\252\002\022PLUME.Sample.Unity'
-  _globals['_ALIGNMENT']._serialized_start=1671
-  _globals['_ALIGNMENT']._serialized_end=1729
-  _globals['_TEXTUREMODE']._serialized_start=1732
-  _globals['_TEXTUREMODE']._serialized_end=1897
-  _globals['_MASKINTERACTION']._serialized_start=1899
-  _globals['_MASKINTERACTION']._serialized_end=2018
-  _globals['_LINERENDERERCREATE']._serialized_start=246
-  _globals['_LINERENDERERCREATE']._serialized_end=337
-  _globals['_LINERENDERERDESTROY']._serialized_start=339
-  _globals['_LINERENDERERDESTROY']._serialized_end=431
-  _globals['_LINERENDERERUPDATE']._serialized_start=434
-  _globals['_LINERENDERERUPDATE']._serialized_end=1669
-  _globals['_LINERENDERERUPDATE_POSITIONS']._serialized_start=1354
-  _globals['_LINERENDERERUPDATE_POSITIONS']._serialized_end=1425
+    _globals["DESCRIPTOR"]._loaded_options = None
+    _globals[
+        "DESCRIPTOR"
+    ]._serialized_options = b"\252\002\022PLUME.Sample.Unity"
+    _globals["_ALIGNMENT"]._serialized_start = 1671
+    _globals["_ALIGNMENT"]._serialized_end = 1729
+    _globals["_TEXTUREMODE"]._serialized_start = 1732
+    _globals["_TEXTUREMODE"]._serialized_end = 1897
+    _globals["_MASKINTERACTION"]._serialized_start = 1899
+    _globals["_MASKINTERACTION"]._serialized_end = 2018
+    _globals["_LINERENDERERCREATE"]._serialized_start = 246
+    _globals["_LINERENDERERCREATE"]._serialized_end = 337
+    _globals["_LINERENDERERDESTROY"]._serialized_start = 339
+    _globals["_LINERENDERERDESTROY"]._serialized_end = 431
+    _globals["_LINERENDERERUPDATE"]._serialized_start = 434
+    _globals["_LINERENDERERUPDATE"]._serialized_end = 1669
+    _globals["_LINERENDERERUPDATE_POSITIONS"]._serialized_start = 1354
+    _globals["_LINERENDERERUPDATE_POSITIONS"]._serialized_end = 1425
 # @@protoc_insertion_point(module_scope)

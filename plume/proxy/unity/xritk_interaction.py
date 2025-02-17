@@ -21,17 +21,35 @@ class XRITKInteractionType(Enum):
 
     @staticmethod
     def from_message(type: XRITKInteractionTypeSample) -> XRITKInteractionType:
-        if type == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_HOVER_ENTER:
+        if (
+            type
+            == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_HOVER_ENTER
+        ):
             return XRITKInteractionType.HOVER_ENTER
-        elif type == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_HOVER_EXIT:
+        elif (
+            type
+            == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_HOVER_EXIT
+        ):
             return XRITKInteractionType.HOVER_EXIT
-        elif type == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_SELECT_ENTER:
+        elif (
+            type
+            == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_SELECT_ENTER
+        ):
             return XRITKInteractionType.SELECT_ENTER
-        elif type == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_SELECT_EXIT:
+        elif (
+            type
+            == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_SELECT_EXIT
+        ):
             return XRITKInteractionType.SELECT_EXIT
-        elif type == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_ACTIVATE_ENTER:
+        elif (
+            type
+            == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_ACTIVATE_ENTER
+        ):
             return XRITKInteractionType.ACTIVATE_ENTER
-        elif type == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_ACTIVATE_EXIT:
+        elif (
+            type
+            == XRITKInteractionTypeSample.XRITK_INTERACTION_TYPE_ACTIVATE_EXIT
+        ):
             return XRITKInteractionType.ACTIVATE_EXIT
         else:
             return XRITKInteractionType.UNSPECIFIED
@@ -45,8 +63,12 @@ class XRITKInteraction:
 
     def __hash__(self):
         return hash((self.interactor, self.interactable, self.type))
-    
+
     def __eq__(self, other):
         if not isinstance(other, XRITKInteraction):
             return False
-        return self.interactor == other.interactor and self.interactable == other.interactable and self.type == other.type
+        return (
+            self.interactor == other.interactor
+            and self.interactable == other.interactable
+            and self.type == other.type
+        )

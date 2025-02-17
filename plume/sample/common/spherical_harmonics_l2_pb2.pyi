@@ -5,7 +5,35 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class SphericalHarmonicsL2(_message.Message):
-    __slots__ = ("shr0", "shr1", "shr2", "shr3", "shr4", "shr5", "shr6", "shr7", "shr8", "shg0", "shg1", "shg2", "shg3", "shg4", "shg5", "shg6", "shg7", "shg8", "shb0", "shb1", "shb2", "shb3", "shb4", "shb5", "shb6", "shb7", "shb8")
+    __slots__ = (
+        "shr0",
+        "shr1",
+        "shr2",
+        "shr3",
+        "shr4",
+        "shr5",
+        "shr6",
+        "shr7",
+        "shr8",
+        "shg0",
+        "shg1",
+        "shg2",
+        "shg3",
+        "shg4",
+        "shg5",
+        "shg6",
+        "shg7",
+        "shg8",
+        "shb0",
+        "shb1",
+        "shb2",
+        "shb3",
+        "shb4",
+        "shb5",
+        "shb6",
+        "shb7",
+        "shb8",
+    )
     SHR0_FIELD_NUMBER: _ClassVar[int]
     SHR1_FIELD_NUMBER: _ClassVar[int]
     SHR2_FIELD_NUMBER: _ClassVar[int]
@@ -60,4 +88,33 @@ class SphericalHarmonicsL2(_message.Message):
     shb6: float
     shb7: float
     shb8: float
-    def __init__(self, shr0: _Optional[float] = ..., shr1: _Optional[float] = ..., shr2: _Optional[float] = ..., shr3: _Optional[float] = ..., shr4: _Optional[float] = ..., shr5: _Optional[float] = ..., shr6: _Optional[float] = ..., shr7: _Optional[float] = ..., shr8: _Optional[float] = ..., shg0: _Optional[float] = ..., shg1: _Optional[float] = ..., shg2: _Optional[float] = ..., shg3: _Optional[float] = ..., shg4: _Optional[float] = ..., shg5: _Optional[float] = ..., shg6: _Optional[float] = ..., shg7: _Optional[float] = ..., shg8: _Optional[float] = ..., shb0: _Optional[float] = ..., shb1: _Optional[float] = ..., shb2: _Optional[float] = ..., shb3: _Optional[float] = ..., shb4: _Optional[float] = ..., shb5: _Optional[float] = ..., shb6: _Optional[float] = ..., shb7: _Optional[float] = ..., shb8: _Optional[float] = ...) -> None: ...
+    def __init__(
+        self,
+        shr0: _Optional[float] = ...,
+        shr1: _Optional[float] = ...,
+        shr2: _Optional[float] = ...,
+        shr3: _Optional[float] = ...,
+        shr4: _Optional[float] = ...,
+        shr5: _Optional[float] = ...,
+        shr6: _Optional[float] = ...,
+        shr7: _Optional[float] = ...,
+        shr8: _Optional[float] = ...,
+        shg0: _Optional[float] = ...,
+        shg1: _Optional[float] = ...,
+        shg2: _Optional[float] = ...,
+        shg3: _Optional[float] = ...,
+        shg4: _Optional[float] = ...,
+        shg5: _Optional[float] = ...,
+        shg6: _Optional[float] = ...,
+        shg7: _Optional[float] = ...,
+        shg8: _Optional[float] = ...,
+        shb0: _Optional[float] = ...,
+        shb1: _Optional[float] = ...,
+        shb2: _Optional[float] = ...,
+        shb3: _Optional[float] = ...,
+        shb4: _Optional[float] = ...,
+        shb5: _Optional[float] = ...,
+        shb6: _Optional[float] = ...,
+        shb7: _Optional[float] = ...,
+        shb8: _Optional[float] = ...,
+    ) -> None: ...

@@ -15,7 +15,6 @@ from functools import cached_property
 
 
 class RecordReader:
-
     def __init__(self, filepath: str):
         self.filepath = filepath
 
@@ -23,7 +22,7 @@ class RecordReader:
 
     def __enter__(self):
         return self
-    
+
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 

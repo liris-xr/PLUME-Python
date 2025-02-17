@@ -19,7 +19,9 @@ from plume.decoder.frame.frame_decoder import get_or_create_component
 @register_frame_data_decoder(XRITKInteractionSample)
 class XRITKInteractionDecoder(FrameDataDecoder[XRITKInteractionSample]):
     def decode(self, frame: Frame, data: XRITKInteractionSample):
-        interactor = get_or_create_component(frame, data.interactor, XRBaseInteractor)
+        interactor = get_or_create_component(
+            frame, data.interactor, XRBaseInteractor
+        )
         interactable = get_or_create_component(
             frame, data.interactable, XRBaseInteractable
         )

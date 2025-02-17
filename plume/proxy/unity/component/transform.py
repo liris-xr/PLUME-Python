@@ -36,7 +36,9 @@ class Transform(Component):
         self._parent = parent
         self._children = children if children else []
         self._sibling_index = sibling_index
-        self._local_position = local_position if local_position else Vector3(0, 0, 0)
+        self._local_position = (
+            local_position if local_position else Vector3(0, 0, 0)
+        )
         self._local_rotation = (
             local_rotation if local_rotation else Quaternion(0, 0, 0, 1)
         )
@@ -49,7 +51,6 @@ class Transform(Component):
 
     @functools.cached_property
     def world_matrix(self) -> np.ndarray:
-
         T = np.eye(4, dtype=np.float32)
         T[:3, 3] = self._local_position.numpy()
 

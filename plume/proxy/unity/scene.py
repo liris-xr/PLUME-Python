@@ -21,7 +21,9 @@ class Scene:
         self._guid = UUID(guid) if isinstance(guid, str) else guid
         self._name = name
         self._asset_bundle_path = asset_bundle_path
-        self._game_objects = game_objects if game_objects else GameObjectCollection()
+        self._game_objects = (
+            game_objects if game_objects else GameObjectCollection()
+        )
 
     @property
     def guid(self) -> UUID:

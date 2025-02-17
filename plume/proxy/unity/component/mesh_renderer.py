@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from plume.proxy.unity.component import Component
 from plume.proxy.unity.game_object import GameObject
 from plume.proxy.unity.asset import Asset
 from plume.proxy.unity.component.renderer import Renderer
@@ -13,7 +12,6 @@ from uuid import UUID
 
 
 class MeshRenderer(Renderer):
-
     def __init__(
         self,
         guid: Union[str, UUID],
