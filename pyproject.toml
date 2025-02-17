@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "plume-python"
-version = "1.1.0"
+version = "1.2.0"
 description = "Set of utilities to work with PLM record files."
 authors = ["Charles JAVERLIAT <charles.javerliat@gmail.com>"]
 license = "GPLv3"
 readme = "README.md"
 repository = "https://github.com/liris-xr/PLUME-Python"
-packages = [ { include = "plume" } ]
+packages = [{ include = "plume" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
