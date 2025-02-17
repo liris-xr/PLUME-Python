@@ -1,6 +1,3 @@
-example.xdf
-test*.py
-
 .ruff_cache/
 .vscode/
 .idea/
