@@ -1,3 +1,6 @@
+./record.plm
+./test.py
+./example.xdf
 .ruff_cache/
 .vscode/
 .idea/
