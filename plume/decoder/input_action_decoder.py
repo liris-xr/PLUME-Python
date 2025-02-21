@@ -54,7 +54,9 @@ class InputActionDecoder(Iterator[InputAction]):
             elif isinstance(value, QuaternionSample):
                 value = Quaternion(value.x, value.y, value.z, value.w)
             elif isinstance(value, ButtonValueSample):
-                value = ButtonValue(value.boolean, value.float, value.threshold)
+                value = ButtonValue(
+                    value.boolean, value.float, value.threshold
+                )
 
         return InputAction(
             time_ns=time_ns,
