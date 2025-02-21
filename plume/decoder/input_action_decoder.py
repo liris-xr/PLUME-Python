@@ -41,16 +41,20 @@ class InputActionDecoder(Iterator[InputAction]):
         )
         binding_paths = input_action_sample.binding_paths
         value_field = input_action_sample.WhichOneof("value")
-        value = getattr(input_action_sample, value_field)
 
-        if isinstance(value, Vector2Sample):
-            value = Vector2(value.x, value.y)
-        elif isinstance(value, Vector3Sample):
-            value = Vector3(value.x, value.y, value.z)
-        elif isinstance(value, QuaternionSample):
-            value = Quaternion(value.x, value.y, value.z, value.w)
-        elif isinstance(value, ButtonValueSample):
-            value = ButtonValue(value.boolean, value.float, value.threshold)
+        if value_field is None:
+            value = None
+        else:
+            value = getattr(input_action_sample, value_field)
+
+            if isinstance(value, Vector2Sample):
+                value = Vector2(value.x, value.y)
+            elif isinstance(value, Vector3Sample):
+                value = Vector3(value.x, value.y, value.z)
+            elif isinstance(value, QuaternionSample):
+                value = Quaternion(value.x, value.y, value.z, value.w)
+            elif isinstance(value, ButtonValueSample):
+                value = ButtonValue(value.boolean, value.float, value.threshold)
 
         return InputAction(
             time_ns=time_ns,
